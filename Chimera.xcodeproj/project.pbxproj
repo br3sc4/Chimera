@@ -11,6 +11,7 @@
 		2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0E78F2296F01050020CDCF /* ContentView.swift */; };
 		2D0E78F5296F01050020CDCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F4296F01050020CDCF /* Assets.xcassets */; };
 		2D0E78F9296F01050020CDCF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */; };
+		A9D540DE296F106A00C76CAF /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D540DD296F106A00C76CAF /* EventCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		2D0E78F4296F01050020CDCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D0E78F6296F01050020CDCF /* Chimera.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chimera.entitlements; sourceTree = "<group>"; };
 		2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A9D540DD296F106A00C76CAF /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				2D0E78F0296F01050020CDCF /* ChimeraApp.swift */,
 				2D0E78F2296F01050020CDCF /* ContentView.swift */,
+				A9D540DD296F106A00C76CAF /* EventCard.swift */,
 				2D0E78F4296F01050020CDCF /* Assets.xcassets */,
 				2D0E78F6296F01050020CDCF /* Chimera.entitlements */,
 				2D0E78F7296F01050020CDCF /* Preview Content */,
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */,
+				A9D540DE296F106A00C76CAF /* EventCard.swift in Sources */,
 				2D0E78F1296F01050020CDCF /* ChimeraApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,7 +269,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Chimera/Preview Content\"";
-				DEVELOPMENT_TEAM = A8DRB9NKCV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -303,7 +307,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Chimera/Preview Content\"";
-				DEVELOPMENT_TEAM = A8DRB9NKCV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
