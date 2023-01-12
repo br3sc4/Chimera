@@ -11,6 +11,8 @@
 		2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0E78F2296F01050020CDCF /* ContentView.swift */; };
 		2D0E78F5296F01050020CDCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F4296F01050020CDCF /* Assets.xcassets */; };
 		2D0E78F9296F01050020CDCF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */; };
+		BCD6E29A296F10D1000B9B9B /* RecorderViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD6E299296F10D1000B9B9B /* RecorderViewDemo.swift */; };
+		BCD6E29C296F11BA000B9B9B /* RecorderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,9 @@
 		2D0E78F4296F01050020CDCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D0E78F6296F01050020CDCF /* Chimera.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chimera.entitlements; sourceTree = "<group>"; };
 		2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BC59EA8A29704F130069F6CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BCD6E299296F10D1000B9B9B /* RecorderViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderViewDemo.swift; sourceTree = "<group>"; };
+		BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,11 +57,13 @@
 		2D0E78EF296F01050020CDCF /* Chimera */ = {
 			isa = PBXGroup;
 			children = (
+				BC59EA8A29704F130069F6CE /* Info.plist */,
 				2D0E7904296F1A200020CDCF /* Components */,
 				2D0E7903296F1A190020CDCF /* Models */,
 				2D0E7902296F1A0D0020CDCF /* Views */,
 				2D0E78F0296F01050020CDCF /* ChimeraApp.swift */,
 				2D0E78F2296F01050020CDCF /* ContentView.swift */,
+				BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */,
 				2D0E78F4296F01050020CDCF /* Assets.xcassets */,
 				2D0E78F6296F01050020CDCF /* Chimera.entitlements */,
 				2D0E78F7296F01050020CDCF /* Preview Content */,
@@ -75,6 +82,7 @@
 		2D0E7902296F1A0D0020CDCF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BCD6E299296F10D1000B9B9B /* RecorderViewDemo.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -163,6 +171,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCD6E29C296F11BA000B9B9B /* RecorderViewModel.swift in Sources */,
+				BCD6E29A296F10D1000B9B9B /* RecorderViewDemo.swift in Sources */,
 				2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */,
 				2D0E78F1296F01050020CDCF /* ChimeraApp.swift in Sources */,
 			);
@@ -289,10 +299,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Chimera/Preview Content\"";
-				DEVELOPMENT_TEAM = A8DRB9NKCV;
+				DEVELOPMENT_TEAM = A653B885WN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Chimera/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -327,10 +338,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Chimera/Preview Content\"";
-				DEVELOPMENT_TEAM = A8DRB9NKCV;
+				DEVELOPMENT_TEAM = A653B885WN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Chimera/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
