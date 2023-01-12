@@ -18,6 +18,7 @@
 		A9D5413229706A6F00C76CAF /* VocalMemoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413129706A6F00C76CAF /* VocalMemoRow.swift */; };
 		A9D5413429706A8600C76CAF /* TextMemoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413329706A8600C76CAF /* TextMemoRow.swift */; };
 		A9D5413629706AB500C76CAF /* TextMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413529706AB500C76CAF /* TextMemo.swift */; };
+		A9D5413829706B4D00C76CAF /* YourEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413729706B4D00C76CAF /* YourEventsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		A9D5413129706A6F00C76CAF /* VocalMemoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocalMemoRow.swift; sourceTree = "<group>"; };
 		A9D5413329706A8600C76CAF /* TextMemoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMemoRow.swift; sourceTree = "<group>"; };
 		A9D5413529706AB500C76CAF /* TextMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMemo.swift; sourceTree = "<group>"; };
+		A9D5413729706B4D00C76CAF /* YourEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourEventsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				A9D5412F29706A2A00C76CAF /* EventView.swift */,
+				A9D5413729706B4D00C76CAF /* YourEventsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 			files = (
 				2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */,
 				A9D5412A2970687C00C76CAF /* EventCard.swift in Sources */,
+				A9D5413829706B4D00C76CAF /* YourEventsView.swift in Sources */,
 				A9D5413229706A6F00C76CAF /* VocalMemoRow.swift in Sources */,
 				A9D5412C2970691200C76CAF /* EventModel.swift in Sources */,
 				A9D5413629706AB500C76CAF /* TextMemo.swift in Sources */,
