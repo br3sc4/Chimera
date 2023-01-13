@@ -11,7 +11,7 @@
 		2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0E78F2296F01050020CDCF /* ContentView.swift */; };
 		2D0E78F5296F01050020CDCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F4296F01050020CDCF /* Assets.xcassets */; };
 		2D0E78F9296F01050020CDCF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */; };
-		BCD6E29A296F10D1000B9B9B /* RecorderViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD6E299296F10D1000B9B9B /* RecorderViewDemo.swift */; };
+		BCD6E29A296F10D1000B9B9B /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD6E299296F10D1000B9B9B /* RecorderView.swift */; };
 		BCD6E29C296F11BA000B9B9B /* RecorderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,7 +23,7 @@
 		2D0E78F6296F01050020CDCF /* Chimera.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chimera.entitlements; sourceTree = "<group>"; };
 		2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BC59EA8A29704F130069F6CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		BCD6E299296F10D1000B9B9B /* RecorderViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderViewDemo.swift; sourceTree = "<group>"; };
+		BCD6E299296F10D1000B9B9B /* RecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
 		BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,7 +82,7 @@
 		2D0E7902296F1A0D0020CDCF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BCD6E299296F10D1000B9B9B /* RecorderViewDemo.swift */,
+				BCD6E299296F10D1000B9B9B /* RecorderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -172,7 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCD6E29C296F11BA000B9B9B /* RecorderViewModel.swift in Sources */,
-				BCD6E29A296F10D1000B9B9B /* RecorderViewDemo.swift in Sources */,
+				BCD6E29A296F10D1000B9B9B /* RecorderView.swift in Sources */,
 				2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */,
 				2D0E78F1296F01050020CDCF /* ChimeraApp.swift in Sources */,
 			);
@@ -299,7 +299,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Chimera/Preview Content\"";
-				DEVELOPMENT_TEAM = A653B885WN;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -338,7 +338,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Chimera/Preview Content\"";
-				DEVELOPMENT_TEAM = A653B885WN;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

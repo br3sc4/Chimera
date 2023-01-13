@@ -11,6 +11,7 @@ import AVFoundation
 class RecorderViewModel : ObservableObject {
     
     private var audioRecorder : AVAudioRecorder!
+    @Published var isRecording : Bool
     
     private let settings = [
         AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -20,12 +21,15 @@ class RecorderViewModel : ObservableObject {
     ]
     
     init() {
+        self.isRecording = false
         self.audioRecorder = nil
     }
         
     func startRecording(){
-        let date = Date()
+        isRecording = true
+        let date = Date().formatted()
         let path = URL.documentsDirectory
+        //TODO: Store it in a directory related to the event
         let fileName = path.appendingPathComponent("Recording - \(date).m4a")
         
         let recordingSession = AVAudioSession.sharedInstance()
@@ -47,7 +51,8 @@ class RecorderViewModel : ObservableObject {
     }
     
     func stopRecording(){
-            audioRecorder.stop()
+        isRecording = false
+        audioRecorder.stop()
     }
     
 }
