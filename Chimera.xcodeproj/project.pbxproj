@@ -11,6 +11,8 @@
 		2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0E78F2296F01050020CDCF /* ContentView.swift */; };
 		2D0E78F5296F01050020CDCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F4296F01050020CDCF /* Assets.xcassets */; };
 		2D0E78F9296F01050020CDCF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */; };
+		BCD6E29A296F10D1000B9B9B /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD6E299296F10D1000B9B9B /* RecorderView.swift */; };
+		BCD6E29C296F11BA000B9B9B /* RecorderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */; };
 		A91FB0032971921E0083DCAE /* AudioPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB0022971921E0083DCAE /* AudioPlayerModel.swift */; };
 		A91FB0052971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */; };
 		A9D5412A2970687C00C76CAF /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D541292970687C00C76CAF /* EventCard.swift */; };
@@ -36,6 +38,9 @@
 		2D0E78F4296F01050020CDCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D0E78F6296F01050020CDCF /* Chimera.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chimera.entitlements; sourceTree = "<group>"; };
 		2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BC59EA8A29704F130069F6CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BCD6E299296F10D1000B9B9B /* RecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
+		BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderViewModel.swift; sourceTree = "<group>"; };
 		A91FB0022971921E0083DCAE /* AudioPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerModel.swift; sourceTree = "<group>"; };
 		A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "01-11-22_at_18_30_44.m4a"; sourceTree = "<group>"; };
 		A9D541292970687C00C76CAF /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
@@ -84,6 +89,7 @@
 		2D0E78EF296F01050020CDCF /* Chimera */ = {
 			isa = PBXGroup;
 			children = (
+				BC59EA8A29704F130069F6CE /* Info.plist */,
 				2DC5131A2971A7FD004958C0 /* Extensions */,
 				2DC51318297190A2004958C0 /* IMG_0684.mov */,
 				2D0E7904296F1A200020CDCF /* Components */,
@@ -91,6 +97,7 @@
 				2D0E7902296F1A0D0020CDCF /* Views */,
 				2D0E78F0296F01050020CDCF /* ChimeraApp.swift */,
 				2D0E78F2296F01050020CDCF /* ContentView.swift */,
+				BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */,
 				2D0E78F4296F01050020CDCF /* Assets.xcassets */,
 				A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */,
 				2D0E78F6296F01050020CDCF /* Chimera.entitlements */,
@@ -110,6 +117,7 @@
 		2D0E7902296F1A0D0020CDCF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BCD6E299296F10D1000B9B9B /* RecorderView.swift */,
 				A9D5412F29706A2A00C76CAF /* EventView.swift */,
 				A9D5413729706B4D00C76CAF /* YourEventsView.swift */,
 			);
@@ -221,6 +229,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCD6E29C296F11BA000B9B9B /* RecorderViewModel.swift in Sources */,
+				BCD6E29A296F10D1000B9B9B /* RecorderView.swift in Sources */,
 				2DC5130929715FCD004958C0 /* MediaType.swift in Sources */,
 				2DC5130729707ECD004958C0 /* MediaGrid.swift in Sources */,
 				2DC5130529707DD9004958C0 /* MediaCard.swift in Sources */,
@@ -365,6 +375,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Chimera/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -403,6 +414,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Chimera/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
