@@ -19,6 +19,12 @@
 		A9D5413429706A8600C76CAF /* TextMemoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413329706A8600C76CAF /* TextMemoRow.swift */; };
 		A9D5413629706AB500C76CAF /* TextMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413529706AB500C76CAF /* TextMemo.swift */; };
 		A9D5413829706B4D00C76CAF /* YourEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413729706B4D00C76CAF /* YourEventsView.swift */; };
+		2DC5130529707DD9004958C0 /* MediaCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5130429707DD9004958C0 /* MediaCard.swift */; };
+		2DC5130729707ECD004958C0 /* MediaGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5130629707ECD004958C0 /* MediaGrid.swift */; };
+		2DC5130929715FCD004958C0 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5130829715FCD004958C0 /* MediaType.swift */; };
+		2DC5130F2971699F004958C0 /* IMG_0684.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2DC5130E2971699F004958C0 /* IMG_0684.mov */; };
+		2DC51311297176C8004958C0 /* VideoMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC51310297176C8004958C0 /* VideoMemo.swift */; };
+		2DC5131329717B40004958C0 /* Video.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2DC5131229717B40004958C0 /* Video.mov */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +42,12 @@
 		A9D5413329706A8600C76CAF /* TextMemoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMemoRow.swift; sourceTree = "<group>"; };
 		A9D5413529706AB500C76CAF /* TextMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMemo.swift; sourceTree = "<group>"; };
 		A9D5413729706B4D00C76CAF /* YourEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourEventsView.swift; sourceTree = "<group>"; };
+		2DC5130429707DD9004958C0 /* MediaCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCard.swift; sourceTree = "<group>"; };
+		2DC5130629707ECD004958C0 /* MediaGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaGrid.swift; sourceTree = "<group>"; };
+		2DC5130829715FCD004958C0 /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
+		2DC5130E2971699F004958C0 /* IMG_0684.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = IMG_0684.mov; path = ../../../Downloads/IMG_0684.mov; sourceTree = "<group>"; };
+		2DC51310297176C8004958C0 /* VideoMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMemo.swift; sourceTree = "<group>"; };
+		2DC5131229717B40004958C0 /* Video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = Video.mov; path = ../../../Downloads/Video.mov; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +86,8 @@
 				2D0E78F0296F01050020CDCF /* ChimeraApp.swift */,
 				2D0E78F2296F01050020CDCF /* ContentView.swift */,
 				2D0E78F4296F01050020CDCF /* Assets.xcassets */,
+				2DC5130E2971699F004958C0 /* IMG_0684.mov */,
+				2DC5131229717B40004958C0 /* Video.mov */,
 				2D0E78F6296F01050020CDCF /* Chimera.entitlements */,
 				2D0E78F7296F01050020CDCF /* Preview Content */,
 			);
@@ -101,6 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				A9D5412B2970691200C76CAF /* EventModel.swift */,
+				2DC5130829715FCD004958C0 /* MediaType.swift */,
+				2DC51310297176C8004958C0 /* VideoMemo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -113,6 +129,8 @@
 				A9D5413329706A8600C76CAF /* TextMemoRow.swift */,
 				A9D5413529706AB500C76CAF /* TextMemo.swift */,
 				A9D5412D297069E600C76CAF /* EventList.swift */,
+				2DC5130429707DD9004958C0 /* MediaCard.swift */,
+				2DC5130629707ECD004958C0 /* MediaGrid.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -177,6 +195,8 @@
 			files = (
 				2D0E78F9296F01050020CDCF /* Preview Assets.xcassets in Resources */,
 				2D0E78F5296F01050020CDCF /* Assets.xcassets in Resources */,
+				2DC5131329717B40004958C0 /* Video.mov in Resources */,
+				2DC5130F2971699F004958C0 /* IMG_0684.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +207,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DC5130929715FCD004958C0 /* MediaType.swift in Sources */,
+				2DC5130729707ECD004958C0 /* MediaGrid.swift in Sources */,
+				2DC5130529707DD9004958C0 /* MediaCard.swift in Sources */,
 				2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */,
 				A9D5412A2970687C00C76CAF /* EventCard.swift in Sources */,
 				A9D5413829706B4D00C76CAF /* YourEventsView.swift in Sources */,
@@ -195,6 +218,7 @@
 				A9D5413629706AB500C76CAF /* TextMemo.swift in Sources */,
 				A9D5413029706A2A00C76CAF /* EventView.swift in Sources */,
 				A9D5412E297069E600C76CAF /* EventList.swift in Sources */,
+				2DC51311297176C8004958C0 /* VideoMemo.swift in Sources */,
 				2D0E78F1296F01050020CDCF /* ChimeraApp.swift in Sources */,
 				A9D5413429706A8600C76CAF /* TextMemoRow.swift in Sources */,
 			);
