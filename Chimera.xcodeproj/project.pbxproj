@@ -50,7 +50,6 @@
 /* Begin PBXFileReference section */
 		2D0E78ED296F01050020CDCF /* Chimera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chimera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D0E78F0296F01050020CDCF /* ChimeraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChimeraApp.swift; sourceTree = "<group>"; };
-		2D0E78F2296F01050020CDCF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2D0E78F4296F01050020CDCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D0E78F6296F01050020CDCF /* Chimera.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chimera.entitlements; sourceTree = "<group>"; };
 		2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -126,12 +125,14 @@
 				2DC51318297190A2004958C0 /* IMG_0684.mov */,
 				A91FB01029798A5B0083DCAE /* ViewModels */,
 				2D0E7904296F1A200020CDCF /* Components */,
+				2DC5131A2971A7FD004958C0 /* Extensions */,
 				2D0E7903296F1A190020CDCF /* Models */,
+				2DC513202971B969004958C0 /* ViewModels */,
 				2D0E7902296F1A0D0020CDCF /* Views */,
 				2D0E78F0296F01050020CDCF /* ChimeraApp.swift */,
-				2D0E78F2296F01050020CDCF /* ContentView.swift */,
-				BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */,
+				BC59EA8A29704F130069F6CE /* Info.plist */,
 				2D0E78F4296F01050020CDCF /* Assets.xcassets */,
+				2DC51318297190A2004958C0 /* IMG_0684.mov */,
 				A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */,
 				40529D8F29705429006107BA /* Violoncello - 33565.mp4 */,
 				40529D9129705F43006107BA /* Tamburellare - 5026.mp4 */,
@@ -462,7 +463,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SwiftLens.Chimera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -501,7 +502,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SwiftLens.Chimera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
