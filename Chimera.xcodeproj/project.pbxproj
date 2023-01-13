@@ -11,6 +11,14 @@
 		2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0E78F2296F01050020CDCF /* ContentView.swift */; };
 		2D0E78F5296F01050020CDCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F4296F01050020CDCF /* Assets.xcassets */; };
 		2D0E78F9296F01050020CDCF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */; };
+		A9D5412A2970687C00C76CAF /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D541292970687C00C76CAF /* EventCard.swift */; };
+		A9D5412C2970691200C76CAF /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5412B2970691200C76CAF /* EventModel.swift */; };
+		A9D5412E297069E600C76CAF /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5412D297069E600C76CAF /* EventList.swift */; };
+		A9D5413029706A2A00C76CAF /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5412F29706A2A00C76CAF /* EventView.swift */; };
+		A9D5413229706A6F00C76CAF /* VocalMemoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413129706A6F00C76CAF /* VocalMemoRow.swift */; };
+		A9D5413429706A8600C76CAF /* TextMemoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413329706A8600C76CAF /* TextMemoRow.swift */; };
+		A9D5413629706AB500C76CAF /* TextMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413529706AB500C76CAF /* TextMemo.swift */; };
+		A9D5413829706B4D00C76CAF /* YourEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413729706B4D00C76CAF /* YourEventsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +28,14 @@
 		2D0E78F4296F01050020CDCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D0E78F6296F01050020CDCF /* Chimera.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chimera.entitlements; sourceTree = "<group>"; };
 		2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A9D541292970687C00C76CAF /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
+		A9D5412B2970691200C76CAF /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
+		A9D5412D297069E600C76CAF /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
+		A9D5412F29706A2A00C76CAF /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
+		A9D5413129706A6F00C76CAF /* VocalMemoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocalMemoRow.swift; sourceTree = "<group>"; };
+		A9D5413329706A8600C76CAF /* TextMemoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMemoRow.swift; sourceTree = "<group>"; };
+		A9D5413529706AB500C76CAF /* TextMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMemo.swift; sourceTree = "<group>"; };
+		A9D5413729706B4D00C76CAF /* YourEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourEventsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +91,8 @@
 		2D0E7902296F1A0D0020CDCF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A9D5412F29706A2A00C76CAF /* EventView.swift */,
+				A9D5413729706B4D00C76CAF /* YourEventsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -82,6 +100,7 @@
 		2D0E7903296F1A190020CDCF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A9D5412B2970691200C76CAF /* EventModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -89,6 +108,11 @@
 		2D0E7904296F1A200020CDCF /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A9D541292970687C00C76CAF /* EventCard.swift */,
+				A9D5413129706A6F00C76CAF /* VocalMemoRow.swift */,
+				A9D5413329706A8600C76CAF /* TextMemoRow.swift */,
+				A9D5413529706AB500C76CAF /* TextMemo.swift */,
+				A9D5412D297069E600C76CAF /* EventList.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -164,7 +188,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */,
+				A9D5412A2970687C00C76CAF /* EventCard.swift in Sources */,
+				A9D5413829706B4D00C76CAF /* YourEventsView.swift in Sources */,
+				A9D5413229706A6F00C76CAF /* VocalMemoRow.swift in Sources */,
+				A9D5412C2970691200C76CAF /* EventModel.swift in Sources */,
+				A9D5413629706AB500C76CAF /* TextMemo.swift in Sources */,
+				A9D5413029706A2A00C76CAF /* EventView.swift in Sources */,
+				A9D5412E297069E600C76CAF /* EventList.swift in Sources */,
 				2D0E78F1296F01050020CDCF /* ChimeraApp.swift in Sources */,
+				A9D5413429706A8600C76CAF /* TextMemoRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,7 +321,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Chimera/Preview Content\"";
-				DEVELOPMENT_TEAM = A8DRB9NKCV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -327,7 +359,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Chimera/Preview Content\"";
-				DEVELOPMENT_TEAM = A8DRB9NKCV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
