@@ -6,7 +6,8 @@
 //
 
 import Foundation
+import CoreGraphics
 
 enum MediaType {
-    case image, video(duration: Double)
+    case image(name: String), video(duration: Double, thumbnail: CGImage? = nil)
 }

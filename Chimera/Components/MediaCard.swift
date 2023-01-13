@@ -8,43 +8,42 @@
 import SwiftUI
 
 struct MediaCard: View {
-    private let mediaName: String
-    private let mediaType: MediaType
+    private let type: MediaType
     
-    init(mediaName: String, mediaType: MediaType = .image) {
-        self.mediaName = mediaName
-        self.mediaType = mediaType
+    init(type: MediaType) {
+        self.type = type
     }
     
     var body: some View {
-        Image(mediaName)
-            .resizable()
-            .scaledToFill()
-            .frame(minWidth: 0, maxWidth: .infinity,
-                   minHeight: 0, maxHeight: .infinity)
-            .clipped()
-            .aspectRatio(1, contentMode: .fit)
-            .overlay(alignment: .bottomTrailing) {
-                if case let .video(duration) = mediaType {
-                    let convertedDuration = secondsToMinutesSeconds(ceil(duration))
-                    
-                    Text("\(convertedDuration.minutes):\(convertedDuration.seconds.formatted(.number.precision(.integerLength(2))))")
-                        .font(.footnote)
-                        .foregroundColor(.white)
-                        .padding(.trailing, 8)
-                        .padding(.bottom, 4)
-                }
+        switch type {
+        case .image(let name):
+            Image(name)
+                .squared()
+        case .video(let duration, let thumbnail):
+            if let thumbnail {
+                Image(thumbnail, scale: 1, label: Text(""))
+                    .squared()
+                    .overlay(alignment: .bottomTrailing) {
+                        let convertedDuration = secondsToMinutesSeconds(ceil(duration))
+                        
+                        Text("\(convertedDuration.minutes):\(convertedDuration.seconds.formatted(.number.precision(.integerLength(2))))")
+                            .font(.footnote)
+                            .foregroundColor(.white)
+                            .padding(.trailing, 8)
+                            .padding(.bottom, 4)
+                    }
             }
+        }
     }
     
-    func secondsToMinutesSeconds(_ seconds: Double) -> (minutes: Int, seconds: Int) {
+    private func secondsToMinutesSeconds(_ seconds: Double) -> (minutes: Int, seconds: Int) {
         return ((Int(seconds) % 3600) / 60, (Int(seconds) % 3600) % 60)
     }
 }
 
 struct MediaCard_Previews: PreviewProvider {
     static var previews: some View {
-        MediaCard(mediaName: "ConcertImageMemo")
-        MediaCard(mediaName: "ConcertImageMemoVertical", mediaType: .video(duration: 5))
+        MediaCard(type: .image(name: "ConcertImageMemo"))
+        MediaCard(type: .video(duration: 5))
     }
 }

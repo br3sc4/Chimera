@@ -18,13 +18,13 @@ struct MediaGrid: View {
     
     var body: some View {
         LazyVGrid(columns: columns, spacing: 2) {
-            MediaCard(mediaName: "ConcertImageMemo")
-            MediaCard(mediaName: "ConcertImageMemoVertical")
-            MediaCard(mediaName: "ConcertImageMemo", mediaType: .video(duration: videos[0].mediaDuration))
-            MediaCard(mediaName: "ConcertImageMemoVertical")
-            MediaCard(mediaName: "ConcertImageMemo")
-            MediaCard(mediaName: "ConcertImageMemoVertical", mediaType: .video(duration: videos[0].mediaDuration))
-            MediaCard(mediaName: "ConcertImageMemo")
+            MediaCard(type: .image(name: "ConcertImageMemo"))
+            MediaCard(type: .image(name: "ConcertImageMemoVertical"))
+            MediaCard(type: .video(duration: videos[0].mediaDuration, thumbnail: videos[0].thumbnail))
+            MediaCard(type: .image(name: "ConcertImageMemoVertical"))
+            MediaCard(type: .image(name: "ConcertImageMemo"))
+            MediaCard(type: .video(duration: videos[0].mediaDuration, thumbnail: videos[0].thumbnail))
+            MediaCard(type: .image(name: "ConcertImageMemo"))
         }
     }
 }
