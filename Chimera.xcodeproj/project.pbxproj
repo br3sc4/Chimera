@@ -22,6 +22,7 @@
 		A91FB0072975B4D40083DCAE /* MemoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB0062975B4D40083DCAE /* MemoriesView.swift */; };
 		A91FB0092975E4C60083DCAE /* UpcomingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB0082975E4C60083DCAE /* UpcomingView.swift */; };
 		A91FB00B2975FBD60083DCAE /* AddUpcomingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB00A2975FBD60083DCAE /* AddUpcomingView.swift */; };
+		A91FB00D297605F00083DCAE /* AddUpcomingEventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB00C297605F00083DCAE /* AddUpcomingEventCard.swift */; };
 		A9D5412A2970687C00C76CAF /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D541292970687C00C76CAF /* EventCard.swift */; };
 		A9D5412C2970691200C76CAF /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5412B2970691200C76CAF /* EventModel.swift */; };
 		A9D5412E297069E600C76CAF /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5412D297069E600C76CAF /* EventList.swift */; };
@@ -52,6 +53,7 @@
 		A91FB0062975B4D40083DCAE /* MemoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriesView.swift; sourceTree = "<group>"; };
 		A91FB0082975E4C60083DCAE /* UpcomingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingView.swift; sourceTree = "<group>"; };
 		A91FB00A2975FBD60083DCAE /* AddUpcomingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpcomingView.swift; sourceTree = "<group>"; };
+		A91FB00C297605F00083DCAE /* AddUpcomingEventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpcomingEventCard.swift; sourceTree = "<group>"; };
 		A9D541292970687C00C76CAF /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
 		A9D5412B2970691200C76CAF /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		A9D5412D297069E600C76CAF /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				A9D541292970687C00C76CAF /* EventCard.swift */,
+				A91FB00C297605F00083DCAE /* AddUpcomingEventCard.swift */,
 				A9D5413129706A6F00C76CAF /* VocalMemoRow.swift */,
 				A9D5413329706A8600C76CAF /* TextMemoRow.swift */,
 				A9D5413529706AB500C76CAF /* TextMemo.swift */,
@@ -244,6 +247,7 @@
 				2DC5130929715FCD004958C0 /* MediaType.swift in Sources */,
 				2DC5130729707ECD004958C0 /* MediaGrid.swift in Sources */,
 				2DC5130529707DD9004958C0 /* MediaCard.swift in Sources */,
+				A91FB00D297605F00083DCAE /* AddUpcomingEventCard.swift in Sources */,
 				2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */,
 				A9D5412A2970687C00C76CAF /* EventCard.swift in Sources */,
 				A9D5413829706B4D00C76CAF /* YourEventsView.swift in Sources */,
