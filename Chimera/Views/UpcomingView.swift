@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct UpcomingView: View {
+    @State var isShowingAddUpcoming = false
     @State private var searchQuery = ""
     var searchResults: [Event] {
         if searchQuery.isEmpty {
@@ -32,11 +33,12 @@ struct UpcomingView: View {
             .toolbar{
                 ToolbarItem(placement: .primaryAction) {
                     Button {
+                        isShowingAddUpcoming.toggle()
                     } label: {
                         Image(systemName: "plus")
                     }
                 }
-            }
+            }.sheet(isPresented: $isShowingAddUpcoming, content: {AddUpcomingView()})
             .searchable(text: $searchQuery, placement: .automatic)
         }
     }
