@@ -11,7 +11,7 @@ import SwiftUI
 struct ChimeraApp: App {
     var body: some Scene {
         WindowGroup {
-            YourEventsView()
+            ContentView()
         }
     }
 }
