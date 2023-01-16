@@ -14,7 +14,7 @@ struct ContentView: View {
                 .tabItem{
                     Label("Memories", systemImage: "memories")
                 }
-            EventView(event: events[0])
+            UpcomingView()
                 .tabItem{
                     Label("Upcoming", systemImage: "calendar.day.timeline.left")
                 }
