@@ -20,6 +20,7 @@
 		A91FB0032971921E0083DCAE /* AudioPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB0022971921E0083DCAE /* AudioPlayerModel.swift */; };
 		A91FB0052971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */; };
 		A91FB0072975B4D40083DCAE /* MemoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB0062975B4D40083DCAE /* MemoriesView.swift */; };
+		A91FB0092975E4C60083DCAE /* UpcomingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB0082975E4C60083DCAE /* UpcomingView.swift */; };
 		A9D5412A2970687C00C76CAF /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D541292970687C00C76CAF /* EventCard.swift */; };
 		A9D5412C2970691200C76CAF /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5412B2970691200C76CAF /* EventModel.swift */; };
 		A9D5412E297069E600C76CAF /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5412D297069E600C76CAF /* EventList.swift */; };
@@ -48,6 +49,7 @@
 		A91FB0022971921E0083DCAE /* AudioPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerModel.swift; sourceTree = "<group>"; };
 		A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "01-11-22_at_18_30_44.m4a"; sourceTree = "<group>"; };
 		A91FB0062975B4D40083DCAE /* MemoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriesView.swift; sourceTree = "<group>"; };
+		A91FB0082975E4C60083DCAE /* UpcomingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingView.swift; sourceTree = "<group>"; };
 		A9D541292970687C00C76CAF /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
 		A9D5412B2970691200C76CAF /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		A9D5412D297069E600C76CAF /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				A9D5412F29706A2A00C76CAF /* EventView.swift */,
 				A9D5413729706B4D00C76CAF /* YourEventsView.swift */,
 				A91FB0062975B4D40083DCAE /* MemoriesView.swift */,
+				A91FB0082975E4C60083DCAE /* UpcomingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			files = (
 				BCD6E29C296F11BA000B9B9B /* RecorderViewModel.swift in Sources */,
 				BCD6E29A296F10D1000B9B9B /* RecorderView.swift in Sources */,
+				A91FB0092975E4C60083DCAE /* UpcomingView.swift in Sources */,
 				2DC5130929715FCD004958C0 /* MediaType.swift in Sources */,
 				2DC5130729707ECD004958C0 /* MediaGrid.swift in Sources */,
 				2DC5130529707DD9004958C0 /* MediaCard.swift in Sources */,
