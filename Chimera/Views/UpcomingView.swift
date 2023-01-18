@@ -28,7 +28,7 @@ struct UpcomingView: View {
                 }
                 .padding(.horizontal)
             }
-            .navigationTitle("Upcomig Events")
+            .navigationTitle("Upcoming Events")
             .navigationBarTitleDisplayMode(.large)
             .toolbar{
                 ToolbarItem(placement: .primaryAction) {

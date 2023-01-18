@@ -14,10 +14,7 @@ struct MemoriesView: View {
                 Text("Re-Live your Moments  ✨ ")
                     .fontWeight(.semibold)
                     .padding(.horizontal)
-                ScrollView(showsIndicators: false){
                     EventList()
-                        .padding(.horizontal)
-                }
             }.navigationTitle("Memories")
                 .navigationBarTitleDisplayMode(.large)
                 .toolbar{
