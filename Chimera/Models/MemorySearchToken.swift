@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum MemorySearchToken: String, Identifiable, Hashable, CaseIterable {
-    case coldplay, guns
+enum MemorySearchToken: Identifiable, Hashable {
+    case performer(name: String), place(city: String)
     
     var id: Self {
         self
