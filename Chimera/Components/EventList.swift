@@ -8,17 +8,25 @@
 import SwiftUI
 
 struct EventList: View {
-    @State private var searchedMemory: String = ""
+    @State private var searchedEvent: String = ""
     @State private var tokens: [MemorySearchToken] = []
     
     private var memoryAttributed: AttributedString {
-        var attributedString = AttributedString(stringLiteral: searchedMemory)
+        var attributedString = AttributedString(stringLiteral: searchedEvent)
         attributedString.font = .body.bold()
         return attributedString
     }
     
     private var filteredEvents: [Event] {
-        return events.filter { event in
+        var filtered = events
+        
+        if !searchedEvent.isEmpty {
+            filtered = filtered.filter { event in
+                event.performer.contains(searchedEvent) || event.place.contains(searchedEvent)
+            }
+        }
+        
+        return filtered.filter { event in
             tokens.allSatisfy { token in
                 switch token {
                 case .performer(let name):
@@ -53,7 +61,7 @@ struct EventList: View {
             }
         }
         .listStyle(.plain)
-        .searchable(text: $searchedMemory, tokens: $tokens, placement: .toolbar, prompt: "Search an event") { token in
+        .searchable(text: $searchedEvent, tokens: $tokens, placement: .toolbar, prompt: "Search an event") { token in
             switch token {
             case .performer(let name):
                 Label(name.capitalized, systemImage: "person.crop.circle")
@@ -62,7 +70,7 @@ struct EventList: View {
             }
         }
         .searchSuggestions {
-            if !searchedMemory.isEmpty {
+            if !searchedEvent.isEmpty && !filteredEvents.isEmpty {
                 Section("Top Hits") {
                     ForEach(filteredEvents) { event in
                         EventCard(image: event.image,
@@ -70,21 +78,19 @@ struct EventList: View {
                                   date: event.date,
                                   place: event.place)
                     }
+                    .listRowSeparator(.hidden)
                 }
             }
             
-            if !searchedMemory.isEmpty {
+            if !searchedEvent.isEmpty {
                 Section("Suggestions") {
                     Text("Performer contains: \(memoryAttributed)")
-                        .searchCompletion(MemorySearchToken.performer(name: searchedMemory))
+                        .searchCompletion(MemorySearchToken.performer(name: searchedEvent))
                     
                     Text("Place contains: \(memoryAttributed)")
-                        .searchCompletion(MemorySearchToken.place(city: searchedMemory))
+                        .searchCompletion(MemorySearchToken.place(city: searchedEvent))
                 }
             }
-        }
-        .onSubmit(of: .search) {
-            print(searchedMemory)
         }
     }
 }
