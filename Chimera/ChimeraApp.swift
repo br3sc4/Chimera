@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct ChimeraApp: App {
+    @StateObject var vm = EventVM()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(vm)
         }
     }
 }

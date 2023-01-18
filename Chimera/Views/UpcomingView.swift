@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct UpcomingView: View {
+    @EnvironmentObject var vm: EventVM
     @State var isShowingAddUpcoming = false
     @State private var searchQuery = ""
     var searchResults: [Event] {
         if searchQuery.isEmpty {
-            return events
+            return vm.events
         } else {
-            return events.filter { $0.performer.localizedCaseInsensitiveContains(searchQuery)}
+            return vm.events.filter { $0.performer.localizedCaseInsensitiveContains(searchQuery)}
         }
     }
+
     var body: some View {
         NavigationStack{
             ScrollView(showsIndicators: false){

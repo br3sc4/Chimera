@@ -23,7 +23,6 @@ struct VocalMemo: Identifiable, Hashable {
     var urlString: String
 }
 
-
 var events = [
     Event(
         performer: "Imagine Dragons",

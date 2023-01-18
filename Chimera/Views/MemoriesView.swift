@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MemoriesView: View {
+    @EnvironmentObject var vm: EventVM
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading){

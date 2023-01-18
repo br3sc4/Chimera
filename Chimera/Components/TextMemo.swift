@@ -18,6 +18,6 @@ struct TextMemo: View {
 
 struct TextMemo_Previews: PreviewProvider {
     static var previews: some View {
-        TextMemo(textMemo: events[0].textMemos![0])
+        TextMemo(textMemo: "events[0].textMemos![0]")
     }
 }

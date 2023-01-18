@@ -10,6 +10,7 @@ import PhotosUI
 
 struct AddUpcomingView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var vm: EventVM
     @State var isViaTicketmaster = true
     @State private var searchQuery = ""
     @State var performer = ""
@@ -18,9 +19,9 @@ struct AddUpcomingView: View {
     @State var image: PhotosPickerItem?
     var searchResults: [Event] {
         if searchQuery.isEmpty {
-            return [events[0], events[3]]
+            return [vm.events[0], vm.events[3]]
         } else {
-            return events.filter { $0.performer.localizedCaseInsensitiveContains(searchQuery)}
+            return vm.events.filter { $0.performer.localizedCaseInsensitiveContains(searchQuery)}
         }
     }
     var body: some View {
@@ -92,8 +93,10 @@ struct AddUpcomingView: View {
                         Text("Cancel")
                     })
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .confirmationAction) {
                     Button(action: {
+                        vm.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending"))
+                        dismiss()
                     }, label: {
                         Text("Done")
                     })
@@ -111,7 +114,8 @@ struct AddUpcomingView: View {
 }
 
 struct AddUpcomingView_Previews: PreviewProvider {
+    @StateObject var vm = EventVM()
     static var previews: some View {
-        AddUpcomingView(performer: events[0].performer, date: events[0].date, place: events[0].place)
+        AddUpcomingView(performer: "Name of Performer", date: "Date", place: "Place")
     }
 }

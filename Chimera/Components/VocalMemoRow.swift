@@ -46,6 +46,6 @@ struct VocalMemoRow: View {
 
 struct VocalMemoRow_Previews: PreviewProvider {
     static var previews: some View {
-        VocalMemoRow(vocalMemo: events[0].vocalMemos![0])
+        VocalMemoRow(vocalMemo: VocalMemo(title: "test", urlString: ""))
     }
 }
