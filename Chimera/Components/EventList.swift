@@ -11,33 +11,6 @@ struct EventList: View {
     @State private var searchedEvent: String = ""
     @State private var tokens: [MemorySearchToken] = []
     
-    private var memoryAttributed: AttributedString {
-        var attributedString = AttributedString(stringLiteral: searchedEvent)
-        attributedString.font = .body.bold()
-        return attributedString
-    }
-    
-    private var filteredEvents: [Event] {
-        var filtered = events
-        
-        if !searchedEvent.isEmpty {
-            filtered = filtered.filter { event in
-                event.performer.contains(searchedEvent) || event.place.contains(searchedEvent)
-            }
-        }
-        
-        return filtered.filter { event in
-            tokens.allSatisfy { token in
-                switch token {
-                case .performer(let name):
-                    return event.performer.contains(name)
-                case .place(let city):
-                    return event.place.contains(city)
-                }
-            }
-        }
-    }
-    
     var body: some View {
         List {
             Text("Re-Live your Moments ✨")
@@ -84,14 +57,59 @@ struct EventList: View {
             
             if !searchedEvent.isEmpty {
                 Section("Suggestions") {
-                    Text("Performer contains: \(memoryAttributed)")
-                        .searchCompletion(MemorySearchToken.performer(name: searchedEvent))
+                    ForEach(performerSuggestions, id: \.self) { performer in
+                        Label(performer, systemImage: "person.crop.circle")
+                            .searchCompletion(MemorySearchToken.performer(name: performer))
+                    }
                     
-                    Text("Place contains: \(memoryAttributed)")
-                        .searchCompletion(MemorySearchToken.place(city: searchedEvent))
+                    ForEach(placeSuggestions, id: \.self) { place in
+                        Label(place, systemImage: "pin.circle")
+                            .searchCompletion(MemorySearchToken.place(city: place))
+                    }
                 }
             }
         }
+    }
+    
+    private var memoryAttributed: AttributedString {
+        var attributedString = AttributedString(stringLiteral: searchedEvent)
+        attributedString.font = .body.bold()
+        return attributedString
+    }
+    
+    private var filteredEvents: [Event] {
+        var filtered = events
+        
+        if !searchedEvent.isEmpty {
+            filtered = filtered.filter { event in
+                event.performer.contains(searchedEvent) || event.place.contains(searchedEvent)
+            }
+        }
+        
+        return filtered.filter { event in
+            tokens.allSatisfy { token in
+                switch token {
+                case .performer(let name):
+                    return event.performer.contains(name)
+                case .place(let city):
+                    return event.place.contains(city)
+                }
+            }
+        }
+    }
+    
+    private var performerSuggestions: [String] {
+        events.map(\.performer)
+            .filter { performer in
+                performer.contains(searchedEvent)
+            }
+    }
+    
+    private var placeSuggestions: [String] {
+        events.map(\.place)
+            .filter { performer in
+                performer.contains(searchedEvent)
+            }
     }
 }
 
