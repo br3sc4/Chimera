@@ -29,6 +29,9 @@
 		2DC51311297176C8004958C0 /* VideoMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC51310297176C8004958C0 /* VideoMemo.swift */; };
 		2DC51319297190A2004958C0 /* IMG_0684.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2DC51318297190A2004958C0 /* IMG_0684.mov */; };
 		2DC5131C2971A84D004958C0 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5131B2971A84D004958C0 /* Image.swift */; };
+		40529D8C297035AC006107BA /* MediaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40529D8B297035AC006107BA /* MediaDetailView.swift */; };
+		40529D902970542D006107BA /* Violoncello - 33565.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 40529D8F29705429006107BA /* Violoncello - 33565.mp4 */; };
+		40529D9229705F46006107BA /* Tamburellare - 5026.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 40529D9129705F43006107BA /* Tamburellare - 5026.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +60,9 @@
 		2DC51310297176C8004958C0 /* VideoMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMemo.swift; sourceTree = "<group>"; };
 		2DC51318297190A2004958C0 /* IMG_0684.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_0684.mov; sourceTree = "<group>"; };
 		2DC5131B2971A84D004958C0 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		40529D8B297035AC006107BA /* MediaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailView.swift; sourceTree = "<group>"; };
+		40529D8F29705429006107BA /* Violoncello - 33565.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Violoncello - 33565.mp4"; sourceTree = "<group>"; };
+		40529D9129705F43006107BA /* Tamburellare - 5026.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tamburellare - 5026.mp4"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +106,8 @@
 				BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */,
 				2D0E78F4296F01050020CDCF /* Assets.xcassets */,
 				A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */,
+				40529D8F29705429006107BA /* Violoncello - 33565.mp4 */,
+				40529D9129705F43006107BA /* Tamburellare - 5026.mp4 */,
 				2D0E78F6296F01050020CDCF /* Chimera.entitlements */,
 				2D0E78F7296F01050020CDCF /* Preview Content */,
 			);
@@ -120,6 +128,7 @@
 				BCD6E299296F10D1000B9B9B /* RecorderView.swift */,
 				A9D5412F29706A2A00C76CAF /* EventView.swift */,
 				A9D5413729706B4D00C76CAF /* YourEventsView.swift */,
+				40529D8B297035AC006107BA /* MediaDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,6 +228,10 @@
 				2D0E78F9296F01050020CDCF /* Preview Assets.xcassets in Resources */,
 				2D0E78F5296F01050020CDCF /* Assets.xcassets in Resources */,
 				A91FB0052971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a in Resources */,
+				40529D9229705F46006107BA /* Tamburellare - 5026.mp4 in Resources */,
+				2D0E78F9296F01050020CDCF /* Preview Assets.xcassets in Resources */,
+				2D0E78F5296F01050020CDCF /* Assets.xcassets in Resources */,
+				40529D902970542D006107BA /* Violoncello - 33565.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +247,7 @@
 				2DC5130929715FCD004958C0 /* MediaType.swift in Sources */,
 				2DC5130729707ECD004958C0 /* MediaGrid.swift in Sources */,
 				2DC5130529707DD9004958C0 /* MediaCard.swift in Sources */,
+				40529D8C297035AC006107BA /* MediaDetailView.swift in Sources */,
 				2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */,
 				A9D5412A2970687C00C76CAF /* EventCard.swift in Sources */,
 				A9D5413829706B4D00C76CAF /* YourEventsView.swift in Sources */,
