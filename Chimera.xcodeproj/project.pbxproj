@@ -264,8 +264,6 @@
 				2D0E78F5296F01050020CDCF /* Assets.xcassets in Resources */,
 				A91FB0052971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a in Resources */,
 				40529D9229705F46006107BA /* Tamburellare - 5026.mp4 in Resources */,
-				2D0E78F9296F01050020CDCF /* Preview Assets.xcassets in Resources */,
-				2D0E78F5296F01050020CDCF /* Assets.xcassets in Resources */,
 				40529D902970542D006107BA /* Violoncello - 33565.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

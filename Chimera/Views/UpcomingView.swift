@@ -24,7 +24,7 @@ struct UpcomingView: View {
             ScrollView(showsIndicators: false){
                 ForEach(searchResults){ x in
                     NavigationLink(destination: EventView(event: x), label: {
-                        EventCard(image: x.image, performer: x.performer, date: x.date, place: x.place)
+                        EventCard(event: x)
                             .padding(.vertical)
                     })
                 }
