@@ -49,6 +49,6 @@ struct UpcomingView: View {
 
 struct UpcomingView_Previews: PreviewProvider {
     static var previews: some View {
-        UpcomingView()
+        UpcomingView().environmentObject(EventVM())
     }
 }
