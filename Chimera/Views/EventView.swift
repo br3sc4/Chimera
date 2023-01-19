@@ -35,6 +35,6 @@ struct EventView: View {
 
 struct EventView_Previews: PreviewProvider {
     static var previews: some View {
-        EventView(event: events[0])
+        EventView(event: Event(performer: "event1", place: "Name of Performer", date: "Date", image: "Place"))
     }
 }

@@ -9,13 +9,26 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView{
+            MemoriesView()
+                .tabItem{
+                    Label("Memories", systemImage: "memories")
+                }
+            UpcomingView()
+                .tabItem{
+                    Label("Upcoming", systemImage: "calendar.day.timeline.left")
+                }
         }
-        .padding()
+        .onAppear {
+            // correct the transparency bug for Tab bars
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithOpaqueBackground()
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            // correct the transparency bug for Navigation bars
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithOpaqueBackground()
+            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        }
     }
 }
 
@@ -24,3 +37,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+    

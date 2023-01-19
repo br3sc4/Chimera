@@ -30,6 +30,6 @@ struct TextMemoRow: View {
 
 struct TextMemoRow_Previews: PreviewProvider {
     static var previews: some View {
-        TextMemoRow(textMemo: events[0].textMemos![0])
+        TextMemoRow(textMemo: "events[0].textMemos![0]")
     }
 }
