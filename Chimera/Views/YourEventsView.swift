@@ -9,7 +9,7 @@ import SwiftUI
 
 struct YourEventsView: View {
     var body: some View {
-        NavigationView {
+        NavigationStack {
             EventList()
                 .navigationTitle("Your Events")
                 .toolbar{

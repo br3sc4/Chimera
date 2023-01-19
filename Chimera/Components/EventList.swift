@@ -19,18 +19,8 @@ struct EventList: View {
                 .listSectionSeparator(.hidden)
             
             ForEach(filteredEvents) { event in
-                NavigationLink {
-                    EventView(event: event)
-                } label: {
-                    EventCard(image: event.image,
-                              performer: event.performer,
-                              date: event.date,
-                              place: event.place)
-                }
-                .foregroundColor(.clear)
-                .listRowInsets(EdgeInsets(top: 11, leading: 20, bottom: 11, trailing: 5))
-                .listRowSeparator(.hidden)
-                .listRowBackground(Color(uiColor: .systemBackground))
+                EventCard(event: event)
+                    .listRowSeparator(.hidden)
             }
         }
         .listStyle(.plain)
@@ -43,38 +33,44 @@ struct EventList: View {
             }
         }
         .searchSuggestions {
-            if !searchedEvent.isEmpty && !filteredEvents.isEmpty {
-                Section("Top Hits") {
-                    ForEach(filteredEvents) { event in
-                        EventCard(image: event.image,
-                                  performer: event.performer,
-                                  date: event.date,
-                                  place: event.place)
-                    }
-                    .listRowSeparator(.hidden)
+            topHits()
+            suggestions()
+        }
+        .navigationDestination(for: Event.self) { event in
+            EventView(event: event)
+        }
+    }
+    
+    @ViewBuilder
+    private func topHits() -> some View {
+        if !searchedEvent.isEmpty && !filteredEvents.isEmpty {
+            Section("Top Hits") {
+                ForEach(filteredEvents) { event in
+                    EventCard(event: event)
                 }
-            }
-            
-            if !searchedEvent.isEmpty {
-                Section("Suggestions") {
-                    ForEach(performerSuggestions, id: \.self) { performer in
-                        Label(performer, systemImage: "person.crop.circle")
-                            .searchCompletion(MemorySearchToken.performer(name: performer))
-                    }
-                    
-                    ForEach(placeSuggestions, id: \.self) { place in
-                        Label(place, systemImage: "pin.circle")
-                            .searchCompletion(MemorySearchToken.place(city: place))
-                    }
-                }
+                .listRowSeparator(.hidden)
             }
         }
     }
     
-    private var memoryAttributed: AttributedString {
-        var attributedString = AttributedString(stringLiteral: searchedEvent)
-        attributedString.font = .body.bold()
-        return attributedString
+    @ViewBuilder
+    private func suggestions() -> some View {
+        let performers = makeSuggestions(by: \.performer)
+        let places = makeSuggestions(by: \.place)
+        
+        if !searchedEvent.isEmpty && (!performers.isEmpty || !places.isEmpty) {
+            Section("Suggestions") {
+                ForEach(performers, id: \.self) { performer in
+                    Label(performer, systemImage: "person.crop.circle")
+                        .searchCompletion(MemorySearchToken.performer(name: performer))
+                }
+                
+                ForEach(places, id: \.self) { place in
+                    Label(place, systemImage: "pin.circle")
+                        .searchCompletion(MemorySearchToken.place(city: place))
+                }
+            }
+        }
     }
     
     private var filteredEvents: [Event] {
@@ -98,17 +94,10 @@ struct EventList: View {
         }
     }
     
-    private var performerSuggestions: [String] {
-        events.map(\.performer)
-            .filter { performer in
-                performer.contains(searchedEvent)
-            }
-    }
-    
-    private var placeSuggestions: [String] {
-        events.map(\.place)
-            .filter { performer in
-                performer.contains(searchedEvent)
+    private func makeSuggestions(by transform: (Event) -> String) -> [String] {
+        events.map(transform)
+            .filter { field in
+                field.contains(searchedEvent)
             }
     }
 }

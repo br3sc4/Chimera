@@ -18,7 +18,7 @@ struct EventView: View {
                 }.listRowInsets(EdgeInsets())
             }
             Section("Vocal Memos") {
-                ForEach(event.VocalMemos!){ vocalMemo in
+                ForEach(event.vocalMemos!){ vocalMemo in
                     VocalMemoRow(vocalMemo: vocalMemo)
                         .padding(.vertical)
                 }.listRowInsets(EdgeInsets())
