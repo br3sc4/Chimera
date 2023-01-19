@@ -11,17 +11,22 @@ struct EventView: View {
     let event: Event
     var body: some View {
         List {
-            Section("Textual Memos") {
-                ForEach(event.textMemos!, id: \.self){ textMemo in
-                    TextMemoRow(textMemo: textMemo)
-                        .padding(.vertical)
-                }.listRowInsets(EdgeInsets())
+            if let textMemos = event.textMemos {
+                Section("Textual Memos") {
+                    ForEach(textMemos, id: \.self){ textMemo in
+                        TextMemoRow(textMemo: textMemo)
+                            .padding(.vertical)
+                    }.listRowInsets(EdgeInsets())
+                }
             }
-            Section("Vocal Memos") {
-                ForEach(event.vocalMemos!){ vocalMemo in
-                    VocalMemoRow(vocalMemo: vocalMemo)
-                        .padding(.vertical)
-                }.listRowInsets(EdgeInsets())
+            
+            if let vocalMemos = event.vocalMemos {
+                Section("Vocal Memos") {
+                    ForEach(vocalMemos){ vocalMemo in
+                        VocalMemoRow(vocalMemo: vocalMemo)
+                            .padding(.vertical)
+                    }.listRowInsets(EdgeInsets())
+                }
             }
         }
         .navigationTitle(event.performer)
