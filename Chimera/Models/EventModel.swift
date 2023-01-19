@@ -7,22 +7,21 @@
 
 import Foundation
 
-struct Event: Identifiable {
+struct Event: Identifiable, Hashable {
     let id = UUID()
     var performer: String
     var place: String
     var date: String
     var image: String
     var textMemos: [String]?
-    var VocalMemos: [VocalMemo]?
+    var vocalMemos: [VocalMemo]?
 }
 
-struct VocalMemo: Identifiable{
+struct VocalMemo: Identifiable, Hashable {
     let id = UUID()
     var title: String
     var urlString: String
 }
-
 
 var events = [
     Event(
@@ -34,7 +33,7 @@ var events = [
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur",
     "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo"],
-        VocalMemos: [
+        vocalMemos: [
             VocalMemo(title: "Audio 1",
                       urlString: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"),
             VocalMemo(title: "Audio 2",
@@ -49,7 +48,7 @@ var events = [
         image: "event2",
         textMemos: [
     "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo"],
-        VocalMemos: [
+        vocalMemos: [
             VocalMemo(title: "Audio 1",
                       urlString: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"),
             VocalMemo(title: "Audio 2",
@@ -72,7 +71,7 @@ var events = [
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur",
     "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo"],
-        VocalMemos: [
+        vocalMemos: [
             VocalMemo(title: "Audio 1",
                       urlString: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"),
             VocalMemo(title: "Audio 2",

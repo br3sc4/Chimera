@@ -8,17 +8,11 @@
 import SwiftUI
 
 struct MemoriesView: View {
+    @EnvironmentObject var vm: EventVM
     var body: some View {
         NavigationStack{
-            VStack(alignment: .leading){
-                Text("Re-Live your Moments  ✨ ")
-                    .fontWeight(.semibold)
-                    .padding(.horizontal)
-                ScrollView(showsIndicators: false){
                     EventList()
-                        .padding(.horizontal)
-                }
-            }.navigationTitle("Memories")
+                    .navigationTitle("Memories")
                 .navigationBarTitleDisplayMode(.large)
                 .toolbar{
                     ToolbarItem(placement: .primaryAction) {

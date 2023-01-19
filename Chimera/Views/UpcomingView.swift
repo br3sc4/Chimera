@@ -8,27 +8,29 @@
 import SwiftUI
 
 struct UpcomingView: View {
+    @EnvironmentObject var vm: EventVM
     @State var isShowingAddUpcoming = false
     @State private var searchQuery = ""
     var searchResults: [Event] {
         if searchQuery.isEmpty {
-            return events
+            return vm.events
         } else {
-            return events.filter { $0.performer.localizedCaseInsensitiveContains(searchQuery)}
+            return vm.events.filter { $0.performer.localizedCaseInsensitiveContains(searchQuery)}
         }
     }
+
     var body: some View {
         NavigationStack{
             ScrollView(showsIndicators: false){
                 ForEach(searchResults){ x in
                     NavigationLink(destination: EventView(event: x), label: {
-                        EventCard(image: x.image, performer: x.performer, date: x.date, place: x.place)
+                        EventCard(event: x)
                             .padding(.vertical)
                     })
                 }
                 .padding(.horizontal)
             }
-            .navigationTitle("Upcomig Events")
+            .navigationTitle("Upcoming Events")
             .navigationBarTitleDisplayMode(.large)
             .toolbar{
                 ToolbarItem(placement: .primaryAction) {
@@ -47,6 +49,6 @@ struct UpcomingView: View {
 
 struct UpcomingView_Previews: PreviewProvider {
     static var previews: some View {
-        UpcomingView()
+        UpcomingView().environmentObject(EventVM())
     }
 }

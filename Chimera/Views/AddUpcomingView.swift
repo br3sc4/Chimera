@@ -6,57 +6,36 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct AddUpcomingView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var vm: EventVM
     @State var isViaTicketmaster = true
-    @State private var searchQuery = ""
-    var searchResults: [Event] {
-        if searchQuery.isEmpty {
-            return [events[0], events[3]]
-        } else {
-            return events.filter { $0.performer.localizedCaseInsensitiveContains(searchQuery)}
-        }
-    }
+//    @State private var searchQuery = ""
+    @State var performer = ""
+    @State var date = ""
+    @State var place = ""
+    @State var image: PhotosPickerItem?
+//    var searchResults: [Event] {
+//        if searchQuery.isEmpty {
+//            return [vm.events[0], vm.events[3]]
+//        } else {
+//            return vm.events.filter { $0.performer.localizedCaseInsensitiveContains(searchQuery)}
+//        }
+//    }
     var body: some View {
         NavigationStack{
-            VStack{
-                Picker("", selection: $isViaTicketmaster){
-                    Text("Ticketmaster").tag(true)
-                    Text("Manually").tag(false)
-                }
-                .pickerStyle(.segmented)
-                .padding()
-                
+            VStack(spacing: 4){
                 if isViaTicketmaster{
-                    //                    NavigationView{
-                    ScrollView{
-                        ForEach(searchResults){ result in
-                            Button(action: {
-                                
-                            }, label: {
-                                HStack{
-                                    Spacer()
-                                    Image(systemName: "plus")
-                                        .fontWeight(.semibold)
-                                    //                                        .font(.system(size: 18))
-                                    Spacer()
-                                    AddUpcomingEventCard(image: result.image, performer: result.performer, date: result.date, place: result.place)
-                                        .padding(.vertical)
-                                }
-                            }
-                            )
-                        }
-                            .padding(.horizontal)
-                        //                        }
-                    }.searchable(text: $searchQuery)
-                }else {
-                    Text("Manually adding")
-                    Spacer()
+                    AddUpcomingTicketmasterView().environmentObject(EventVM())
+                }else{
+                    
+                    AddUpcomingManuallyView()
                 }
             }
-            .navigationTitle("Add a new Upcoming Gig")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(isViaTicketmaster ? "Search a new Event" : "Add a new Event")
+            .navigationBarTitleDisplayMode(.large)
             .toolbar{
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
@@ -67,9 +46,18 @@ struct AddUpcomingView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button(action: {
+                        vm.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending"))
+                        dismiss()
                     }, label: {
                         Text("Done")
                     })
+                }
+                ToolbarItem(placement: .principal) {
+                    Picker("", selection: $isViaTicketmaster){
+                        Text("Ticketmaster").tag(true)
+                        Text("Manually").tag(false)
+                    }
+                    .pickerStyle(.segmented)
                 }
             }
         }
@@ -78,6 +66,6 @@ struct AddUpcomingView: View {
 
 struct AddUpcomingView_Previews: PreviewProvider {
     static var previews: some View {
-        AddUpcomingView()
+        AddUpcomingView(performer: "Name of Performer", date: "Date", place: "Place").environmentObject(EventVM())
     }
 }
