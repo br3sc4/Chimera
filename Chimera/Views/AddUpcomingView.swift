@@ -28,10 +28,10 @@ struct AddUpcomingView: View {
         NavigationStack{
             VStack(spacing: 4){
                 if isViaTicketmaster{
-                    AddUpcomingTicketmasterView().environmentObject(EventVM())
+                    AddUpcomingTicketmasterView().environmentObject(vm)
                 }else{
                     
-                    AddUpcomingManuallyView()
+                    AddUpcomingManuallyView().environmentObject(vm)
                 }
             }
             .navigationTitle(isViaTicketmaster ? "Search a new Event" : "Add a new Event")
@@ -44,14 +44,14 @@ struct AddUpcomingView: View {
                         Text("Cancel")
                     })
                 }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button(action: {
-                        vm.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending"))
-                        dismiss()
-                    }, label: {
-                        Text("Done")
-                    })
-                }
+//                ToolbarItem(placement: .confirmationAction) {
+//                    Button(action: {
+//                        vm.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending"))
+//                        dismiss()
+//                    }, label: {
+//                        Text("Done")
+//                    })
+//                }
                 ToolbarItem(placement: .principal) {
                     Picker("", selection: $isViaTicketmaster){
                         Text("Ticketmaster").tag(true)

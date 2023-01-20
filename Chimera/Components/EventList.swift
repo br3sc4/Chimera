@@ -13,11 +13,11 @@ struct EventList: View {
     
     var body: some View {
         List {
-            Text("Re-Live your Moments ✨")
-                .font(.title3)
-                .fontWeight(.semibold)
-                .listSectionSeparator(.hidden)
-            
+//            Text("Re-Live your Moments ✨")
+//                .font(.title3)
+//                .fontWeight(.semibold)
+//                .listSectionSeparator(.hidden)
+//
             ForEach(filteredEvents) { event in
                 EventCard(event: event)
                     .listRowSeparator(.hidden)

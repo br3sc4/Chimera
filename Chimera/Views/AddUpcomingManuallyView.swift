@@ -9,55 +9,82 @@ import SwiftUI
 import PhotosUI
 
 struct AddUpcomingManuallyView: View {
-    @State var performer = ""
-    @State var date = ""
-    @State var place = ""
-    @State var image: PhotosPickerItem?
+    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var eventsVM: EventVM
+    
+
+    @EnvironmentObject var vm: AddEventVM
+    @State var pickedImage: PhotosPickerItem?
+    @State private var pickedData: Data?
     var body: some View {
-        Form{
+        Form {
             Section{
-                PhotosPicker(selection: $image, matching: .images) {
-                    ZStack{
-                        if image == nil {
-                            Image("event1")
+                ZStack{
+                    if pickedImage == nil {
+                        Image("event1")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(height: 136)
+                            .cornerRadius(24)
+                            .padding(.horizontal)
+                    }else{
+                        if let pickedData, let uiImage = UIImage(data: pickedData){
+                            Image(uiImage: uiImage)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(height: 136)
                                 .cornerRadius(24)
                                 .padding(.horizontal)
-                        }else{
-//                                        Image(uiImage: UIImage(data: image))
-//                                            .resizable()
-//                                            .scaledToFill()
-//                                            .frame(height: 136)
-//                                            .cornerRadius(24)
-//                                            .padding(.horizontal)
                         }
-                        Rectangle()
-                            .foregroundColor(.black)
-                            .frame(height: 136)
-                            .opacity(0.75)
-                            .cornerRadius(24)
-                            .padding(.horizontal)
-                        
-                        Text(image == nil ? "Select a Cover" : "Edit the Cover")
-                            .foregroundColor(.accentColor)
+                    }
+                    Rectangle()
+                        .foregroundColor(.black)
+                        .frame(height: 136)
+                        .opacity(0.75)
+                        .cornerRadius(24)
+                        .padding(.horizontal)
+                    
+                PhotosPicker(pickedImage == nil ? "Select a Cover" : "Edit the Cover", selection: $pickedImage, matching: .images)
+                        .onChange(of: pickedImage) { newItem in
+                    Task {
+                        if let data = try? await newItem?.loadTransferable(type: Data.self) {
+                            pickedData = data
+                        }
                     }
                 }
-            }.listRowBackground(Color.clear)
-                .padding(.top)
+                            .foregroundColor(.accentColor)
+                }
+            }
+            .listRowBackground(Color.clear)
+            .padding(.top)
             
             Section {
-                TextField("Name of Performer", text: $performer)
-                TextField("Place of the Event", text: $place)
-                TextField("Date of the Event", text: $date)
+                TextField("Name of Performer", text: $vm.performer)
+                TextField("Place of the Event", text: $vm.place)
+                TextField("Date of the Event", text: $vm.date)
             }
-        }
+            
+        }.toolbar{
+            ToolbarItem(placement: .confirmationAction) {
+                Button(action: {
+                    if pickedData == nil{
+                        eventsVM.events.append(Event(performer: vm.performer, place: vm.place, date: vm.date, image: "imgforappending"))
+                    }
+                    else{
+                        eventsVM.events.append(Event(performer: vm.performer, place: vm.place, date: vm.date, image: "", imageData: pickedData))
+                    }
+                    dismiss()
+                }, label: {
+                    Text("Done")
+                })
+            }
     }
+    }
+        
 }
 
 struct AddUpcomingManuallyView_Previews: PreviewProvider {
     static var previews: some View {
-        AddUpcomingManuallyView()
+        AddUpcomingManuallyView().environmentObject(EventVM()).environmentObject(AddEventVM())
     }
 }
