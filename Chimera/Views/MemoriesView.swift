@@ -34,6 +34,6 @@ struct MemoriesView: View {
 
 struct MemoriesView_Previews: PreviewProvider {
     static var previews: some View {
-        MemoriesView()
+        MemoriesView().environmentObject(EventVM())
     }
 }

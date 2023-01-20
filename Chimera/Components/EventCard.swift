@@ -46,6 +46,6 @@ struct EventCard: View {
 
 struct EventCard_Previews: PreviewProvider {
     static var previews: some View {
-        EventCard(event: events[0])
+        EventCard(event: EventVM().events[0]).environmentObject(EventVM())
     }
 }

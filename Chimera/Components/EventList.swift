@@ -10,14 +10,14 @@ import SwiftUI
 struct EventList: View {
     @State private var searchedEvent: String = ""
     @State private var tokens: [MemorySearchToken] = []
-    
+    @EnvironmentObject var vm: EventVM
     var body: some View {
         List {
-//            Text("Re-Live your Moments ✨")
-//                .font(.title3)
-//                .fontWeight(.semibold)
-//                .listSectionSeparator(.hidden)
-//
+            Text("Re-Live your Moments ✨")
+                .font(.title3)
+                .fontWeight(.semibold)
+                .listSectionSeparator(.hidden)
+
             ForEach(filteredEvents) { event in
                 EventCard(event: event)
                     .listRowSeparator(.hidden)
@@ -74,7 +74,7 @@ struct EventList: View {
     }
     
     private var filteredEvents: [Event] {
-        var filtered = events
+        var filtered = vm.events
         
         if !searchedEvent.isEmpty {
             filtered = filtered.filter { event in
@@ -95,7 +95,7 @@ struct EventList: View {
     }
     
     private func makeSuggestions(by transform: (Event) -> String) -> [String] {
-        events.map(transform)
+        vm.events.map(transform)
             .filter { field in
                 field.contains(searchedEvent)
             }
@@ -104,6 +104,6 @@ struct EventList: View {
 
 struct EventList_Previews: PreviewProvider {
     static var previews: some View {
-        EventList()
+        EventList().environmentObject(EventVM())
     }
 }

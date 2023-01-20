@@ -26,6 +26,6 @@ struct YourEventsView: View {
 
 struct YourEventsView_Previews: PreviewProvider {
     static var previews: some View {
-        YourEventsView()
+        YourEventsView().environmentObject(EventVM())
     }
 }
