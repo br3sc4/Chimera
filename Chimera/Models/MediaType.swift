@@ -8,6 +8,16 @@
 import Foundation
 import CoreGraphics
 
-enum MediaType {
-    case image(name: String), video(duration: Double, thumbnail: CGImage? = nil)
+enum MediaType: Identifiable, Hashable {
+    case image(name: String)
+    case video(videoMemo: VideoMemo)
+    
+    var id: String {
+        switch self {
+        case .image(let name):
+            return name
+        case .video(let videoMemo):
+            return videoMemo.url.description
+        }
+    }
 }

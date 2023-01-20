@@ -8,29 +8,41 @@
 import SwiftUI
 
 struct MediaGrid: View {
+    @State private var selectedMedia: MediaType?
+    
     private let columns: [GridItem] = [
         GridItem(.adaptive(minimum: 100), spacing: 2)
     ]
     
-    private let videos: [VideoMemo] = [
-        VideoMemo(name: "IMG_0684")
-    ]
+    private let media: [MediaType]
+    
+    init(media: [MediaType]) {
+        self.media = media
+    }
     
     var body: some View {
         LazyVGrid(columns: columns, spacing: 2) {
-            MediaCard(type: .image(name: "ConcertImageMemo"))
-            MediaCard(type: .image(name: "ConcertImageMemoVertical"))
-            MediaCard(type: .video(duration: videos[0].mediaDuration, thumbnail: videos[0].thumbnail))
-            MediaCard(type: .image(name: "ConcertImageMemoVertical"))
-            MediaCard(type: .image(name: "ConcertImageMemo"))
-            MediaCard(type: .video(duration: videos[0].mediaDuration, thumbnail: videos[0].thumbnail))
-            MediaCard(type: .image(name: "ConcertImageMemo"))
+            ForEach(media) { media in
+                MediaCard(type: media)
+                    .onTapGesture {
+                        selectedMedia = media
+                    }
+            }
+        }
+        .fullScreenCover(item: $selectedMedia) { _ in
+            MediaDetailView(media: media)
         }
     }
 }
 
 struct MediaGrid_Previews: PreviewProvider {
     static var previews: some View {
-        MediaGrid()
+        MediaGrid(media: [
+            .image(name: "concert1"),
+            .image(name: "concert2"),
+            .video(videoMemo: VideoMemo(name: "Tamburellare - 5026", ext: "mp4")),
+            .image(name: "concert3"),
+            .video(videoMemo: VideoMemo(name: "Violoncello - 33565", ext: "mp4"))
+        ])
     }
 }

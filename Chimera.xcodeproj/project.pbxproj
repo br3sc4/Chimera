@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		2D0E78F1296F01050020CDCF /* ChimeraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0E78F0296F01050020CDCF /* ChimeraApp.swift */; };
 		2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0E78F2296F01050020CDCF /* ContentView.swift */; };
-		2D0E78F5296F01050020CDCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F4296F01050020CDCF /* Assets.xcassets */; };
-		2D0E78F9296F01050020CDCF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */; };
 		2D23694E2977240C00F5CCC3 /* MemorySearchToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D23694D2977240C00F5CCC3 /* MemorySearchToken.swift */; };
+		2DBC894129799FE4009C41EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F4296F01050020CDCF /* Assets.xcassets */; };
+		2DBC894229799FEA009C41EA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */; };
+		2DBC8944297ADCA4009C41EA /* MediaDetailPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBC8943297ADCA4009C41EA /* MediaDetailPreview.swift */; };
 		2DC5130529707DD9004958C0 /* MediaCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5130429707DD9004958C0 /* MediaCard.swift */; };
 		2DC5130729707ECD004958C0 /* MediaGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5130629707ECD004958C0 /* MediaGrid.swift */; };
 		2DC5130929715FCD004958C0 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5130829715FCD004958C0 /* MediaType.swift */; };
@@ -54,6 +55,7 @@
 		2D0E78F6296F01050020CDCF /* Chimera.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chimera.entitlements; sourceTree = "<group>"; };
 		2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2D23694D2977240C00F5CCC3 /* MemorySearchToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorySearchToken.swift; sourceTree = "<group>"; };
+		2DBC8943297ADCA4009C41EA /* MediaDetailPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailPreview.swift; sourceTree = "<group>"; };
 		2DC5130429707DD9004958C0 /* MediaCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCard.swift; sourceTree = "<group>"; };
 		2DC5130629707ECD004958C0 /* MediaGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaGrid.swift; sourceTree = "<group>"; };
 		2DC5130829715FCD004958C0 /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				A9D5412D297069E600C76CAF /* EventList.swift */,
 				2DC5130429707DD9004958C0 /* MediaCard.swift */,
 				2DC5130629707ECD004958C0 /* MediaGrid.swift */,
+				2DBC8943297ADCA4009C41EA /* MediaDetailPreview.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -268,9 +271,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DBC894229799FEA009C41EA /* Preview Assets.xcassets in Resources */,
+				2DBC894129799FE4009C41EA /* Assets.xcassets in Resources */,
 				2DC51319297190A2004958C0 /* IMG_0684.mov in Resources */,
-				2D0E78F9296F01050020CDCF /* Preview Assets.xcassets in Resources */,
-				2D0E78F5296F01050020CDCF /* Assets.xcassets in Resources */,
 				A91FB0052971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a in Resources */,
 				40529D9229705F46006107BA /* Tamburellare - 5026.mp4 in Resources */,
 				40529D902970542D006107BA /* Violoncello - 33565.mp4 in Resources */,
@@ -284,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DBC8944297ADCA4009C41EA /* MediaDetailPreview.swift in Sources */,
 				BCD6E29C296F11BA000B9B9B /* RecorderViewModel.swift in Sources */,
 				A91FB01229798A800083DCAE /* AddEventVM.swift in Sources */,
 				BCD6E29A296F10D1000B9B9B /* RecorderView.swift in Sources */,
