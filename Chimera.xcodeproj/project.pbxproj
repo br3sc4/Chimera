@@ -21,6 +21,8 @@
 		40529D8C297035AC006107BA /* MediaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40529D8B297035AC006107BA /* MediaDetailView.swift */; };
 		40529D902970542D006107BA /* Violoncello - 33565.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 40529D8F29705429006107BA /* Violoncello - 33565.mp4 */; };
 		40529D9229705F46006107BA /* Tamburellare - 5026.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 40529D9129705F43006107BA /* Tamburellare - 5026.mp4 */; };
+		40F8128729799D90007A175D /* NSLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F8128629799D90007A175D /* NSLocale.swift */; };
+		40F812892979BB2C007A175D /* LocaleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F812882979BB2C007A175D /* LocaleModel.swift */; };
 		A91FB0032971921E0083DCAE /* AudioPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB0022971921E0083DCAE /* AudioPlayerModel.swift */; };
 		A91FB0052971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */; };
 		A91FB0072975B4D40083DCAE /* MemoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB0062975B4D40083DCAE /* MemoriesView.swift */; };
@@ -60,6 +62,8 @@
 		40529D8B297035AC006107BA /* MediaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailView.swift; sourceTree = "<group>"; };
 		40529D8F29705429006107BA /* Violoncello - 33565.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Violoncello - 33565.mp4"; sourceTree = "<group>"; };
 		40529D9129705F43006107BA /* Tamburellare - 5026.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tamburellare - 5026.mp4"; sourceTree = "<group>"; };
+		40F8128629799D90007A175D /* NSLocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLocale.swift; sourceTree = "<group>"; };
+		40F812882979BB2C007A175D /* LocaleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleModel.swift; sourceTree = "<group>"; };
 		A91FB0022971921E0083DCAE /* AudioPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerModel.swift; sourceTree = "<group>"; };
 		A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "01-11-22_at_18_30_44.m4a"; sourceTree = "<group>"; };
 		A91FB0062975B4D40083DCAE /* MemoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriesView.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 				2DC51310297176C8004958C0 /* VideoMemo.swift */,
 				A91FB0022971921E0083DCAE /* AudioPlayerModel.swift */,
 				2D23694D2977240C00F5CCC3 /* MemorySearchToken.swift */,
+				40F812882979BB2C007A175D /* LocaleModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				2DC5131B2971A84D004958C0 /* Image.swift */,
+				40F8128629799D90007A175D /* NSLocale.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -284,6 +290,7 @@
 				A91FB01429798D3B0083DCAE /* AddUpcomingTicketmasterView.swift in Sources */,
 				2DC5130929715FCD004958C0 /* MediaType.swift in Sources */,
 				2DC5130729707ECD004958C0 /* MediaGrid.swift in Sources */,
+				40F8128729799D90007A175D /* NSLocale.swift in Sources */,
 				2DC5130529707DD9004958C0 /* MediaCard.swift in Sources */,
 				40529D8C297035AC006107BA /* MediaDetailView.swift in Sources */,
 				A91FB00D297605F00083DCAE /* AddUpcomingEventCard.swift in Sources */,
@@ -291,6 +298,7 @@
 				A9D5412A2970687C00C76CAF /* EventCard.swift in Sources */,
 				A9D5413829706B4D00C76CAF /* YourEventsView.swift in Sources */,
 				A9D5413229706A6F00C76CAF /* VocalMemoRow.swift in Sources */,
+				40F812892979BB2C007A175D /* LocaleModel.swift in Sources */,
 				A9D5412C2970691200C76CAF /* EventModel.swift in Sources */,
 				A9D5413629706AB500C76CAF /* TextMemo.swift in Sources */,
 				A9D5413029706A2A00C76CAF /* EventView.swift in Sources */,
