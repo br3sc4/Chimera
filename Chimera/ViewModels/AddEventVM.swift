@@ -15,5 +15,6 @@ class AddEventVM: ObservableObject{
     @Published var place = ""
     @Published var date = ""
     @Published var imageData: Data?
+    @Published var photoPickerItem: PhotosPickerItem?
 
 }

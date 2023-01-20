@@ -12,9 +12,6 @@ struct MemoriesView: View {
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading){
-//                Text("Re-Live your Moments  ✨ ")
-//                    .fontWeight(.semibold)
-//                    .padding(.horizontal)
                     EventList()
             }.navigationTitle("Memories")
                 .navigationBarTitleDisplayMode(.large)
