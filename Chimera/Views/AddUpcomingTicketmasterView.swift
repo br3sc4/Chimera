@@ -10,20 +10,20 @@ import SwiftUI
 struct AddUpcomingTicketmasterView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var vm: EventVM
+    @StateObject var ticketMasterVm = CreateEventApiViewModel()
     
-    @State private var searchQuery = ""
     
-    @State private var date = Date()
-    @State private var locale: String = "IT"
+    //@State private var date = Date()
+    //@State private var locale: String = "IT"
     
     
     
     
     var searchResults: [Event] {
-        if searchQuery.isEmpty {
+        if ticketMasterVm.searchQuery.isEmpty {
             return [vm.events[0], vm.events[3]]
         } else {
-            return vm.events.filter { $0.performer.localizedCaseInsensitiveContains(searchQuery)}
+            return vm.events.filter { $0.performer.localizedCaseInsensitiveContains(ticketMasterVm.searchQuery)}
         }
     }
     
@@ -32,9 +32,9 @@ struct AddUpcomingTicketmasterView: View {
         
         VStack {
             HStack {
-                DatePicker("Event Date", selection: $date, displayedComponents: .date)
+                DatePicker("Event Date", selection: $ticketMasterVm.date, displayedComponents: .date)
                 Spacer()
-                Picker("Country Event", selection: $locale) {
+                Picker("Country Event", selection: $ticketMasterVm.locale) {
                     ForEach(NSLocale.locales()) { locale in
                         
                         Text("\(locale.countryName) - \(locale.countryCode)")
@@ -48,7 +48,7 @@ struct AddUpcomingTicketmasterView: View {
             .padding()
             
             ScrollView{
-                ForEach(searchResults){ result in
+                ForEach(ticketMasterVm.events){ result in
                     Button(action: {
                         
                     }, label: {
@@ -66,8 +66,13 @@ struct AddUpcomingTicketmasterView: View {
                     .padding(.horizontal)
                 }
             }
-            .searchable(text: $searchQuery, placement:
+            .searchable(text: $ticketMasterVm.searchQuery, placement:
                 .navigationBarDrawer(displayMode: .always))
+            .onSubmit(of: .search, {
+                Task{
+                    await ticketMasterVm.getEvents()
+                }
+            })
         }
 
     }

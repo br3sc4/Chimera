@@ -12,19 +12,20 @@ class CreateEventApiViewModel : ObservableObject {
     
     
     private var ticketMasterResults : TicketMasterAPI?
-    @Published var eventName : String
-    @Published var cityName : String
-    
+    @Published var searchQuery : String
+    @Published var locale : String
+    @Published var date : Date
     @Published var events  : [Event]
     
     var urlComponents : URLComponents
     
     init() {
         self.ticketMasterResults = nil
-        self.eventName = ""
-        self.cityName = "Napoli"
+        self.searchQuery = ""
+        self.locale = "IT"
         self.urlComponents = URLComponents(string: "https://app.ticketmaster.com/")!
         self.events = []
+        self.date = Date()
     }
     
     
@@ -32,18 +33,31 @@ class CreateEventApiViewModel : ObservableObject {
         
         urlComponents.path = "/discovery/v2/events"
         
+        
+        let calendar = Calendar.current
+        let startTime = calendar.startOfDay(for: date)
+        let endTime = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: date)!
+        
+
+        
+        let startTimeFormatted = startTime.formatted(.iso8601)
+        let endTimeFormatted = endTime.formatted(.iso8601)
+        
         //TODO: Check if/how you can specify API-Code outsitde of source
         let apiKeyQery = URLQueryItem(name: "apikey", value: "DxmW4FBMq7gyPeRrRPdI7fCocVAxrO56")
-        let localeQuery = URLQueryItem(name: "locale", value: "IT")
-        let cityQuery = URLQueryItem(name: "city", value: cityName)
-        let keyWordQuery = URLQueryItem(name: "keyword", value: eventName)
+        let localeQuery = URLQueryItem(name: "locale", value: locale)
+        let keyWordQuery = URLQueryItem(name: "keyword", value: searchQuery)
+        let startDateQuery = URLQueryItem(name: "startDateTime", value: startTimeFormatted)
+        let endDatQuery = URLQueryItem(name: "endDateTime", value: endTimeFormatted)
         
         urlComponents.queryItems = [apiKeyQery,
                                     localeQuery,
-                                    cityQuery,
+                                    startDateQuery,
+                                    endDatQuery,
                                     keyWordQuery]
         
         let url = urlComponents.url!
+        print(url)
         
                 do {
                     let (data, _) = try await URLSession.shared.data(from: url)
@@ -61,7 +75,7 @@ class CreateEventApiViewModel : ObservableObject {
                     ticketMasterResults = try decoder.decode(TicketMasterAPI.self, from: data)
                     
                     for tMevent in ticketMasterResults!.embedded.events {
-                        let event = Event(performer: tMevent.embedded.attractions.first?.name ?? "Not provided", place: tMevent.embedded.venues.first?.city.name ?? "Not provided", date: tMevent.dates.start.localDate, image: "event1")
+                        let event = Event(performer: tMevent.embedded.attractions?.first?.name ?? "Not provided", place: tMevent.embedded.venues.first?.city.name ?? "Not provided", date: tMevent.dates.start.localDate, image: "event1")
                         events.append(event)
                     }
                     

@@ -54,7 +54,7 @@ struct Start: Codable {
 // MARK: - EventEmbedded
 struct EventEmbedded: Codable {
     let venues: [Venue]
-    let attractions: [Attraction]
+    let attractions: [Attraction]?
 }
 
 // MARK: - Venue
@@ -69,6 +69,7 @@ struct Venue: Codable {
 
 struct Attraction: Codable {
     let name, type, id, locale, url : String
+    //let name : String
 }
 
 // MARK: - City
