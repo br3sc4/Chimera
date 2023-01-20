@@ -39,6 +39,8 @@
 		A9D5413429706A8600C76CAF /* TextMemoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413329706A8600C76CAF /* TextMemoRow.swift */; };
 		A9D5413629706AB500C76CAF /* TextMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413529706AB500C76CAF /* TextMemo.swift */; };
 		A9D5413829706B4D00C76CAF /* YourEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413729706B4D00C76CAF /* YourEventsView.swift */; };
+		BC92394E2979AE4600311613 /* CreateEventApiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC92394D2979AE4600311613 /* CreateEventApiViewModel.swift */; };
+		BC9239502979AF3500311613 /* TicketMasterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC92394F2979AF3500311613 /* TicketMasterModel.swift */; };
 		BCD6E29A296F10D1000B9B9B /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD6E299296F10D1000B9B9B /* RecorderView.swift */; };
 		BCD6E29C296F11BA000B9B9B /* RecorderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -79,6 +81,8 @@
 		A9D5413529706AB500C76CAF /* TextMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMemo.swift; sourceTree = "<group>"; };
 		A9D5413729706B4D00C76CAF /* YourEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourEventsView.swift; sourceTree = "<group>"; };
 		BC59EA8A29704F130069F6CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BC92394D2979AE4600311613 /* CreateEventApiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventApiViewModel.swift; sourceTree = "<group>"; };
+		BC92394F2979AF3500311613 /* TicketMasterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketMasterModel.swift; sourceTree = "<group>"; };
 		BCD6E299296F10D1000B9B9B /* RecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
 		BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -160,6 +164,7 @@
 		2D0E7903296F1A190020CDCF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BC92394F2979AF3500311613 /* TicketMasterModel.swift */,
 				A9D5412B2970691200C76CAF /* EventModel.swift */,
 				2DC5130829715FCD004958C0 /* MediaType.swift */,
 				2DC51310297176C8004958C0 /* VideoMemo.swift */,
@@ -197,6 +202,7 @@
 			children = (
 				A91FB00E297853730083DCAE /* EventVM.swift */,
 				A91FB01129798A800083DCAE /* AddEventVM.swift */,
+				BC92394D2979AE4600311613 /* CreateEventApiViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -285,6 +291,7 @@
 				2DC5130929715FCD004958C0 /* MediaType.swift in Sources */,
 				2DC5130729707ECD004958C0 /* MediaGrid.swift in Sources */,
 				2DC5130529707DD9004958C0 /* MediaCard.swift in Sources */,
+				BC92394E2979AE4600311613 /* CreateEventApiViewModel.swift in Sources */,
 				40529D8C297035AC006107BA /* MediaDetailView.swift in Sources */,
 				A91FB00D297605F00083DCAE /* AddUpcomingEventCard.swift in Sources */,
 				2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */,
@@ -299,6 +306,7 @@
 				2DC51311297176C8004958C0 /* VideoMemo.swift in Sources */,
 				2DC5131C2971A84D004958C0 /* Image.swift in Sources */,
 				2D0E78F1296F01050020CDCF /* ChimeraApp.swift in Sources */,
+				BC9239502979AF3500311613 /* TicketMasterModel.swift in Sources */,
 				A91FB00B2975FBD60083DCAE /* AddUpcomingView.swift in Sources */,
 				A9D5413429706A8600C76CAF /* TextMemoRow.swift in Sources */,
 				A91FB00F297853730083DCAE /* EventVM.swift in Sources */,
