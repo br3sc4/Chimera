@@ -41,11 +41,17 @@ struct AddUpcomingTicketmasterView: View {
                             .tag(locale.countryCode)
                     }
                 }
-//                .onChange(of: locale) { newValue in
-//                    print(locale)
-//                }
+                //                .onChange(of: locale) { newValue in
+                //                    print(locale)
+                //                }
+            }
+            .alert(isPresented: $ticketMasterVm.isError){
+                Alert(title: Text("API-Error"),
+                      message: Text(ticketMasterVm.apiError ?? "Something went wrong!")
+                )
             }
             .padding()
+
             
             ScrollView{
                 ForEach(ticketMasterVm.events){ result in

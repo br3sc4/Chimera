@@ -16,6 +16,8 @@ class CreateEventApiViewModel : ObservableObject {
     @Published var locale : String
     @Published var date : Date
     @Published var events  : [Event]
+    @Published var isError : Bool
+    @Published var apiError : String?
     
     var urlComponents : URLComponents
     
@@ -26,6 +28,7 @@ class CreateEventApiViewModel : ObservableObject {
         self.urlComponents = URLComponents(string: "https://app.ticketmaster.com/")!
         self.events = []
         self.date = Date()
+        self.isError = false
     }
     
     
@@ -83,8 +86,10 @@ class CreateEventApiViewModel : ObservableObject {
                         events.append(event)
                     }
                 } catch {
-                        print("Error!!")
-                        print(error.localizedDescription)
+                    print("Error!!")
+                    print(error.localizedDescription)
+                    isError = true
+                    apiError = error.localizedDescription
                 }
     }
 }
