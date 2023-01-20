@@ -15,11 +15,25 @@ struct AddUpcomingEventCard: View {
     
     var body: some View {
         HStack(alignment: .center){
-            Image(image)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 80, height: 80)
-                .cornerRadius(10)
+            if image.contains("http"){
+                AsyncImage(
+                    url: URL(string: image),
+                    content: { image in
+                        image.resizable()
+                             .aspectRatio(contentMode: .fit)
+                             .frame(maxWidth: 80, maxHeight: 80)
+                    },
+                    placeholder: {
+                        ProgressView()
+                    }
+                )
+            } else {
+                Image(image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 80, height: 80)
+                    .cornerRadius(10)
+            }
             Spacer()
             VStack(alignment: .leading, spacing: 5){
                 Text(performer.capitalized)

@@ -58,31 +58,33 @@ class CreateEventApiViewModel : ObservableObject {
         
         let url = urlComponents.url!
         print(url)
-        
                 do {
                     let (data, _) = try await URLSession.shared.data(from: url)
-                    
                     print(String(data: data, encoding: .utf8)!)
                     //print(response)
-                    
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-                    
                     let decoder = JSONDecoder()
-                    
                     decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                    
                     ticketMasterResults = try decoder.decode(TicketMasterAPI.self, from: data)
-                    
+                    events = []
+                    var imageURL = "event1"
                     for tMevent in ticketMasterResults!.embedded.events {
-                        let event = Event(performer: tMevent.embedded.attractions?.first?.name ?? "Not provided", place: tMevent.embedded.venues.first?.city.name ?? "Not provided", date: tMevent.dates.start.localDate, image: "event1")
+                        if tMevent.images.count > 5 {
+                            imageURL = tMevent.images[5].url
+                        } else if tMevent.images.count > 0 {
+                            imageURL = tMevent.images[0].url
+                        }
+                        
+                        let event = Event(performer: tMevent.embedded.attractions?.first?.name ?? "Not provided",
+                                          place: tMevent.embedded.venues.first?.city.name ?? "Not provided",
+                                          date: tMevent.dates.start.localDate,
+                                          image: imageURL)
                         events.append(event)
                     }
-                    
-                }
-                    catch {
+                } catch {
                         print("Error!!")
                         print(error.localizedDescription)
-                    }
+                }
     }
 }
