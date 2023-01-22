@@ -11,11 +11,8 @@ import PhotosUI
 struct AddUpcomingManuallyView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var eventsVM: EventVM
-    
-
     @EnvironmentObject var vm: AddEventVM
-    @State var pickedImage: PhotosPickerItem?
-    @State private var pickedData: Data?
+  
     var body: some View {
         Form {
             Section{
@@ -46,14 +43,7 @@ struct AddUpcomingManuallyView: View {
                     
                     PhotosPicker(vm.photoPickerItem.isEmpty ? "Select a Cover" : "Edit the Cover", selection: $vm.photoPickerItem, maxSelectionCount: 1, matching: .images)
                         .onChange(of: vm.photoPickerItem, perform: vm.loadImage)
-//                    newItem in
-//                    Task {
-//                        if let data = try? await newItem?.loadTransferable(type: Data.self) {
-//                            pickedData = data
-//                        }
-//                    }
-//                }
-                            .foregroundColor(.accentColor)
+                        .foregroundColor(.accentColor)
                 }
             }
             .listRowBackground(Color.clear)
@@ -68,20 +58,15 @@ struct AddUpcomingManuallyView: View {
         }.toolbar{
             ToolbarItem(placement: .confirmationAction) {
                 Button(action: {
-                    if pickedData == nil{
-                        eventsVM.events.append(Event(performer: vm.performer, place: vm.place, date: vm.date, image: "imgforappending"))
-                    }
-                    else{
-                        eventsVM.events.append(Event(performer: vm.performer, place: vm.place, date: vm.date, image: "", imageData: pickedData))
-                    }
+                    vm.addEvent(EventsViewModel: eventsVM)
                     dismiss()
                 }, label: {
                     Text("Done")
                 })
             }
+        }
     }
-    }
-        
+    
 }
 
 struct AddUpcomingManuallyView_Previews: PreviewProvider {

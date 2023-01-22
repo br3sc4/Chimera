@@ -27,4 +27,25 @@ class AddEventVM: ObservableObject{
             }
         }
     }
+    
+    func addEvent(EventsViewModel: EventVM){
+        if photoPickerItem.isEmpty{
+            EventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending"))
+            resetProperties()
+            print("here")
+        }
+        else{
+            EventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "", imageData: imageData[0]))
+            resetProperties()
+            print("or here")
+        }
+    }
+    
+    func resetProperties(){
+        performer = ""
+        place = ""
+        date = ""
+        imageData = []
+        photoPickerItem = []
+    }
 }
