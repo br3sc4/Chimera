@@ -20,7 +20,7 @@ struct AddUpcomingManuallyView: View {
         Form {
             Section{
                 ZStack{
-                    if pickedImage == nil {
+                    if vm.imageData.isEmpty{
                         Image("event1")
                             .resizable()
                             .scaledToFill()
@@ -28,7 +28,7 @@ struct AddUpcomingManuallyView: View {
                             .cornerRadius(24)
                             .padding(.horizontal)
                     }else{
-                        if let pickedData, let uiImage = UIImage(data: pickedData){
+                        if let pickedData = vm.imageData[0], let uiImage = UIImage(data: pickedData){
                             Image(uiImage: uiImage)
                                 .resizable()
                                 .scaledToFill()
@@ -44,14 +44,15 @@ struct AddUpcomingManuallyView: View {
                         .cornerRadius(24)
                         .padding(.horizontal)
                     
-                PhotosPicker(pickedImage == nil ? "Select a Cover" : "Edit the Cover", selection: $pickedImage, matching: .images)
-                        .onChange(of: pickedImage) { newItem in
-                    Task {
-                        if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                            pickedData = data
-                        }
-                    }
-                }
+                    PhotosPicker(vm.photoPickerItem.isEmpty ? "Select a Cover" : "Edit the Cover", selection: $vm.photoPickerItem, maxSelectionCount: 1, matching: .images)
+                        .onChange(of: vm.photoPickerItem, perform: vm.loadImage)
+//                    newItem in
+//                    Task {
+//                        if let data = try? await newItem?.loadTransferable(type: Data.self) {
+//                            pickedData = data
+//                        }
+//                    }
+//                }
                             .foregroundColor(.accentColor)
                 }
             }
