@@ -13,12 +13,21 @@ struct EventCard: View {
     var body: some View {
         VStack(alignment: .leading){
             
-            Image(event.image)
-                .resizable()
-                .scaledToFill()
-                .frame(height: 136)
-                .cornerRadius(24)
-            
+            if event.imageData == nil{
+                Image(event.image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 136)
+                    .cornerRadius(24)
+            } else {
+                if let data = event.imageData, let uiImage = UIImage(data: data){
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: 136)
+                        .cornerRadius(24)
+                }
+            }
             NavigationLink(value: event) {
                 Text(event.performer.capitalized)
                     .foregroundColor(.primary)
@@ -37,6 +46,6 @@ struct EventCard: View {
 
 struct EventCard_Previews: PreviewProvider {
     static var previews: some View {
-        EventCard(event: events[0])
+        EventCard(event: EventVM().events[0])
     }
 }

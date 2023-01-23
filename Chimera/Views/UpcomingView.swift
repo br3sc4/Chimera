@@ -22,9 +22,10 @@ struct UpcomingView: View {
     var body: some View {
         NavigationStack{
             ScrollView(showsIndicators: false){
-                ForEach(searchResults){ x in
-                    NavigationLink(destination: EventView(event: x), label: {
-                        EventCard(event: x)
+                ForEach(searchResults){ result in
+                    NavigationLink(destination: EventView(event: result), label: {
+                        EventCard(event: result)
+
                             .padding(.vertical)
                     })
                 }

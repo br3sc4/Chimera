@@ -40,7 +40,6 @@
 		A9D5413229706A6F00C76CAF /* VocalMemoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413129706A6F00C76CAF /* VocalMemoRow.swift */; };
 		A9D5413429706A8600C76CAF /* TextMemoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413329706A8600C76CAF /* TextMemoRow.swift */; };
 		A9D5413629706AB500C76CAF /* TextMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413529706AB500C76CAF /* TextMemo.swift */; };
-		A9D5413829706B4D00C76CAF /* YourEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413729706B4D00C76CAF /* YourEventsView.swift */; };
 		BC92394E2979AE4600311613 /* CreateEventApiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC92394D2979AE4600311613 /* CreateEventApiViewModel.swift */; };
 		BC9239502979AF3500311613 /* TicketMasterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC92394F2979AF3500311613 /* TicketMasterModel.swift */; };
 		BCD6E29A296F10D1000B9B9B /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD6E299296F10D1000B9B9B /* RecorderView.swift */; };
@@ -83,7 +82,6 @@
 		A9D5413129706A6F00C76CAF /* VocalMemoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocalMemoRow.swift; sourceTree = "<group>"; };
 		A9D5413329706A8600C76CAF /* TextMemoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMemoRow.swift; sourceTree = "<group>"; };
 		A9D5413529706AB500C76CAF /* TextMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMemo.swift; sourceTree = "<group>"; };
-		A9D5413729706B4D00C76CAF /* YourEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourEventsView.swift; sourceTree = "<group>"; };
 		BC59EA8A29704F130069F6CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BC92394D2979AE4600311613 /* CreateEventApiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventApiViewModel.swift; sourceTree = "<group>"; };
 		BC92394F2979AF3500311613 /* TicketMasterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketMasterModel.swift; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 			children = (
 				BCD6E299296F10D1000B9B9B /* RecorderView.swift */,
 				A9D5412F29706A2A00C76CAF /* EventView.swift */,
-				A9D5413729706B4D00C76CAF /* YourEventsView.swift */,
 				40529D8B297035AC006107BA /* MediaDetailView.swift */,
 				A91FB00A2975FBD60083DCAE /* AddUpcomingView.swift */,
 				A91FB01329798D3B0083DCAE /* AddUpcomingTicketmasterView.swift */,
@@ -303,7 +300,6 @@
 				A91FB00D297605F00083DCAE /* AddUpcomingEventCard.swift in Sources */,
 				2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */,
 				A9D5412A2970687C00C76CAF /* EventCard.swift in Sources */,
-				A9D5413829706B4D00C76CAF /* YourEventsView.swift in Sources */,
 				A9D5413229706A6F00C76CAF /* VocalMemoRow.swift in Sources */,
 				40F812892979BB2C007A175D /* LocaleModel.swift in Sources */,
 				A9D5412C2970691200C76CAF /* EventModel.swift in Sources */,
@@ -458,7 +454,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
@@ -497,7 +493,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
