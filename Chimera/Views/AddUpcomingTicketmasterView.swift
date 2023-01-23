@@ -79,6 +79,14 @@ struct AddUpcomingTicketmasterView: View {
                     await ticketMasterVm.getEvents()
                 }
             })
+        }.toolbar{
+            ToolbarItem(placement: .confirmationAction) {
+                Button(action: {
+                    dismiss()
+                }, label: {
+                    Text("Done")
+                })
+            }
         }
 
     }
