@@ -21,7 +21,7 @@ struct MediaCard: View {
                 .squared()
         case .video(let video):
             if let thumbnail = video.thumbnail {
-                Image(thumbnail, scale: 1, label: Text(""))
+                Image(uiImage: thumbnail)
                     .squared()
                     .overlay(alignment: .bottomTrailing) {
                         let convertedDuration = secondsToMinutesSeconds(ceil(video.mediaDuration))

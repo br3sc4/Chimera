@@ -14,9 +14,9 @@ enum MediaType: Identifiable, Hashable {
     
     var id: String {
         switch self {
-        case .image(let name):
+        case let .image(name):
             return name
-        case .video(let videoMemo):
+        case let .video(videoMemo):
             return videoMemo.url.description
         }
     }

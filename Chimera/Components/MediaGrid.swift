@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct MediaGrid: View {
-    @State private var selectedMedia: MediaType?
+    @State private var selectedMedia: String = ""
+    @State private var showPreview: Bool = false
     
     private let columns: [GridItem] = [
         GridItem(.adaptive(minimum: 100), spacing: 2)
@@ -25,12 +26,13 @@ struct MediaGrid: View {
             ForEach(media) { media in
                 MediaCard(type: media)
                     .onTapGesture {
-                        selectedMedia = media
+                        selectedMedia = media.id
+                        showPreview.toggle()
                     }
             }
         }
-        .fullScreenCover(item: $selectedMedia) { _ in
-            MediaDetailView(media: media)
+        .navigationDestination(isPresented: $showPreview) {
+            MediaDetailView(media: media, selectedItem: $selectedMedia)
         }
     }
 }
