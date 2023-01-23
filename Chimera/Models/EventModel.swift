@@ -16,6 +16,7 @@ struct Event: Identifiable, Hashable {
     var textMemos: [String]?
     var vocalMemos: [VocalMemo]?
     var imageData: Data?
+    var mediaMemos: [MediaType]?
 }
 
 struct VocalMemo: Identifiable, Hashable {
@@ -23,4 +24,3 @@ struct VocalMemo: Identifiable, Hashable {
     var title: String
     var urlString: String
 }
-

@@ -28,6 +28,13 @@ struct EventView: View {
                     }.listRowInsets(EdgeInsets())
                 }
             }
+            
+            if let mediaMemos = event.mediaMemos {
+                Section("Media Memos") {
+                    MediaGrid(media: mediaMemos)
+                        .listRowInsets(EdgeInsets())
+                }
+            }
         }
         .navigationTitle(event.performer)
     }

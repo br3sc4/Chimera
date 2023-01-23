@@ -8,35 +8,16 @@
 import SwiftUI
 import AVKit
 
-struct MediaModel: Identifiable {
-    let id: String = UUID().uuidString
-    let fileName: String
-    let isVideo: Bool
-    
-    init(fileName: String, isVideo: Bool = false) {
-        self.fileName = fileName
-        self.isVideo = isVideo
-    }
-}
-
-
 struct MediaDetailView: View {
+    let media: [MediaType]
     
-    let medias: [MediaModel] = [
-        MediaModel(fileName: "concert1"),
-        MediaModel(fileName: "concert2"),
-        MediaModel(fileName: "Tamburellare - 5026", isVideo: true),
-        MediaModel(fileName: "concert3"),
-        MediaModel(fileName: "Violoncello - 33565", isVideo: true)
-    ]
-    
-    enum ScrubbingState {
+    private enum ScrubbingState {
         case none
         case scrubbingStart
         case scrubbingEnd
     }
     
-    @State private var selectedItem: String = ""
+    @Binding var selectedItem: String
     @State private var player: AVPlayer = AVPlayer()
     @State private var isPlaying: Bool = false
     @State private var offsetXThumbnail: CGSize = .zero
@@ -46,154 +27,102 @@ struct MediaDetailView: View {
     @State private var showingOptions = false
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.black
-                ZStack(alignment: .bottom) {
-                    TabView(selection: $selectedItem) {
-                        ForEach(medias) { item in
-                            if !item.isVideo {
-                                ZStack {
-                                    Color.black
-                                    Image(item.fileName)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .tag(item.id)
-                                }
-                                
-                            } else {
-                                ZStack(alignment: .top) {
-                                    VideoPlayer(player: player)
-                                        .tag(item.id)
-                                    HStack {
-                                        if let currentItem = player.currentItem {
-                                            Text("\(currentTime, specifier: "%.2f")")
-                                                .font(.headline)
-                                            Slider(value: $currentTime, in: 0...player.currentItem!.asset.duration.seconds) { scrubStarted in
-                                                if scrubStarted {
-                                                    scrubbingState = .scrubbingStart
-                                                } else {
-                                                    scrubbingState = .scrubbingEnd
-                                                }
-                                                print("scrubStarted \(scrubStarted.description)")
-                                                print("seek to: \(currentTime)")
-                                            }
-                                            
-                                            
-                                            Text("\(player.currentItem!.asset.duration.seconds, specifier: "%.2f")")
-                                                .font(.headline)
-                                        }
-                                    }
-                                    .padding()
-                                    .background(Material.ultraThin)
-                                }
-                                
+        ZStack {
+            Color.black
+            ZStack(alignment: .bottom) {
+                TabView(selection: $selectedItem) {
+                    ForEach(media) { item in
+                        if case let .image(name) = item {
+                            ZStack {
+                                Color.black
+                                Image(name)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .tag(item.id)
                             }
                             
-                        }
-                    }
-                    if showPreview {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(medias) { item in
-                                    if !item.isVideo {
-                                        Image(item.fileName)
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: selectedItem == item.id ? 100 : 50, height: 50)
-                                            .clipped()
-                                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                                            .animation(.easeInOut, value: selectedItem)
-                                            .overlay {
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(selectedItem == item.id ? .white : .clear, lineWidth: 4)
+                        } else {
+                            ZStack(alignment: .top) {
+                                VideoPlayer(player: player)
+                                    .tag(item.id)
+                                    if player.currentItem != nil {
+                                        HStack {
+                                        Text("\(currentTime, specifier: "%.2f")")
+                                            .font(.headline)
+                                        Slider(value: $currentTime, in: 0...player.currentItem!.asset.duration.seconds) { scrubStarted in
+                                            if scrubStarted {
+                                                scrubbingState = .scrubbingStart
+                                            } else {
+                                                scrubbingState = .scrubbingEnd
                                             }
-                                            .onTapGesture {
-                                                selectedItem = item.id
-                                            }
-                                            
-                                    } else {
-                                        //                                    Rectangle()
-                                        //                                        .foregroundColor(.white)
-                                        //                                        .frame(width: 100, height: 50)
-                                        let media = checkIsVideo(selectedMedia: item.id)
-                                        Image(uiImage: generateThumbnail(url: Bundle.main.url(forResource: medias[media.index!].fileName, withExtension: "mp4")!)!)
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: selectedItem == item.id ? 100 : 50, height: 50)
-                                            .clipped()
-                                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                                            .overlay {
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(selectedItem == item.id ? .white : .clear, lineWidth: 4)
-                                            }
-                                            .onTapGesture {
-                                                selectedItem = item.id
-                                            }
+                                            print("scrubStarted \(scrubStarted.description)")
+                                            print("seek to: \(currentTime)")
+                                        }
+                                        
+                                        Text(player.currentItem!.asset.duration.seconds.formatted(.number.precision(.fractionLength(2))))
+                                            .font(.headline)
+                                        }
+                                        .padding()
+                                        .background(Material.ultraThin)
                                     }
-                                }
                             }
-                            .padding()
                         }
-                        
                     }
                 }
-                .onTapGesture {
-                    withAnimation(.easeInOut) {
-                        showPreview.toggle()
-                    }
+                
+                if showPreview {
+                    MediaDetailPreview(selectedItem: $selectedItem, media: media)
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                .navigationTitle("Title")
-                .navigationBarTitleDisplayMode(.inline)
-                .onChange(of: selectedItem, perform: { newValue in
-                    isPlaying = false
-                    player.pause()
-                    player.seek(to: CMTime(seconds: 0.0, preferredTimescale: 600))
-                    currentTime = 0.0
-                    let media = checkIsVideo(selectedMedia: newValue)
-                    if media.isVideo {
-                        player = AVPlayer(url: Bundle.main.url(forResource: medias[media.index!].fileName, withExtension: "mp4")!)
-                    }
-                })
-                .toolbar {
-                    ToolbarItem(placement: .bottomBar) {
-                        Button {
-                            isPlaying ? player.pause() : player.play()
-                            isPlaying.toggle()
-                            if isPlaying {
-                                
-                                player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.2, preferredTimescale: 600), queue: .main) { time in
-                                    print("change")
-                                    if scrubbingState == .none {
-                                        currentTime = time.seconds
-                                    } else if scrubbingState == .scrubbingEnd {
-                                        player.seek(to: CMTime(seconds: currentTime, preferredTimescale: 600))
-                                        scrubbingState = .none
-                                    }
-                                    
-                                    if currentTime == player.currentItem!.asset.duration.seconds {
-                                        isPlaying = false
-                                        player.seek(to: CMTime(seconds: 0.0, preferredTimescale: 600))
-                                    }
+            }
+            .onTapGesture {
+                withAnimation(.easeInOut) {
+                    showPreview.toggle()
+                }
+            }
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .navigationTitle("Title")
+            .navigationBarTitleDisplayMode(.inline)
+            .onChange(of: selectedItem) { newId in
+                loadVideo(withId: newId)
+            }
+            .onAppear {
+                loadVideo(withId: selectedItem)
+            }
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    Button {
+                        isPlaying ? player.pause() : player.play()
+                        isPlaying.toggle()
+                        if isPlaying {
+                            player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.2, preferredTimescale: 600), queue: .main) { time in
+                                if scrubbingState == .none {
+                                    currentTime = time.seconds
+                                } else if scrubbingState == .scrubbingEnd {
+                                    player.seek(to: CMTime(seconds: currentTime, preferredTimescale: 600))
+                                    scrubbingState = .none
+                                }
+
+                                if currentTime == player.currentItem!.asset.duration.seconds {
+                                    isPlaying = false
+                                    player.seek(to: CMTime(seconds: 0.0, preferredTimescale: 600))
                                 }
                             }
-                        } label: {
-                            Image(systemName: isPlaying ? "pause.fill" : "play.fill")
                         }
-                        .opacity(checkIsVideo(selectedMedia: selectedItem).isVideo ? 1.0 : 0.0)
-                        
+                    } label: {
+                        Image(systemName: isPlaying ? "pause.fill" : "play.fill")
                     }
-                    ToolbarItem(placement: .bottomBar) {
-                        Button {
-                            showingOptions.toggle()
-                        } label: {
-                            Image(systemName: "trash")
-                        }
-                        .confirmationDialog("Are you sure to delete?", isPresented: $showingOptions, titleVisibility: .visible) {
-                            Button("Delete", role: .destructive) {
-                                
-                            }
+                    .opacity(checkIsVideo(selectedMedia: selectedItem) ? 1.0 : 0.0)
+                }
+                
+                ToolbarItem(placement: .bottomBar) {
+                    Button {
+                        showingOptions.toggle()
+                    } label: {
+                        Image(systemName: "trash")
+                    }
+                    .confirmationDialog("Are you sure to delete?", isPresented: $showingOptions, titleVisibility: .visible) {
+                        Button("Delete", role: .destructive) {
+
                         }
                     }
                 }
@@ -201,38 +130,34 @@ struct MediaDetailView: View {
         }
     }
     
-    func checkIsVideo(selectedMedia: String) -> (isVideo: Bool, index: Int? ) {
-        if let index = medias.firstIndex(where: { $0.id == selectedMedia }) {
-            if medias[index].isVideo {
-                return (true, index)
-            }
-        }
-        return (false, nil)
+    private func loadVideo(withId id: String) {
+        isPlaying = false
+        player.pause()
+        player.seek(to: CMTime(seconds: 0.0, preferredTimescale: 600))
+        currentTime = 0.0
+        
+        guard let foundItem = media.first(where: { $0.id == id }), case let .video(video) = foundItem else { return }
+        player = AVPlayer(url: video.url)
     }
     
-    func generateThumbnail(url: URL) -> UIImage? {
-        do {
-            let asset = AVURLAsset(url: url)
-            let imageGenerator = AVAssetImageGenerator(asset: asset)
-            imageGenerator.appliesPreferredTrackTransform = true
-            
-            // Swift 5.3
-            let cgImage = try imageGenerator.copyCGImage(at: .zero,
-                                                         actualTime: nil)
-            
-            return UIImage(cgImage: cgImage)
-        } catch {
-            print(error.localizedDescription)
-            
-            return nil
+    private func checkIsVideo(selectedMedia: String?) -> Bool {
+        if let selectedMedia, let foundItem = media.first(where: { $0.id == selectedMedia }), case .video(_) = foundItem {
+            return true
         }
+        return false
     }
 }
 
 struct MediaDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            MediaDetailView()
+            MediaDetailView(media: [
+                .image(name: "concert1"),
+                .image(name: "concert2"),
+                .video(videoMemo: VideoMemo(name: "Tamburellare - 5026", ext: "mp4")),
+                .image(name: "concert3"),
+                .video(videoMemo: VideoMemo(name: "Violoncello - 33565", ext: "mp4"))
+            ], selectedItem: .constant(""))
         }
         
     }

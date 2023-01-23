@@ -19,12 +19,12 @@ struct MediaCard: View {
         case .image(let name):
             Image(name)
                 .squared()
-        case .video(let duration, let thumbnail):
-            if let thumbnail {
-                Image(thumbnail, scale: 1, label: Text(""))
+        case .video(let video):
+            if let thumbnail = video.thumbnail {
+                Image(uiImage: thumbnail)
                     .squared()
                     .overlay(alignment: .bottomTrailing) {
-                        let convertedDuration = secondsToMinutesSeconds(ceil(duration))
+                        let convertedDuration = secondsToMinutesSeconds(ceil(video.mediaDuration))
                         
                         Text("\(convertedDuration.minutes):\(convertedDuration.seconds.formatted(.number.precision(.integerLength(2))))")
                             .font(.footnote)
@@ -44,6 +44,6 @@ struct MediaCard: View {
 struct MediaCard_Previews: PreviewProvider {
     static var previews: some View {
         MediaCard(type: .image(name: "ConcertImageMemo"))
-        MediaCard(type: .video(duration: 5))
+        MediaCard(type: .video(videoMemo: VideoMemo(name: "IMG_0684")))
     }
 }
