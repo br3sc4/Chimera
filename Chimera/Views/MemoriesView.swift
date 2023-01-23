@@ -11,9 +11,8 @@ struct MemoriesView: View {
     @EnvironmentObject var vm: EventVM
     var body: some View {
         NavigationStack{
-            VStack(alignment: .leading){
                     EventList()
-            }.navigationTitle("Memories")
+                    .navigationTitle("Memories")
                 .navigationBarTitleDisplayMode(.large)
                 .toolbar{
                     ToolbarItem(placement: .primaryAction) {

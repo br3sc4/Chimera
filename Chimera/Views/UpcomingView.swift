@@ -25,6 +25,7 @@ struct UpcomingView: View {
                 ForEach(searchResults){ result in
                     NavigationLink(destination: EventView(event: result), label: {
                         EventCard(event: result)
+
                             .padding(.vertical)
                     })
                 }
