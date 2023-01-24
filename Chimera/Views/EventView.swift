@@ -11,17 +11,29 @@ struct EventView: View {
     let event: Event
     var body: some View {
         List {
-            Section("Textual Memos") {
-                ForEach(event.textMemos!, id: \.self){ textMemo in
-                    TextMemoRow(textMemo: textMemo)
-                        .padding(.vertical)
-                }.listRowInsets(EdgeInsets())
+            if let textMemos = event.textMemos {
+                Section("Textual Memos") {
+                    ForEach(textMemos, id: \.self){ textMemo in
+                        TextMemoRow(textMemo: textMemo)
+                            .padding(.vertical)
+                    }.listRowInsets(EdgeInsets())
+                }
             }
-            Section("Vocal Memos") {
-                ForEach(event.VocalMemos!){ vocalMemo in
-                    VocalMemoRow(vocalMemo: vocalMemo)
-                        .padding(.vertical)
-                }.listRowInsets(EdgeInsets())
+            
+            if let vocalMemos = event.vocalMemos {
+                Section("Vocal Memos") {
+                    ForEach(vocalMemos){ vocalMemo in
+                        VocalMemoRow(vocalMemo: vocalMemo)
+                            .padding(.vertical)
+                    }.listRowInsets(EdgeInsets())
+                }
+            }
+            
+            if let mediaMemos = event.mediaMemos {
+                Section("Media Memos") {
+                    MediaGrid(media: mediaMemos)
+                        .listRowInsets(EdgeInsets())
+                }
             }
         }
         .navigationTitle(event.performer)
@@ -30,6 +42,6 @@ struct EventView: View {
 
 struct EventView_Previews: PreviewProvider {
     static var previews: some View {
-        EventView(event: events[0])
+        EventView(event: Event(performer: "event1", place: "Name of Performer", date: "Date", image: "Place"))
     }
 }
