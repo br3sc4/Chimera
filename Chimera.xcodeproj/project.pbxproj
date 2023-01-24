@@ -8,22 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		2D0E78F1296F01050020CDCF /* ChimeraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0E78F0296F01050020CDCF /* ChimeraApp.swift */; };
-		2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0E78F2296F01050020CDCF /* ContentView.swift */; };
-		2D23694E2977240C00F5CCC3 /* MemorySearchToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D23694D2977240C00F5CCC3 /* MemorySearchToken.swift */; };
-		2DBC894129799FE4009C41EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F4296F01050020CDCF /* Assets.xcassets */; };
-		2DBC894229799FEA009C41EA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */; };
-		2DBC8944297ADCA4009C41EA /* MediaDetailPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBC8943297ADCA4009C41EA /* MediaDetailPreview.swift */; };
+		2D0E78F5296F01050020CDCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F4296F01050020CDCF /* Assets.xcassets */; };
+		2D0E78F9296F01050020CDCF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */; };
 		2DC5130529707DD9004958C0 /* MediaCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5130429707DD9004958C0 /* MediaCard.swift */; };
 		2DC5130729707ECD004958C0 /* MediaGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5130629707ECD004958C0 /* MediaGrid.swift */; };
 		2DC5130929715FCD004958C0 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5130829715FCD004958C0 /* MediaType.swift */; };
 		2DC51311297176C8004958C0 /* VideoMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC51310297176C8004958C0 /* VideoMemo.swift */; };
 		2DC51319297190A2004958C0 /* IMG_0684.mov in Resources */ = {isa = PBXBuildFile; fileRef = 2DC51318297190A2004958C0 /* IMG_0684.mov */; };
 		2DC5131C2971A84D004958C0 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5131B2971A84D004958C0 /* Image.swift */; };
-		40529D8C297035AC006107BA /* MediaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40529D8B297035AC006107BA /* MediaDetailView.swift */; };
-		40529D902970542D006107BA /* Violoncello - 33565.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 40529D8F29705429006107BA /* Violoncello - 33565.mp4 */; };
-		40529D9229705F46006107BA /* Tamburellare - 5026.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 40529D9129705F43006107BA /* Tamburellare - 5026.mp4 */; };
-		40F8128729799D90007A175D /* NSLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F8128629799D90007A175D /* NSLocale.swift */; };
-		40F812892979BB2C007A175D /* LocaleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F812882979BB2C007A175D /* LocaleModel.swift */; };
 		A91FB0032971921E0083DCAE /* AudioPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB0022971921E0083DCAE /* AudioPlayerModel.swift */; };
 		A91FB0052971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */; };
 		A91FB0072975B4D40083DCAE /* MemoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB0062975B4D40083DCAE /* MemoriesView.swift */; };
@@ -41,8 +33,7 @@
 		A9D5413229706A6F00C76CAF /* VocalMemoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413129706A6F00C76CAF /* VocalMemoRow.swift */; };
 		A9D5413429706A8600C76CAF /* TextMemoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413329706A8600C76CAF /* TextMemoRow.swift */; };
 		A9D5413629706AB500C76CAF /* TextMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413529706AB500C76CAF /* TextMemo.swift */; };
-		BC92394E2979AE4600311613 /* CreateEventApiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC92394D2979AE4600311613 /* CreateEventApiViewModel.swift */; };
-		BC9239502979AF3500311613 /* TicketMasterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC92394F2979AF3500311613 /* TicketMasterModel.swift */; };
+		A9D5413829706B4D00C76CAF /* YourEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5413729706B4D00C76CAF /* YourEventsView.swift */; };
 		BCD6E29A296F10D1000B9B9B /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD6E299296F10D1000B9B9B /* RecorderView.swift */; };
 		BCD6E29C296F11BA000B9B9B /* RecorderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -50,23 +41,15 @@
 /* Begin PBXFileReference section */
 		2D0E78ED296F01050020CDCF /* Chimera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chimera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D0E78F0296F01050020CDCF /* ChimeraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChimeraApp.swift; sourceTree = "<group>"; };
-		2D0E78F2296F01050020CDCF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2D0E78F4296F01050020CDCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D0E78F6296F01050020CDCF /* Chimera.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chimera.entitlements; sourceTree = "<group>"; };
 		2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		2D23694D2977240C00F5CCC3 /* MemorySearchToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorySearchToken.swift; sourceTree = "<group>"; };
-		2DBC8943297ADCA4009C41EA /* MediaDetailPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailPreview.swift; sourceTree = "<group>"; };
 		2DC5130429707DD9004958C0 /* MediaCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCard.swift; sourceTree = "<group>"; };
 		2DC5130629707ECD004958C0 /* MediaGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaGrid.swift; sourceTree = "<group>"; };
 		2DC5130829715FCD004958C0 /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
 		2DC51310297176C8004958C0 /* VideoMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMemo.swift; sourceTree = "<group>"; };
 		2DC51318297190A2004958C0 /* IMG_0684.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_0684.mov; sourceTree = "<group>"; };
 		2DC5131B2971A84D004958C0 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
-		40529D8B297035AC006107BA /* MediaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailView.swift; sourceTree = "<group>"; };
-		40529D8F29705429006107BA /* Violoncello - 33565.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Violoncello - 33565.mp4"; sourceTree = "<group>"; };
-		40529D9129705F43006107BA /* Tamburellare - 5026.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tamburellare - 5026.mp4"; sourceTree = "<group>"; };
-		40F8128629799D90007A175D /* NSLocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLocale.swift; sourceTree = "<group>"; };
-		40F812882979BB2C007A175D /* LocaleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleModel.swift; sourceTree = "<group>"; };
 		A91FB0022971921E0083DCAE /* AudioPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerModel.swift; sourceTree = "<group>"; };
 		A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "01-11-22_at_18_30_44.m4a"; sourceTree = "<group>"; };
 		A91FB0062975B4D40083DCAE /* MemoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriesView.swift; sourceTree = "<group>"; };
@@ -84,9 +67,8 @@
 		A9D5413129706A6F00C76CAF /* VocalMemoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocalMemoRow.swift; sourceTree = "<group>"; };
 		A9D5413329706A8600C76CAF /* TextMemoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMemoRow.swift; sourceTree = "<group>"; };
 		A9D5413529706AB500C76CAF /* TextMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMemo.swift; sourceTree = "<group>"; };
+		A9D5413729706B4D00C76CAF /* YourEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourEventsView.swift; sourceTree = "<group>"; };
 		BC59EA8A29704F130069F6CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		BC92394D2979AE4600311613 /* CreateEventApiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventApiViewModel.swift; sourceTree = "<group>"; };
-		BC92394F2979AF3500311613 /* TicketMasterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketMasterModel.swift; sourceTree = "<group>"; };
 		BCD6E299296F10D1000B9B9B /* RecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
 		BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,17 +103,15 @@
 		2D0E78EF296F01050020CDCF /* Chimera */ = {
 			isa = PBXGroup;
 			children = (
-				BC59EA8A29704F130069F6CE /* Info.plist */,
-				2DC5131A2971A7FD004958C0 /* Extensions */,
-				2DC51318297190A2004958C0 /* IMG_0684.mov */,
-				A91FB01029798A5B0083DCAE /* ViewModels */,
 				2D0E7904296F1A200020CDCF /* Components */,
+				2DC5131A2971A7FD004958C0 /* Extensions */,
 				2D0E7903296F1A190020CDCF /* Models */,
+				2DC513202971B969004958C0 /* ViewModels */,
 				2D0E7902296F1A0D0020CDCF /* Views */,
 				2D0E78F0296F01050020CDCF /* ChimeraApp.swift */,
-				2D0E78F2296F01050020CDCF /* ContentView.swift */,
-				BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */,
+				BC59EA8A29704F130069F6CE /* Info.plist */,
 				2D0E78F4296F01050020CDCF /* Assets.xcassets */,
+				2DC51318297190A2004958C0 /* IMG_0684.mov */,
 				A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */,
 				40529D8F29705429006107BA /* Violoncello - 33565.mp4 */,
 				40529D9129705F43006107BA /* Tamburellare - 5026.mp4 */,
@@ -203,12 +183,10 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		A91FB01029798A5B0083DCAE /* ViewModels */ = {
+		2DC513202971B969004958C0 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				A91FB00E297853730083DCAE /* EventVM.swift */,
-				A91FB01129798A800083DCAE /* AddEventVM.swift */,
-				BC92394D2979AE4600311613 /* CreateEventApiViewModel.swift */,
+				BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -299,10 +277,6 @@
 				2DC5130729707ECD004958C0 /* MediaGrid.swift in Sources */,
 				40F8128729799D90007A175D /* NSLocale.swift in Sources */,
 				2DC5130529707DD9004958C0 /* MediaCard.swift in Sources */,
-				BC92394E2979AE4600311613 /* CreateEventApiViewModel.swift in Sources */,
-				40529D8C297035AC006107BA /* MediaDetailView.swift in Sources */,
-				A91FB00D297605F00083DCAE /* AddUpcomingEventCard.swift in Sources */,
-				2D0E78F3296F01050020CDCF /* ContentView.swift in Sources */,
 				A9D5412A2970687C00C76CAF /* EventCard.swift in Sources */,
 				A9D5413229706A6F00C76CAF /* VocalMemoRow.swift in Sources */,
 				40F812892979BB2C007A175D /* LocaleModel.swift in Sources */,
@@ -462,7 +436,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SwiftLens.Chimera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -501,7 +475,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SwiftLens.Chimera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
