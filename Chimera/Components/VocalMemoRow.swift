@@ -11,15 +11,21 @@ struct VocalMemoRow: View {
     
     let vocalMemo: VocalMemo
     let sampleAudioUrl = Bundle.main.url(forResource: "01-11-22_at_18_30_44", withExtension: "m4a")
-
+    
     @ObservedObject var audioPlayer = AudioPlayer()
     
     var body: some View {
-       
         
-            HStack{
-            Image(systemName: "speaker.wave.3.fill")
-                .foregroundColor(.accentColor)
+        
+        HStack{
+            ZStack{
+                Image(systemName: "square.fill")
+                    .foregroundColor(.accentColor)
+                    .font(.system(size: 34))
+                Image(systemName: "speaker.wave.3.fill")
+                    .foregroundColor(Color(UIColor.secondarySystemGroupedBackground))
+            }
+            
             Text(vocalMemo.title)
                     .foregroundColor(.primary)
                 Spacer()
