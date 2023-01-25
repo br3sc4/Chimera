@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct EventCard: View {
+    let type: EventTypes
     let event: Event
     
     var body: some View {
-        VStack(alignment: .leading){
-            
-            if event.imageData == nil{
+        VStack(alignment: .leading) {
+            if event.imageData == nil {
                 Image(event.image)
                     .resizable()
                     .scaledToFill()
@@ -28,7 +28,14 @@ struct EventCard: View {
                         .cornerRadius(24)
                 }
             }
-            NavigationLink(value: event) {
+            
+            switch type {
+            case .memory:
+                NavigationLink(value: event) {
+                    Text(event.performer.capitalized)
+                        .foregroundColor(.primary)
+                }
+            case .upcoming:
                 Text(event.performer.capitalized)
                     .foregroundColor(.primary)
             }
@@ -39,13 +46,16 @@ struct EventCard: View {
                 Text(event.place.capitalized)
                     .foregroundColor(.secondary)
             }
-            
         }
     }
 }
 
 struct EventCard_Previews: PreviewProvider {
     static var previews: some View {
-        EventCard(event: EventVM().events[0])
+        EventCard(type: .memory,
+                  event: EventVM().events[0])
+        
+        EventCard(type: .upcoming,
+                  event: EventVM().events[0])
     }
 }

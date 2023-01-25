@@ -10,26 +10,40 @@ import SwiftUI
 struct EventList: View {
     @State private var searchedEvent: String = ""
     @State private var tokens: [MemorySearchToken] = []
-    @EnvironmentObject var vm: EventVM
+    @EnvironmentObject private var vm: EventVM
+    private let eventType: EventTypes
+    
+    init(eventType: EventTypes) {
+        self.eventType = eventType
+    }
+    
     var body: some View {
         List {
-            Text("Re-Live your Moments ✨")
-                .font(.title3)
-                .fontWeight(.semibold)
-                .listSectionSeparator(.hidden)
+            if case .memory = eventType {
+                Text("Re-Live your Moments ✨")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .listSectionSeparator(.hidden)
+            }
 
             ForEach(filteredEvents) { event in
-                EventCard(event: event)
+                EventCard(type: eventType,
+                          event: event)
                     .listRowSeparator(.hidden)
             }
         }
         .listStyle(.plain)
-        .searchable(text: $searchedEvent, tokens: $tokens, placement: .toolbar, prompt: "Search an event") { token in
+        .searchable(text: $searchedEvent,
+                    tokens: $tokens,
+                    placement: .toolbar,
+                    prompt: "Search an event") { token in
             switch token {
             case .performer(let name):
-                Label(name.capitalized, systemImage: "person.crop.circle")
+                Label(name.capitalized,
+                      systemImage: "person.crop.circle")
             case .place(let city):
-                Label(city.capitalized, systemImage: "pin.circle")
+                Label(city.capitalized,
+                      systemImage: "pin.circle")
             }
         }
         .searchSuggestions {
@@ -46,7 +60,8 @@ struct EventList: View {
         if !searchedEvent.isEmpty && !filteredEvents.isEmpty {
             Section("Top Hits") {
                 ForEach(filteredEvents) { event in
-                    EventCard(event: event)
+                    EventCard(type: eventType,
+                              event: event)
                 }
                 .listRowSeparator(.hidden)
             }
@@ -104,6 +119,7 @@ struct EventList: View {
 
 struct EventList_Previews: PreviewProvider {
     static var previews: some View {
-        EventList().environmentObject(EventVM())
+        EventList(eventType: .memory)
+            .environmentObject(EventVM())
     }
 }

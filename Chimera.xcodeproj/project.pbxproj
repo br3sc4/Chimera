@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D0E78F1296F01050020CDCF /* ChimeraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0E78F0296F01050020CDCF /* ChimeraApp.swift */; };
+		2D1257F02981217800880459 /* EventTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1257EF2981217800880459 /* EventTypes.swift */; };
 		2DC5130529707DD9004958C0 /* MediaCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5130429707DD9004958C0 /* MediaCard.swift */; };
 		2DC5130729707ECD004958C0 /* MediaGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5130629707ECD004958C0 /* MediaGrid.swift */; };
 		2DC5130929715FCD004958C0 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC5130829715FCD004958C0 /* MediaType.swift */; };
@@ -51,6 +52,7 @@
 		2D0E78F4296F01050020CDCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D0E78F6296F01050020CDCF /* Chimera.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chimera.entitlements; sourceTree = "<group>"; };
 		2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2D1257EF2981217800880459 /* EventTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypes.swift; sourceTree = "<group>"; };
 		2DC5130429707DD9004958C0 /* MediaCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCard.swift; sourceTree = "<group>"; };
 		2DC5130629707ECD004958C0 /* MediaGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaGrid.swift; sourceTree = "<group>"; };
 		2DC5130829715FCD004958C0 /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				2DC5130829715FCD004958C0 /* MediaType.swift */,
 				2DC51310297176C8004958C0 /* VideoMemo.swift */,
 				A91FB0022971921E0083DCAE /* AudioPlayerModel.swift */,
+				2D1257EF2981217800880459 /* EventTypes.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				2DF6BD82298018FF00B8D5B8 /* AddEventVM.swift in Sources */,
 				2DC5130929715FCD004958C0 /* MediaType.swift in Sources */,
 				2DC5130729707ECD004958C0 /* MediaGrid.swift in Sources */,
+				2D1257F02981217800880459 /* EventTypes.swift in Sources */,
 				2DC5130529707DD9004958C0 /* MediaCard.swift in Sources */,
 				A9D5412A2970687C00C76CAF /* EventCard.swift in Sources */,
 				2DF6BD8E2980193900B8D5B8 /* MediaDetailPreview.swift in Sources */,

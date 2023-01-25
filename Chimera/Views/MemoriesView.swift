@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct MemoriesView: View {
-    @EnvironmentObject var vm: EventVM
+    @EnvironmentObject private var vm: EventVM
+    
     var body: some View {
         NavigationStack{
-                    EventList()
-                    .navigationTitle("Memories")
+            EventList(eventType: .memory)
+                .navigationTitle("Memories")
                 .navigationBarTitleDisplayMode(.large)
-                .toolbar{
+                .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         Button {
                         } label: {
