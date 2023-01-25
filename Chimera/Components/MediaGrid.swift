@@ -24,7 +24,7 @@ struct MediaGrid: View {
     var body: some View {
         LazyVGrid(columns: columns, spacing: 2) {
             ForEach(media) { media in
-                MediaCard(type: media)
+                MediaCard1(type: media)
                     .onTapGesture {
                         selectedMedia = media.id
                         showPreview.toggle()

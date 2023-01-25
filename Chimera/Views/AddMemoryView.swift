@@ -25,7 +25,7 @@ struct AddMemoryView: View {
             .navigationTitle("Add a new Memory")
             .navigationBarTitleDisplayMode(.large)
             .toolbar{
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .cancellationAction) {
                     Button(action: {
                         dismiss()
                     }, label: {

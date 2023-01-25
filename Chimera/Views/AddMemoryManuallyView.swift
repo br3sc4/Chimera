@@ -10,14 +10,13 @@ import PhotosUI
 
 struct AddMemoryManuallyView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var eventsVM: EventVM
-    @EnvironmentObject var vm: AddEventVM
+    @EnvironmentObject var vm: AddMemoryVM
     
     var body: some View {
         Form {
             Section{
                 ZStack{
-                    if vm.imageData.isEmpty{
+                    if vm.imageDataCover.isEmpty{
                         Image("event1")
                             .resizable()
                             .scaledToFill()
@@ -25,7 +24,8 @@ struct AddMemoryManuallyView: View {
                             .cornerRadius(24)
                             .padding(.horizontal)
                     }else{
-                        if let pickedData = vm.imageData[0], let uiImage = UIImage(data: pickedData){
+                        if let pickedData = vm.imageDataCover[0], let uiImage = UIImage(data: pickedData
+                        ){
                             Image(uiImage: uiImage)
                                 .resizable()
                                 .scaledToFill()
@@ -41,8 +41,8 @@ struct AddMemoryManuallyView: View {
                         .cornerRadius(24)
                         .padding(.horizontal)
                     
-                    PhotosPicker(vm.photoPickerItem.isEmpty ? "Select a Cover" : "Edit the Cover", selection: $vm.photoPickerItem, maxSelectionCount: 1, matching: .images)
-                        .onChange(of: vm.photoPickerItem, perform: vm.loadImage)
+                    PhotosPicker(vm.photoPickerItemCover.isEmpty ? "Select a Cover" : "Edit the Cover", selection: $vm.photoPickerItemCover, maxSelectionCount: 1, matching: .images)
+                        .onChange(of: vm.photoPickerItemCover, perform: vm.loadCover)
                         .foregroundColor(.accentColor)
                 }
             }
@@ -57,15 +57,16 @@ struct AddMemoryManuallyView: View {
             Section{
                 List{
                     NavigationLink(destination: {RecorderView()}, label: {AddMemorySectionRow(imageIcon: "mic.fill", memoName: "Vocal Memos")})
-                    NavigationLink(destination: {ContentView()}, label: {AddMemorySectionRow(imageIcon: "note.text", memoName: "Textual Memos")})
-                    NavigationLink(destination: {ContentView()}, label: {AddMemorySectionRow(imageIcon: "photo.fill", memoName: "Media Memos")})
+                    NavigationLink(destination: {TextualMemosView()}, label: {AddMemorySectionRow(imageIcon: "note.text", memoName: "Textual Memos")})
+                    NavigationLink(destination: {MediaMemosView()}, label: {AddMemorySectionRow(imageIcon: "photo.fill", memoName: "Media Memos")})
                 }
             }
             
-        }.toolbar{
+        }
+        .toolbar{
             ToolbarItem(placement: .confirmationAction) {
                 Button(action: {
-                    vm.addEvent(EventsViewModel: eventsVM)
+                    
                     dismiss()
                 }, label: {
                     Text("Done")
@@ -78,6 +79,6 @@ struct AddMemoryManuallyView: View {
 
 struct AddMemoryManuallyView_Previews: PreviewProvider {
     static var previews: some View {
-        AddMemoryManuallyView().environmentObject(EventVM()).environmentObject(AddEventVM())
+        AddMemoryManuallyView().environmentObject(AddMemoryVM())
     }
 }

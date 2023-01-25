@@ -45,6 +45,8 @@ struct MediaDetailPreview: View {
                             .onTapGesture {
                                 selectedItem = item.id
                             }
+                    default:
+                        EmptyView()
                     }
                 }
             }
