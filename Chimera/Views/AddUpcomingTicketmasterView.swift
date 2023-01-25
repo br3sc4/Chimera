@@ -8,16 +8,9 @@
 import SwiftUI
 
 struct AddUpcomingTicketmasterView: View {
-    @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var vm: EventVM
-    @StateObject var ticketMasterVm = CreateEventApiViewModel()
-    
-    
-    //@State private var date = Date()
-    //@State private var locale: String = "IT"
-    
-    
-    
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var vm: EventVM
+    @StateObject private var ticketMasterVm = CreateEventApiViewModel()
     
     var searchResults: [Event] {
         if ticketMasterVm.searchQuery.isEmpty {
@@ -26,7 +19,6 @@ struct AddUpcomingTicketmasterView: View {
             return vm.events.filter { $0.performer.localizedCaseInsensitiveContains(ticketMasterVm.searchQuery)}
         }
     }
-    
     
     var body: some View {
         
@@ -41,9 +33,6 @@ struct AddUpcomingTicketmasterView: View {
                             .tag(locale.countryCode)
                     }
                 }
-                //                .onChange(of: locale) { newValue in
-                //                    print(locale)
-                //                }
             }
             .alert(isPresented: $ticketMasterVm.isError){
                 Alert(title: Text("API-Error"),
@@ -51,7 +40,6 @@ struct AddUpcomingTicketmasterView: View {
                 )
             }
             .padding()
-
             
             ScrollView{
                 ForEach(ticketMasterVm.events){ result in
@@ -63,7 +51,10 @@ struct AddUpcomingTicketmasterView: View {
                             Image(systemName: "plus")
                                 .fontWeight(.semibold)
                             Spacer()
-                            AddUpcomingEventCard(image: result.image, performer: result.performer, date: result.date, place: result.place)
+                            AddUpcomingEventCard(image: result.image,
+                                                 performer: result.performer,
+                                                 date: result.date,
+                                                 place: result.place)
                                 .padding(.vertical)
                         }
                     }

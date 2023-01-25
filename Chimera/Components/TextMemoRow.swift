@@ -19,7 +19,7 @@ struct TextMemoRow: View {
                 Text(textMemo)
                     .foregroundColor(.primary)
                     .lineLimit(1)
-            }.padding(.horizontal)
+            }
         }).sheet(isPresented: $showTextMemo) {
             TextMemo(textMemo: textMemo)
                 .presentationDetents([.medium])

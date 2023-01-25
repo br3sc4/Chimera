@@ -9,9 +9,9 @@ import SwiftUI
 import PhotosUI
 
 struct AddUpcomingManuallyView: View {
-    @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var eventsVM: EventVM
-    @EnvironmentObject var vm: AddEventVM
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var eventsVM: EventVM
+    @EnvironmentObject private var vm: AddEventVM
   
     var body: some View {
         Form {
@@ -52,13 +52,17 @@ struct AddUpcomingManuallyView: View {
             Section {
                 TextField("Name of Performer", text: $vm.performer)
                 TextField("Place of the Event", text: $vm.place)
-                TextField("Date of the Event", text: $vm.date)
+                DatePicker(selection: $vm.date,
+                           in: Date.now...,
+                           displayedComponents: .date) {
+                    Text("Date of the Event")
+                }
             }
             
         }.toolbar{
             ToolbarItem(placement: .confirmationAction) {
                 Button(action: {
-                    vm.addEvent(EventsViewModel: eventsVM)
+                    vm.addEvent(eventsViewModel: eventsVM)
                     dismiss()
                 }, label: {
                     Text("Done")

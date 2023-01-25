@@ -9,13 +9,14 @@ import Foundation
 
 struct Event: Identifiable, Hashable {
     let id = UUID()
-    var performer: String
+    let performer: String
     var place: String
-    var date: String
+    var date: Date
     var image: String
+    var imageData: Data?
+    var isMemory: Bool
     var textMemos: [String]?
     var vocalMemos: [VocalMemo]?
-    var imageData: Data?
     var mediaMemos: [MediaType]?
 }
 

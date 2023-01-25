@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreGraphics
 
 enum MediaType: Identifiable, Hashable {
     case image(name: String)

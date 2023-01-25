@@ -9,8 +9,6 @@ import Foundation
 
 @MainActor
 class CreateEventApiViewModel : ObservableObject {
-    
-    
     private var ticketMasterResults : TicketMasterAPI?
     @Published var searchQuery : String
     @Published var locale : String
@@ -64,7 +62,6 @@ class CreateEventApiViewModel : ObservableObject {
                 do {
                     let (data, _) = try await URLSession.shared.data(from: url)
                     print(String(data: data, encoding: .utf8)!)
-                    //print(response)
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
                     let decoder = JSONDecoder()
@@ -81,8 +78,8 @@ class CreateEventApiViewModel : ObservableObject {
                         
                         let event = Event(performer: tMevent.embedded.attractions?.first?.name ?? "Not provided",
                                           place: tMevent.embedded.venues.first?.city.name ?? "Not provided",
-                                          date: tMevent.dates.start.localDate,
-                                          image: imageURL)
+                                          date: tMevent.dates.start.dateTime,
+                                          image: imageURL, isMemory: false)
                         events.append(event)
                     }
                 } catch {

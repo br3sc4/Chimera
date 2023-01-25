@@ -15,9 +15,15 @@ class EventVM: ObservableObject{
         Event(
             performer: "Imagine Dragons",
             place: "Munich",
-            date: "25-11-2022",
+            date: {
+                var components = DateComponents()
+                components.year = 2022
+                components.month = 11
+                components.day = 25
+                return components.date ?? Date.now
+            }(),
             image: "event1",
-            textMemos: [
+            isMemory: true, textMemos: [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
                 "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur",
                 "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo"],
@@ -32,9 +38,15 @@ class EventVM: ObservableObject{
         Event(
             performer: "Foo Fighters",
             place: "London",
-            date: "30-07-2019",
+            date: {
+                var components = DateComponents()
+                components.year = 2019
+                components.month = 7
+                components.day = 30
+                return components.date ?? Date.now
+            }(),
             image: "event2",
-            textMemos: [
+            isMemory: true, textMemos: [
                 "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo"],
             vocalMemos: [
                 VocalMemo(title: "Audio 1",
@@ -43,19 +55,38 @@ class EventVM: ObservableObject{
                           urlString: "data for audio 2 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"),
                 VocalMemo(title: "Audio 3",
                           urlString: "data for audio 3 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"),
-            ]),
+            ],
+            mediaMemos: [
+                .image(name: "concert1"),
+                .video(videoMemo: VideoMemo(name: "IMG_0684", ext: "mov")),
+                .image(name: "concert2"),
+                .image(name: "concert3")
+            ]
+        ),
         Event(
             performer: "Bon Iver",
             place: "Milan",
-            date: "08-11-2022",
-            image: "event3"
+            date: {
+                var components = DateComponents()
+                components.year = 2022
+                components.month = 11
+                components.day = 8
+                return components.date ?? Date.now
+            }(),
+            image: "event3", isMemory: true
         ),
         Event(
             performer: "Imagine Dragons",
             place: "Munich",
-            date: "25-11-2022",
+            date: {
+                var components = DateComponents()
+                components.year = 2022
+                components.month = 11
+                components.day = 25
+                return components.date ?? Date.now
+            }(),
             image: "event1",
-            textMemos: [
+            isMemory: false, textMemos: [
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
                 "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur",
                 "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo"],

@@ -9,49 +9,45 @@ import SwiftUI
 import PhotosUI
 
 struct AddUpcomingView: View {
-    @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var vm: EventVM
-    @State var isViaTicketmaster = true
-//    @State private var searchQuery = ""
-    @State var performer = ""
-    @State var date = ""
-    @State var place = ""
-    @State var image: PhotosPickerItem?
-//    var searchResults: [Event] {
-//        if searchQuery.isEmpty {
-//            return [vm.events[0], vm.events[3]]
-//        } else {
-//            return vm.events.filter { $0.performer.localizedCaseInsensitiveContains(searchQuery)}
-//        }
-//    }
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var vm: EventVM
+    @State private var isViaTicketmaster = true
+    @State private var performer = ""
+    @State private var date = ""
+    @State private var place = ""
+    @State private var image: PhotosPickerItem?
+    
+    init(performer: String = "",
+         date: String = "",
+         place: String = "",
+         image: PhotosPickerItem? = nil) {
+        self.isViaTicketmaster = isViaTicketmaster
+        self.performer = performer
+        self.date = date
+        self.place = place
+        self.image = image
+    }
+    
     var body: some View {
         NavigationStack{
             VStack(spacing: 4){
-                if isViaTicketmaster{
-                    AddUpcomingTicketmasterView().environmentObject(vm)
-                }else{
-                    
-                    AddUpcomingManuallyView().environmentObject(vm)
+                if isViaTicketmaster {
+                    AddUpcomingTicketmasterView()
+                } else {
+                    AddUpcomingManuallyView()
                 }
             }
             .navigationTitle(isViaTicketmaster ? "Search a new Event" : "Add a new Event")
             .navigationBarTitleDisplayMode(.large)
             .toolbar{
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .cancellationAction) {
                     Button(action: {
                         dismiss()
                     }, label: {
                         Text("Cancel")
                     })
                 }
-//                ToolbarItem(placement: .confirmationAction) {
-//                    Button(action: {
-//                        vm.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending"))
-//                        dismiss()
-//                    }, label: {
-//                        Text("Done")
-//                    })
-//                }
+                
                 ToolbarItem(placement: .principal) {
                     Picker("", selection: $isViaTicketmaster){
                         Text("Ticketmaster").tag(true)

@@ -40,7 +40,7 @@ struct VocalMemoRow: View {
                             .foregroundColor(.accentColor)
                     })
                 }
-        }.padding(.horizontal)
+        }
     }
 }
 
