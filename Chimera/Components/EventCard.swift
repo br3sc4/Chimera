@@ -41,7 +41,7 @@ struct EventCard: View {
             }
             
             HStack{
-                Text(event.date)
+                Text(event.date.formatted(date: .numeric, time: .omitted))
                     .foregroundColor(.secondary)
                 Text(event.place.capitalized)
                     .foregroundColor(.secondary)

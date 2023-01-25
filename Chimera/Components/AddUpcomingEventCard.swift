@@ -10,7 +10,7 @@ import SwiftUI
 struct AddUpcomingEventCard: View {
     let image: String
     let performer: String
-    let date: String
+    let date: Date
     let place: String
     
     var body: some View {
@@ -39,7 +39,7 @@ struct AddUpcomingEventCard: View {
                 Text(performer.capitalized)
                     .foregroundColor(.primary)
                 HStack{
-                    Text(date)
+                    Text(date.formatted(date: .numeric, time: .omitted))
                         .foregroundColor(.secondary)
                     Text(place.capitalized)
                         .foregroundColor(.secondary)
@@ -56,6 +56,6 @@ struct AddUpcomingEventCard: View {
 
 struct AddUpcomingEventCard_Previews: PreviewProvider {
     static var previews: some View {
-        AddUpcomingEventCard(image: "event1", performer: "Name of Performer", date: "Date", place: "Place")
+        AddUpcomingEventCard(image: "event1", performer: "Name of Performer", date: Date.now, place: "Place")
     }
 }

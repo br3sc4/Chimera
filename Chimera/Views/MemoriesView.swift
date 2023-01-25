@@ -14,7 +14,6 @@ struct MemoriesView: View {
         NavigationStack{
             EventList(eventType: .memory)
                 .navigationTitle("Memories")
-                .navigationBarTitleDisplayMode(.large)
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         Button {

@@ -13,7 +13,7 @@ import PhotosUI
 class AddEventVM: ObservableObject{
     @Published var performer = ""
     @Published var place = ""
-    @Published var date = ""
+    @Published var date = Date.now
     @Published var imageData: [Data] = []
     @Published var photoPickerItem: [PhotosPickerItem] = []
     
@@ -28,14 +28,13 @@ class AddEventVM: ObservableObject{
         }
     }
     
-    func addEvent(EventsViewModel: EventVM){
-        if photoPickerItem.isEmpty{
-            EventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending"))
+    func addEvent(eventsViewModel: EventVM){
+        if photoPickerItem.isEmpty {
+            eventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending", isMemory: false))
             resetProperties()
             print("here")
-        }
-        else{
-            EventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "", imageData: imageData[0]))
+        } else {
+            eventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "", imageData: imageData[0], isMemory: false))
             resetProperties()
             print("or here")
         }
@@ -44,7 +43,7 @@ class AddEventVM: ObservableObject{
     func resetProperties(){
         performer = ""
         place = ""
-        date = ""
+        date = Date.now
         imageData = []
         photoPickerItem = []
     }

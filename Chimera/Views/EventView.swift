@@ -15,8 +15,7 @@ struct EventView: View {
                 Section("Textual Memos") {
                     ForEach(textMemos, id: \.self){ textMemo in
                         TextMemoRow(textMemo: textMemo)
-                            .padding(.vertical)
-                    }.listRowInsets(EdgeInsets())
+                    }
                 }
             }
             
@@ -24,8 +23,7 @@ struct EventView: View {
                 Section("Vocal Memos") {
                     ForEach(vocalMemos){ vocalMemo in
                         VocalMemoRow(vocalMemo: vocalMemo)
-                            .padding(.vertical)
-                    }.listRowInsets(EdgeInsets())
+                    }
                 }
             }
             
@@ -42,6 +40,6 @@ struct EventView: View {
 
 struct EventView_Previews: PreviewProvider {
     static var previews: some View {
-        EventView(event: Event(performer: "event1", place: "Name of Performer", date: "Date", image: "Place"))
+        EventView(event: Event(performer: "event1", place: "Name of Performer", date: Date.now, image: "Place", isMemory: true))
     }
 }
