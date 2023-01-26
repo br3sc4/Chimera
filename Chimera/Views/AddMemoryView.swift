@@ -16,10 +16,10 @@ struct AddMemoryView: View {
         NavigationStack{
             VStack(spacing: 4){
                 if isFromUpcoming{
-                    AddMemoryUpcomingEventsView().environmentObject(vm)
+                    AddMemoryUpcomingEventsView()
                 }else{
                     
-                    AddMemoryManuallyView().environmentObject(vm)
+                    AddMemoryManuallyView()
                 }
             }
             .navigationTitle("Add a new Memory")

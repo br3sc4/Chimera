@@ -16,16 +16,16 @@ struct AddMemoryManuallyView: View {
         Form {
             Section{
                 ZStack{
-                    if vm.imageDataCover.isEmpty{
+                    if vm.imageDataCover == nil {
                         Image("event1")
                             .resizable()
                             .scaledToFill()
                             .frame(height: 136)
                             .cornerRadius(24)
                             .padding(.horizontal)
-                    }else{
-                        if let pickedData = vm.imageDataCover[0], let uiImage = UIImage(data: pickedData
-                        ){
+                    } else {
+                        if let pickedData = vm.imageDataCover,
+                            let uiImage = UIImage(data: pickedData) {
                             Image(uiImage: uiImage)
                                 .resizable()
                                 .scaledToFill()
@@ -41,9 +41,12 @@ struct AddMemoryManuallyView: View {
                         .cornerRadius(24)
                         .padding(.horizontal)
                     
-                    PhotosPicker(vm.photoPickerItemCover.isEmpty ? "Select a Cover" : "Edit the Cover", selection: $vm.photoPickerItemCover, maxSelectionCount: 1, matching: .images)
-                        .onChange(of: vm.photoPickerItemCover, perform: vm.loadCover)
-                        .foregroundColor(.accentColor)
+                    PhotosPicker(vm.photoPickerItemCover.isEmpty ? "Select a Cover" : "Edit the Cover",
+                                 selection: $vm.photoPickerItemCover,
+                                 maxSelectionCount: 1,
+                                 matching: .images)
+                    .onChange(of: vm.photoPickerItemCover, perform: vm.loadCover)
+                    .foregroundColor(.accentColor)
                 }
             }
             .listRowBackground(Color.clear)
@@ -52,7 +55,9 @@ struct AddMemoryManuallyView: View {
             Section {
                 TextField("Name of Performer", text: $vm.performer)
                 TextField("Place of the Event", text: $vm.place)
-                TextField("Date of the Event", text: $vm.date)
+                DatePicker(selection: $vm.date, in: Date.now..., displayedComponents: .date) {
+                    Text("Date of the Event")
+                }
             }
             Section{
                 List{
@@ -61,16 +66,14 @@ struct AddMemoryManuallyView: View {
                     NavigationLink(destination: {MediaMemosView()}, label: {AddMemorySectionRow(imageIcon: "photo.fill", memoName: "Media Memos")})
                 }
             }
-            
         }
-        .toolbar{
+        .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button(action: {
-                    
+                Button {
                     dismiss()
-                }, label: {
+                } label: {
                     Text("Done")
-                })
+                }
             }
         }
     }

@@ -16,14 +16,14 @@ struct MediaMemosView: View {
     ]
     
     var body: some View {
-        VStack{
+        ScrollView {
             LazyVGrid(columns: columns, spacing: 2) {
                 ForEach(vm.mediaMemo, id: \.id) { media in
                     MediaCard(memo: media)
                 }
             }
-            Spacer()
         }
+        .navigationTitle("media memos".capitalized)
         .toolbar{
             ToolbarItem(placement: .primaryAction) {
                 PhotosPicker(selection: $vm.photoPickerItem, matching: .any(of: [.images, .videos])){

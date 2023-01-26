@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 struct MediaMemo<Content>: Identifiable {
     let content: Content
@@ -24,5 +25,23 @@ extension MediaMemo: Codable where Content: Codable {
         case content
         case isVideo
         case id
+    }
+}
+
+extension MediaMemo where Content == URL {
+    var mediaDuration: Double {
+        let time = videoAsset.duration
+        return time.seconds
+    }
+    
+    var thumbnail: CGImage? {
+        return try? AVAssetImageGenerator(asset: videoAsset)
+            .copyCGImage(at: .init(seconds: 0,
+                                   preferredTimescale: 1),
+                         actualTime: nil)
+    }
+    
+    private var videoAsset: AVAsset {
+        return AVAsset(url: content)
     }
 }

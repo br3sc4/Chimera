@@ -12,8 +12,8 @@ import PhotosUI
 class AddMemoryVM: ObservableObject{
     @Published var performer = ""
     @Published var place = ""
-    @Published var date = ""
-    @Published var imageDataCover: [Data] = []
+    @Published var date = Date.now
+    @Published var imageDataCover: Data?
     @Published var mediaMemo: [MediaMemo<Data>] = []
     @Published var photoPickerItem: [PhotosPickerItem] = []
     @Published var photoPickerItemCover: [PhotosPickerItem] = []
@@ -22,11 +22,11 @@ class AddMemoryVM: ObservableObject{
     @Published var mediaMemos: [MediaType] = []
     
     func loadCover(_ photos: [PhotosPickerItem]) {
-        imageDataCover = []
+        imageDataCover = nil
         Task { @MainActor in
             for photo in photos {
                 guard let image = try? await photo.loadTransferable(type: Data.self) else { return }
-                imageDataCover.append(image)
+                imageDataCover = image
             }
         }
     }
@@ -43,23 +43,24 @@ class AddMemoryVM: ObservableObject{
         }
     }
     
-    //    func addEvent(EventsViewModel: EventVM){
-    //        if photoPickerItem.isEmpty{
-    //            EventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending"))
-    //            resetProperties()
-    //            print("here")
-    //        }
-    //        else{
-    //            EventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "", imageData: imageData[0]))
-    //            resetProperties()
-    //            print("or here")
-    //        }
-    //    }
+    func addEvent(eventsViewModel: EventVM) {
+        eventsViewModel.events.append(
+            Event(performer: performer,
+                  place: place,
+                  date: date,
+                  image: "",
+                  textMemos: textMemos,
+                  vocalMemos: vocalMemos,
+                  imageData: imageDataCover,
+                  mediaMemos: mediaMemos)
+        )
+        resetProperties()
+    }
     
-    func resetProperties(){
+    func resetProperties() {
         performer = ""
         place = ""
-        date = ""
+        date = Date.now
         mediaMemo = []
         photoPickerItem = []
     }

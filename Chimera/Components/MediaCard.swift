@@ -7,43 +7,23 @@
 
 import SwiftUI
 
-struct MediaCard: View {
-    private let memo: MediaMemo<Data>
+struct MediaCard<ContentType>: View {
+    private let memo: MediaMemo<ContentType>
     
-    init(memo: MediaMemo<Data>) {
+    init(memo: MediaMemo<ContentType>) {
         self.memo = memo
     }
     
     var body: some View {
         if memo.isVideo {
             EmptyView()
-//            Image(uiImage: thumbnail)
-//                .squared()
-//                .overlay(alignment: .bottomTrailing) {
-//                    let convertedDuration = secondsToMinutesSeconds(ceil(video.mediaDuration))
-//
-//                    Text("\(convertedDuration.minutes):\(convertedDuration.seconds.formatted(.number.precision(.integerLength(2))))")
-//                        .font(.footnote)
-//                        .foregroundColor(.white)
-//                        .padding(.trailing, 8)
-//                        .padding(.bottom, 4)
-//                }
-        } else {
-            if let uiImage = UIImage(data: memo.content) {
-                Image(uiImage: uiImage)
-                    .squared()
-            }
-        }
-//        switch type {
-//        case .image(let name):
-//            Image(name)
-//                .squared()
-//        case .video(let video):
-//            if let thumbnail = video.thumbnail {
-//                Image(uiImage: thumbnail)
+//            if let content = memo.content as? URL,
+//                let thumbnail = memo.thumbnail,
+//                let uiImage = UIImage(cgImage: thumbnail) {
+//                Image(uiImage: uiImage)
 //                    .squared()
 //                    .overlay(alignment: .bottomTrailing) {
-//                        let convertedDuration = secondsToMinutesSeconds(ceil(video.mediaDuration))
+//                        let convertedDuration = secondsToMinutesSeconds(ceil(memo.mediaDuration))
 //
 //                        Text("\(convertedDuration.minutes):\(convertedDuration.seconds.formatted(.number.precision(.integerLength(2))))")
 //                            .font(.footnote)
@@ -52,12 +32,25 @@ struct MediaCard: View {
 //                            .padding(.bottom, 4)
 //                    }
 //            }
-//        case let .data(_, data):
-//            if let uiImage = UIImage(data: data) {
-//                Image(uiImage: uiImage)
-//                    .squared()
-//            }
-//        }
+        } else {
+            if let data = memo.content as? Data {
+                if let uiImage = UIImage(data: data) {
+                    Image(uiImage: uiImage)
+                        .squared()
+                }
+            } else if let url = memo.content as? URL {
+                AsyncImage(url: url) { phase in
+                    switch phase {
+                    case let .success(image):
+                        image.squared()
+                    case .empty:
+                        EmptyView()
+                    case let .failure(error):
+                        EmptyView()
+                    }
+                }
+            }
+        }
     }
     
     private func secondsToMinutesSeconds(_ seconds: Double) -> (minutes: Int, seconds: Int) {
