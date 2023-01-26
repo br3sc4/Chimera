@@ -16,13 +16,25 @@ class EventStore : ObservableObject {
         return fileName
     }
     
-    static func loadAllEvents(){
-        let fileURL = fileURL()
-        do {
-            let jsonData = try Data(contentsOf: fileURL)
-            let eventStore = try JSONDecoder().decode([Event].self, from: jsonData)
-        } catch {
-            print(error.localizedDescription)
+    static func loadAllEvents(completion: @escaping (Result<[Event], Error>)->Void) {
+        DispatchQueue.global(qos: .background).async {
+            do {
+                let fileURL = fileURL()
+                guard let file = try? FileHandle(forReadingFrom: fileURL) else {
+                    DispatchQueue.main.async {
+                        completion(.success([]))
+                    }
+                    return
+                }
+                let events = try JSONDecoder().decode([Event].self, from: file.availableData)
+                DispatchQueue.main.async {
+                    completion(.success(events))
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
         }
     }
     
