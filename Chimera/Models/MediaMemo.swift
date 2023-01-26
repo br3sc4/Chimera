@@ -7,32 +7,22 @@
 
 import Foundation
 
-
-struct MediaMemo<Content>: Identifiable, Codable where Content: Codable {
+struct MediaMemo<Content>: Identifiable {
     let content: Content
     let isVideo: Bool
-    let id: UUID //= UUID()
+    let id: UUID
     
     init(content: Content, isVideo: Bool = false) {
         self.content = content
         self.isVideo = isVideo
         self.id = UUID()
     }
-    
-    
-    func encode(to encoder: Encoder) throws {
-        <#code#>
-    }
-    
-    
 }
-//
-//extension MediaMemo: Codable where Content: StringProtocol {
-//
-//    private enum CodingKey: CodingKeys {
-//
-//        case content = "content"
-//        case isVideo = "isVideo"
-//    }
-//
-//}
+
+extension MediaMemo: Codable where Content: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case content
+        case isVideo
+        case id
+    }
+}
