@@ -10,17 +10,18 @@ import Foundation
 @MainActor
 class CreateEventApiViewModel : ObservableObject {
     private var ticketMasterResults : TicketMasterAPI?
+    @Published var isUseDate : Bool
     @Published var searchQuery : String
     @Published var locale : String
     @Published var date : Date
     @Published var events  : [Event]
     @Published var isError : Bool
-    @Published var apiError : String?
     
     var urlComponents : URLComponents
     
     init() {
         self.ticketMasterResults = nil
+        self.isUseDate = false
         self.searchQuery = ""
         self.locale = "IT"
         self.urlComponents = URLComponents(string: "https://app.ticketmaster.com/")!
@@ -48,15 +49,24 @@ class CreateEventApiViewModel : ObservableObject {
         let apiKeyQery = URLQueryItem(name: "apikey", value: "DxmW4FBMq7gyPeRrRPdI7fCocVAxrO56")
         let localeQuery = URLQueryItem(name: "locale", value: locale)
         let keyWordQuery = URLQueryItem(name: "keyword", value: searchQuery)
-        let startDateQuery = URLQueryItem(name: "startDateTime", value: startTimeFormatted)
-        let endDatQuery = URLQueryItem(name: "endDateTime", value: endTimeFormatted)
+        let classificationID = URLQueryItem(name: "classificationID", value: "KZFzniwnSyZfZ7v7nJ")
         
-        urlComponents.queryItems = [apiKeyQery,
-                                    localeQuery,
-                                    startDateQuery,
-                                    endDatQuery,
-                                    keyWordQuery]
-        
+        if isUseDate {
+            let startDateQuery = URLQueryItem(name: "startDateTime", value: startTimeFormatted)
+            let endDatQuery = URLQueryItem(name: "endDateTime", value: endTimeFormatted)
+            
+            urlComponents.queryItems = [apiKeyQery,
+                                        localeQuery,
+                                        classificationID,
+                                        startDateQuery,
+                                        endDatQuery,
+                                        keyWordQuery]
+        } else {
+            urlComponents.queryItems = [apiKeyQery,
+                                        localeQuery,
+                                        classificationID,
+                                        keyWordQuery]
+        }
         let url = urlComponents.url!
         print(url)
                 do {
@@ -77,16 +87,23 @@ class CreateEventApiViewModel : ObservableObject {
                         }
                         
                         let event = Event(performer: tMevent.embedded.attractions?.first?.name ?? "Not provided",
-                                          place: tMevent.embedded.venues.first?.city.name ?? "Not provided",
-                                          date: tMevent.dates.start.dateTime,
+                                          place: tMevent.embedded.venues?.first?.city?.name ?? "Not provided",
+                                          date: tMevent.dates.start?.dateTime ?? Date(),
                                           image: imageURL, isMemory: false)
                         events.append(event)
                     }
                 } catch {
                     print("Error!!")
-                    print(error.localizedDescription)
+                    print(error)
                     isError = true
-                    apiError = error.localizedDescription
                 }
+    }
+    
+    private func downloadPreviewImage(){
+        
+    }
+    
+    func addImageToEvents(){
+        
     }
 }

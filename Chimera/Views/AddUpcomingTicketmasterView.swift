@@ -23,20 +23,27 @@ struct AddUpcomingTicketmasterView: View {
     var body: some View {
         
         VStack {
-            HStack {
-                DatePicker("Event Date", selection: $ticketMasterVm.date, displayedComponents: .date)
-                Spacer()
-                Picker("Country Event", selection: $ticketMasterVm.locale) {
-                    ForEach(NSLocale.locales()) { locale in
-                        
-                        Text("\(locale.countryName) - \(locale.countryCode)")
-                            .tag(locale.countryCode)
+            VStack {
+                Toggle("Specify Date", isOn: $ticketMasterVm.isUseDate)
+                if ticketMasterVm.isUseDate {
+                    DatePicker("Event Date", selection: $ticketMasterVm.date, displayedComponents: .date)
+                    Divider()
+                }
+                HStack {
+                    Text("Country")
+                    Spacer()
+                    Picker("Country Event", selection: $ticketMasterVm.locale) {
+                        ForEach(NSLocale.locales()) { locale in
+                            
+                            Text("\(locale.countryName) - \(locale.countryCode)")
+                                .tag(locale.countryCode)
+                        }
                     }
                 }
             }
             .alert(isPresented: $ticketMasterVm.isError){
-                Alert(title: Text("API-Error"),
-                      message: Text(ticketMasterVm.apiError ?? "Something went wrong!")
+                Alert(title: Text("Nothing found"),
+                      message: Text("Unfortunately we found nothing corresponding to your search!")
                 )
             }
             .padding()
