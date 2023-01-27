@@ -80,6 +80,7 @@ extension Event {
     
 }
 
+<<<<<<< HEAD
 //extension Event {
 //    var record: CKRecord {
 //        let record = CKRecord(recordType: "Event")

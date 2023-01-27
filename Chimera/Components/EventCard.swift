@@ -13,22 +13,6 @@ struct EventCard: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-//            if event.imageData == nil {
-//                Image(event.image!)
-//                    .resizable()
-//                    .scaledToFill()
-//                    .frame(height: 136)
-//                    .cornerRadius(24)
-//            } else {
-////                if let data = event.imageData, let uiImage = UIImage(data: data){
-////                    Image(uiImage: uiImage)
-////                        .resizable()
-////                        .scaledToFill()
-////                        .frame(height: 136)
-////                        .cornerRadius(24)
-////                }
-//            }
-            
             if let url = event.cover, let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
                 Image(uiImage: image)
                     .resizable()
