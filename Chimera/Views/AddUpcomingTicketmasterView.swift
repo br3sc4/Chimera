@@ -51,12 +51,23 @@ struct AddUpcomingTicketmasterView: View {
             ScrollView{
                 ForEach(ticketMasterVm.events){ result in
                     Button(action: {
-                        
+                        if !ticketMasterVm.checkIfEventAlreadyExists(events: vm.events, searchEvent: result){
+                            Task {
+                                let eventWithPreview = await ticketMasterVm.eventWithPreview(result)
+                                vm.events.append(eventWithPreview)
+                            }
+                        }
+
                     }, label: {
                         HStack{
                             Spacer()
-                            Image(systemName: "plus")
-                                .fontWeight(.semibold)
+                            if ticketMasterVm.checkIfEventAlreadyExists(events: vm.events, searchEvent: result){
+                                Image(systemName: "checkmark")
+                                    .fontWeight(.semibold)
+                            } else {
+                                Image(systemName: "plus")
+                                    .fontWeight(.semibold)
+                            }
                             Spacer()
                             AddUpcomingEventCard(image: result.image,
                                                  performer: result.performer,

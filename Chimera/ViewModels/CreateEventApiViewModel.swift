@@ -78,13 +78,10 @@ class CreateEventApiViewModel : ObservableObject {
                     decoder.dateDecodingStrategy = .formatted(dateFormatter)
                     ticketMasterResults = try decoder.decode(TicketMasterAPI.self, from: data)
                     events = []
-                    var imageURL = "event1"
+                    var imageURL = ""
                     for tMevent in ticketMasterResults!.embedded.events {
-                        if tMevent.images.count > 5 {
-                            imageURL = tMevent.images[5].url
-                        } else if tMevent.images.count > 0 {
-                            imageURL = tMevent.images[0].url
-                        }
+                        
+                        imageURL = getImageURL(for: tMevent)
                         
                         let event = Event(performer: tMevent.embedded.attractions?.first?.name ?? "Not provided",
                                           place: tMevent.embedded.venues?.first?.city?.name ?? "Not provided",
@@ -99,11 +96,51 @@ class CreateEventApiViewModel : ObservableObject {
                 }
     }
     
-    private func downloadPreviewImage(){
+    private func getImageURL(for event : TMEvent) -> String {
+        var imageURL = "event1"
+        if event.images.count > 5 {
+            imageURL = event.images[3].url
+        } else if event.images.count > 0 {
+            imageURL = event.images[0].url
+        }
+        return imageURL
+    }
+    
+    private func downloadPreviewImage(from stringUrl : String) async -> String{
+        let url = URL(string: stringUrl)
+        let documentDirectoryPath = URL.documentsDirectory
+        let filePath = documentDirectoryPath.appendingPathComponent("\(UUID()).jpg")
+        
+        do {
+            if let url {
+                let (data, _) = try await URLSession.shared.data(from: url)
+                try data.write(to: filePath)
+                
+            }
+        } catch {
+            print(error)
+        }
+        print(filePath)
+        return filePath.absoluteString
         
     }
     
-    func addImageToEvents(){
-        
+    /* Downloads an image for the preview to make it available for offline usage */
+    func eventWithPreview(_ event : Event) async -> Event{
+        var newEvent = event
+        let imageURL = await downloadPreviewImage(from: event.image)
+        newEvent.image = imageURL
+        return newEvent
+    }
+    
+    //TODO: Refactor with Data directly from Store not from vm
+    func checkIfEventAlreadyExists(events: [Event], searchEvent: Event) -> Bool{
+        return events.contains(where: {
+            $0.date == searchEvent.date &&
+            $0.performer == searchEvent.performer &&
+            $0.place == searchEvent.place
+        })
     }
 }
+
+
