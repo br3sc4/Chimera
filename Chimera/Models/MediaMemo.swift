@@ -7,28 +7,29 @@
 
 import Foundation
 import AVFoundation
+import SwiftUI
 
-struct MediaMemo<Content>: Identifiable {
-    let content: Content
+struct MediaMemo: Identifiable, Hashable {
+    let url: URL
     let isVideo: Bool
     let id: UUID
     
-    init(content: Content, isVideo: Bool = false) {
-        self.content = content
+    init(url: URL, isVideo: Bool = false, id: UUID = UUID()) {
+        self.url = url
         self.isVideo = isVideo
-        self.id = UUID()
+        self.id = id
     }
 }
 
-extension MediaMemo: Codable where Content: Codable {
+extension MediaMemo: Codable {
     private enum CodingKeys: String, CodingKey {
-        case content
+        case url
         case isVideo
         case id
     }
 }
 
-extension MediaMemo where Content == URL {
+extension MediaMemo {
     var mediaDuration: Double {
         let time = videoAsset.duration
         return time.seconds
@@ -42,6 +43,18 @@ extension MediaMemo where Content == URL {
     }
     
     private var videoAsset: AVAsset {
-        return AVAsset(url: content)
+        return AVAsset(url: url)
+    }
+}
+
+extension MediaMemo: Transferable {
+    static var transferRepresentation: some TransferRepresentation {
+        FileRepresentation(importedContentType: .data) { received in
+            let id = UUID()
+            let fileName = "\(id.uuidString).png"
+            let filePath = URL.documentsDirectory.appendingPathComponent(fileName, conformingTo: .data)
+            try FileManager.default.copyItem(at: received.file, to: filePath)
+            return Self.init(url: filePath, isVideo: false, id: id)
+        }
     }
 }

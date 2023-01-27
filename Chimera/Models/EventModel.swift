@@ -17,7 +17,7 @@ struct Event: Identifiable, Hashable {
     var isMemory: Bool
     var textMemos: [String]?
     var vocalMemos: [VocalMemo]?
-    var mediaMemos: [MediaType]?
+    var mediaMemos: [MediaMemo]?
 }
 
 struct VocalMemo: Identifiable, Hashable {
