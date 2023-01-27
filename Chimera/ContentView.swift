@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var cloudKitUserVM: CloudKitUserVM
+    init() {
+        _cloudKitUserVM = StateObject(wrappedValue: CloudKitUserVM(service: CloudKitService()))
+        print("init")
+    }
     var body: some View {
         TabView{
             MemoriesView()

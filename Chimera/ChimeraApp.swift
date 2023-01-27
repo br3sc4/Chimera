@@ -9,10 +9,15 @@ import SwiftUI
 
 @main
 struct ChimeraApp: App {
-    @StateObject private var eventVM: EventVM = EventVM()
-    @StateObject private var addEventVM: AddEventVM = AddEventVM()
+    @StateObject private var eventVM: EventVM
+    @StateObject private var addEventVM: AddEventVM
     @StateObject private var addMemoryVM: AddMemoryVM = AddMemoryVM()
     @StateObject private var upcomingVM: UpcomingEventVM = UpcomingEventVM()
+    
+    init() {
+        _eventVM = StateObject(wrappedValue: EventVM(service: CloudKitService()))
+        _addEventVM = StateObject(wrappedValue: AddEventVM(service: CloudKitService()))
+    }
     
     var body: some Scene {
         WindowGroup {

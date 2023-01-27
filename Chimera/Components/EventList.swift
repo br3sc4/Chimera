@@ -32,6 +32,9 @@ struct EventList: View {
                           event: event)
                     .listRowSeparator(.hidden)
             }
+            .onDelete { indexSet in
+                vm.deleteItem(at: indexSet)
+            }
         }
         .listStyle(.plain)
         .searchable(text: $searchedEvent,

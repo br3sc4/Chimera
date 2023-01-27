@@ -75,6 +75,6 @@ struct AddUpcomingManuallyView: View {
 
 struct AddUpcomingManuallyView_Previews: PreviewProvider {
     static var previews: some View {
-        AddUpcomingManuallyView().environmentObject(EventVM()).environmentObject(AddEventVM())
+        AddUpcomingManuallyView().environmentObject(EventVM(service: CloudKitService())).environmentObject(AddEventVM(service: CloudKitService()))
     }
 }

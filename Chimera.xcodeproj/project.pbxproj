@@ -29,6 +29,8 @@
 		2DF6BD8F2980198C00B8D5B8 /* AddUpcomingEventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB00C297605F00083DCAE /* AddUpcomingEventCard.swift */; };
 		2DF6BD9029801CB300B8D5B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F4296F01050020CDCF /* Assets.xcassets */; };
 		2DF6BD9129801CB300B8D5B8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D0E78F8296F01050020CDCF /* Preview Assets.xcassets */; };
+		40330BD12981AE9100FBD715 /* CloudKitUserVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40330BD02981AE9100FBD715 /* CloudKitUserVM.swift */; };
+		40F8129329816490007A175D /* CloudKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F8129229816490007A175D /* CloudKitService.swift */; };
 		A91FB0032971921E0083DCAE /* AudioPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB0022971921E0083DCAE /* AudioPlayerModel.swift */; };
 		A91FB0052971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */; };
 		A91FB0072975B4D40083DCAE /* MemoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB0062975B4D40083DCAE /* MemoriesView.swift */; };
@@ -80,6 +82,8 @@
 		2DF6BD892980192000B8D5B8 /* NSLocale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLocale.swift; sourceTree = "<group>"; };
 		2DF6BD8B2980193000B8D5B8 /* MediaDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaDetailView.swift; sourceTree = "<group>"; };
 		2DF6BD8D2980193800B8D5B8 /* MediaDetailPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaDetailPreview.swift; sourceTree = "<group>"; };
+		40330BD02981AE9100FBD715 /* CloudKitUserVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitUserVM.swift; sourceTree = "<group>"; };
+		40F8129229816490007A175D /* CloudKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitService.swift; sourceTree = "<group>"; };
 		A91FB0022971921E0083DCAE /* AudioPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerModel.swift; sourceTree = "<group>"; };
 		A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "01-11-22_at_18_30_44.m4a"; sourceTree = "<group>"; };
 		A91FB0062975B4D40083DCAE /* MemoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriesView.swift; sourceTree = "<group>"; };
@@ -141,10 +145,11 @@
 		2D0E78EF296F01050020CDCF /* Chimera */ = {
 			isa = PBXGroup;
 			children = (
+				40F8129129816473007A175D /* Services */,
+				A91FB01029798A5B0083DCAE /* ViewModels */,
 				2D0E7904296F1A200020CDCF /* Components */,
 				2DC5131A2971A7FD004958C0 /* Extensions */,
 				2D0E7903296F1A190020CDCF /* Models */,
-				2DC513202971B969004958C0 /* ViewModels */,
 				2D0E7902296F1A0D0020CDCF /* Views */,
 				2D0E78F0296F01050020CDCF /* ChimeraApp.swift */,
 				2DF6BD7B298018F200B8D5B8 /* ContentView.swift */,
@@ -229,7 +234,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		2DC513202971B969004958C0 /* ViewModels */ = {
+		40F8129129816473007A175D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				40F8129229816490007A175D /* CloudKitService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A91FB01029798A5B0083DCAE /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				2DDD9E642982CE1B00D34342 /* AddMemoryVM.swift */,
@@ -238,6 +251,7 @@
 				2DF6BD7D298018FF00B8D5B8 /* EventVM.swift */,
 				BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */,
 				2D5CAA19298AA4B700A83922 /* UpcomingEventVM.swift */,
+				40330BD02981AE9100FBD715 /* CloudKitUserVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -346,8 +360,10 @@
 				A97D3D3029801DD70071B5E9 /* AddMemorySectionRow.swift in Sources */,
 				A97D3D3A2981629D0071B5E9 /* MediaMemosView.swift in Sources */,
 				A9D5413629706AB500C76CAF /* TextMemo.swift in Sources */,
+				40F8129329816490007A175D /* CloudKitService.swift in Sources */,
 				A9D5413029706A2A00C76CAF /* EventView.swift in Sources */,
 				A91FB0072975B4D40083DCAE /* MemoriesView.swift in Sources */,
+				40330BD12981AE9100FBD715 /* CloudKitUserVM.swift in Sources */,
 				A9D5412E297069E600C76CAF /* EventList.swift in Sources */,
 				2DC51311297176C8004958C0 /* VideoMemo.swift in Sources */,
 				2DC5131C2971A84D004958C0 /* Image.swift in Sources */,
@@ -489,11 +505,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Chimera/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7AGYKJGT3A;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Chimera/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need for adding Voice Notes";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -528,11 +545,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Chimera/Preview Content\"";
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = "";
+=======
+				DEVELOPMENT_TEAM = 7AGYKJGT3A;
+>>>>>>> bdf2108 (CloudKit integration fetch add and delete function)
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Chimera/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Need for adding Voice Notes";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

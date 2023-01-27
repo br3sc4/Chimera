@@ -17,6 +17,11 @@ class AddEventVM: ObservableObject{
     @Published var imageData: [Data] = []
     @Published var photoPickerItem: [PhotosPickerItem] = []
     
+    private let service: CloudKitService
+    
+    init(service: CloudKitService) {
+        self.service = service
+    }
     
     func loadImage(_ photos: [PhotosPickerItem]) {
         imageData = []
@@ -30,11 +35,46 @@ class AddEventVM: ObservableObject{
     
     func addEvent(upcomingVM: UpcomingEventVM){
         if photoPickerItem.isEmpty {
-            upcomingVM.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending", isMemory: false))
+//            eventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending", isMemory: false))
+            let event: Event = Event(performer: performer, place: place, date: date, isMemory: false)
+            Task {
+                
+                try await service.add(item: event.record)
+            }
             resetProperties()
             print("here")
         } else {
-            upcomingVM.events.append(Event(performer: performer, place: place, date: date, image: "", imageData: imageData[0], isMemory: false))
+//            guard
+//                let image = UIImage(named: "house"),
+//                let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent("house.jpg"),
+//                let data = image.jpegData(compressionQuality: 1.0) else { return }
+//            do {
+//                try data.write(to: url)
+//                guard let newFruit = FruitModel.init(name: name, imageURL: url) else { return }
+//                CloudKitUtility.add(item: newFruit) { result in
+//                    DispatchQueue.main.async {
+//                        self.fetchItems()
+//                    }
+//                }
+//            } catch let error {
+//                print(error)
+//            }
+            
+//            eventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "", isMemory: false))
+            
+            guard let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent("house.jpg") else { return }
+            do {
+                try imageData[0].write(to: url)
+                //let imageStringURL = try String(contentsOf: url)
+                let event: Event = Event(performer: performer, place: place, date: date, cover: url, isMemory: false)
+                Task {
+                    
+                    try await service.add(item: event.record)
+                }
+            } catch {
+                print(error)
+            }
+            
             resetProperties()
             print("or here")
         }
@@ -47,4 +87,6 @@ class AddEventVM: ObservableObject{
         imageData = []
         photoPickerItem = []
     }
+    
+    
 }
