@@ -18,7 +18,7 @@ struct MediaMemosView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 2) {
-                ForEach(vm.mediaMemo, id: \.id) { media in
+                ForEach(vm.mediaMemos, id: \.id) { media in
                     MediaCard(memo: media)
                 }
             }
@@ -26,9 +26,8 @@ struct MediaMemosView: View {
         .navigationTitle("media memos".capitalized)
         .toolbar{
             ToolbarItem(placement: .primaryAction) {
-                PhotosPicker(selection: $vm.photoPickerItem, matching: .any(of: [.images, .videos])){
+                PhotosPicker(selection: $vm.photoPickerItem, matching: .any(of: [.images, .videos])) {
                     Image(systemName: "plus")
-                    
                 }
                 .onChange(of: vm.photoPickerItem, perform: vm.loadImage)
                 .foregroundColor(.accentColor)

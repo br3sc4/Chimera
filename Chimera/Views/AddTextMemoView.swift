@@ -14,7 +14,7 @@ struct AddTextMemoView: View {
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading) {
-                HStack{
+                HStack(alignment: .top) {
                     ZStack{
                         Image(systemName: "square.fill")
                             .foregroundColor(.accentColor)
@@ -22,7 +22,7 @@ struct AddTextMemoView: View {
                         Image(systemName: "pencil.line")
                             .foregroundColor(Color(UIColor.secondarySystemGroupedBackground))
                     }
-                    TextField("Write your memory here", text: $text)
+                    TextField("Write your memory here", text: $text, axis: .vertical)
                 }
                 .toolbar{
                     ToolbarItem(placement: .cancellationAction) {

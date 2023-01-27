@@ -11,7 +11,7 @@ import SwiftUI
 
 struct MediaMemo: Identifiable, Hashable {
     let url: URL
-    let isVideo: Bool
+    var isVideo: Bool
     let id: UUID
     
     init(url: URL, isVideo: Bool = false, id: UUID = UUID()) {
@@ -52,7 +52,7 @@ extension MediaMemo: Transferable {
         FileRepresentation(importedContentType: .data) { received in
             let id = UUID()
             let fileName = "\(id.uuidString).png"
-            let filePath = URL.documentsDirectory.appendingPathComponent(fileName, conformingTo: .data)
+            let filePath = URL.cachesDirectory.appendingPathComponent(fileName, conformingTo: .data)
             try FileManager.default.copyItem(at: received.file, to: filePath)
             return Self.init(url: filePath, isVideo: false, id: id)
         }

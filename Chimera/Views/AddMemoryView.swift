@@ -14,32 +14,25 @@ struct AddMemoryView: View {
     @State var isFromUpcoming = true
     var body: some View {
         NavigationStack{
-            VStack(spacing: 4){
-                if isFromUpcoming{
-                    AddMemoryUpcomingEventsView()
-                }else{
+//            VStack(spacing: 4){
+//                if isFromUpcoming{
+//                    AddMemoryUpcomingEventsView()
+//                }else{
                     
                     AddMemoryManuallyView()
-                }
-            }
+//                }
+//            }
             .navigationTitle("Add a new Memory")
             .navigationBarTitleDisplayMode(.large)
-            .toolbar{
-                ToolbarItem(placement: .cancellationAction) {
-                    Button(action: {
-                        dismiss()
-                    }, label: {
-                        Text("Cancel")
-                    })
-                }
-                ToolbarItem(placement: .principal) {
-                    Picker("", selection: $isFromUpcoming){
-                        Text("Your Upcoming Events").tag(true)
-                        Text("Manually").tag(false)
-                    }
-                    .pickerStyle(.segmented)
-                }
-            }
+//            .toolbar{
+//                ToolbarItem(placement: .principal) {
+//                    Picker("", selection: $isFromUpcoming){
+//                        Text("Your Upcoming Events").tag(true)
+//                        Text("Manually").tag(false)
+//                    }
+//                    .pickerStyle(.segmented)
+//                }
+//            }
         }
     }
 }

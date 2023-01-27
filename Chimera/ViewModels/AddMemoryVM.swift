@@ -14,12 +14,11 @@ class AddMemoryVM: ObservableObject{
     @Published var place = ""
     @Published var date = Date.now
     @Published var imageDataCover: Data?
-    @Published var mediaMemo: [MediaMemo<Data>] = []
+    @Published var mediaMemos: [MediaMemo] = []
     @Published var photoPickerItem: [PhotosPickerItem] = []
     @Published var photoPickerItemCover: [PhotosPickerItem] = []
     @Published var vocalMemos: [VocalMemo] = []
     @Published var textMemos: [String] = []
-    @Published var mediaMemos: [MediaType] = []
     
     func loadCover(_ photos: [PhotosPickerItem]) {
         imageDataCover = nil
@@ -32,13 +31,14 @@ class AddMemoryVM: ObservableObject{
     }
     
     func loadImage(_ photos: [PhotosPickerItem]) {
-        mediaMemo = []
+        mediaMemos = []
         Task { @MainActor in
             for photo in photos {
                 guard let mediaTypes = photo.supportedContentTypes.first,
-                        let image = try? await photo.loadTransferable(type: Data.self) else { return }
+                        var media = try? await photo.loadTransferable(type: MediaMemo.self) else { return }
                 let isVideo = mediaTypes.preferredMIMEType?.split(separator: "/")[0] == "video"
-                mediaMemo.append(MediaMemo(content: image, isVideo: isVideo))
+                media.isVideo = isVideo
+                mediaMemos.append(media)
             }
         }
     }
@@ -49,20 +49,36 @@ class AddMemoryVM: ObservableObject{
                   place: place,
                   date: date,
                   image: "",
+                  imageData: imageDataCover,
+                  isMemory: true,
                   textMemos: textMemos,
                   vocalMemos: vocalMemos,
-                  imageData: imageDataCover,
                   mediaMemos: mediaMemos)
         )
         resetProperties()
     }
     
-    func resetProperties() {
+    var isFormValid: Bool {
+        !performer.isEmpty && !place.isEmpty && imageDataCover != nil
+    }
+    
+    private func resetProperties() {
         performer = ""
         place = ""
         date = Date.now
-        mediaMemo = []
+        mediaMemos = []
         photoPickerItem = []
+        imageDataCover = nil
     }
     
+    func deleteMediaFiles() {
+        for memo in mediaMemos {
+            do {
+                try FileManager.default.removeItem(at: memo.url)
+            } catch {
+                debugPrint(error)
+            }
+        }
+        resetProperties()
+    }
 }

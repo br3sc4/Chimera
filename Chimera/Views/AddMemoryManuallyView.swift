@@ -9,13 +9,15 @@ import SwiftUI
 import PhotosUI
 
 struct AddMemoryManuallyView: View {
-    @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var vm: AddMemoryVM
+    @FocusState private var focusedField: FocusedFields?
+    @Environment(\.dismiss) private var dismiss: DismissAction
+    @EnvironmentObject private var eventVM: EventVM
+    @EnvironmentObject private var vm: AddMemoryVM
     
     var body: some View {
         Form {
-            Section{
-                ZStack{
+            Section {
+                ZStack {
                     if vm.imageDataCover == nil {
                         Image("event1")
                             .resizable()
@@ -54,30 +56,63 @@ struct AddMemoryManuallyView: View {
             
             Section {
                 TextField("Name of Performer", text: $vm.performer)
+                    .focused($focusedField, equals: .performer)
                 TextField("Place of the Event", text: $vm.place)
+                    .focused($focusedField, equals: .place)
                 DatePicker(selection: $vm.date, in: Date.now..., displayedComponents: .date) {
                     Text("Date of the Event")
                 }
             }
             Section{
                 List{
-                    NavigationLink(destination: {RecorderView()}, label: {AddMemorySectionRow(imageIcon: "mic.fill", memoName: "Vocal Memos")})
-                    NavigationLink(destination: {TextualMemosView()}, label: {AddMemorySectionRow(imageIcon: "note.text", memoName: "Textual Memos")})
-                    NavigationLink(destination: {MediaMemosView()}, label: {AddMemorySectionRow(imageIcon: "photo.fill", memoName: "Media Memos")})
+                    NavigationLink {
+                        RecorderView()
+                    } label: {
+                        AddMemorySectionRow(imageIcon: "mic.fill", memoName: "Vocal Memos")
+                    }
+                    
+                    NavigationLink {
+                        TextualMemosView()
+                    } label: {
+                        AddMemorySectionRow(imageIcon: "note.text", memoName: "Textual Memos")
+                    }
+                    
+                    NavigationLink {
+                        MediaMemosView()
+                    } label: {
+                        AddMemorySectionRow(imageIcon: "photo.fill", memoName: "Media Memos")
+                    }
                 }
             }
         }
         .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button {
+                    vm.deleteMediaFiles()
+                    dismiss()
+                } label: {
+                    Text("Cancel")
+                }
+            }
+            
             ToolbarItem(placement: .confirmationAction) {
                 Button {
+                    vm.addEvent(eventsViewModel: eventVM)
                     dismiss()
                 } label: {
                     Text("Done")
                 }
+                .disabled(!vm.isFormValid)
             }
         }
     }
     
+}
+
+extension AddMemoryManuallyView {
+    private enum FocusedFields: Hashable {
+        case performer, place
+    }
 }
 
 struct AddMemoryManuallyView_Previews: PreviewProvider {

@@ -11,7 +11,8 @@ struct MemoriesView: View {
     @EnvironmentObject private var vm: EventVM
     @State var isShowingAddMemory = false
     var body: some View {
-        NavigationStack{
+        NavigationStack
+        {
             EventList(eventType: .memory)
                 .navigationTitle("Memories")
                 .toolbar {
@@ -22,10 +23,13 @@ struct MemoriesView: View {
                             Image(systemName: "plus")
                         }
                     }
-                }.sheet(isPresented: $isShowingAddMemory, content: {AddMemoryView()})
-            
+                }
+                .sheet(isPresented: $isShowingAddMemory) {
+                    AddMemoryView()
+                        .interactiveDismissDisabled()
+                        .scrollDismissesKeyboard(.interactively)
+                }
         }
-        
     }
 }
 

@@ -15,36 +15,36 @@ struct MediaGrid: View {
         GridItem(.adaptive(minimum: 100), spacing: 2)
     ]
     
-    private let media: [MediaType]
+    private let media: [MediaMemo]
     
-    init(media: [MediaType]) {
+    init(media: [MediaMemo]) {
         self.media = media
     }
     
     var body: some View {
         LazyVGrid(columns: columns, spacing: 2) {
             ForEach(media) { media in
-                MediaCard1(type: media)
+                MediaCard(memo: media)
                     .onTapGesture {
-                        selectedMedia = media.id
+                        selectedMedia = media.id.uuidString
                         showPreview.toggle()
                     }
             }
         }
-        .navigationDestination(isPresented: $showPreview) {
-            MediaDetailView(media: media, selectedItem: $selectedMedia)
-        }
+//        .navigationDestination(isPresented: $showPreview) {
+//            MediaDetailView(media: media, selectedItem: $selectedMedia)
+//        }
     }
 }
 
 struct MediaGrid_Previews: PreviewProvider {
     static var previews: some View {
         MediaGrid(media: [
-            .image(name: "concert1"),
-            .image(name: "concert2"),
-            .video(videoMemo: VideoMemo(name: "Tamburellare - 5026", ext: "mp4")),
-            .image(name: "concert3"),
-            .video(videoMemo: VideoMemo(name: "Violoncello - 33565", ext: "mp4"))
+//            .image(name: "concert1"),
+//            .image(name: "concert2"),
+//            .video(videoMemo: VideoMemo(name: "Tamburellare - 5026", ext: "mp4")),
+//            .image(name: "concert3"),
+//            .video(videoMemo: VideoMemo(name: "Violoncello - 33565", ext: "mp4"))
         ])
     }
 }

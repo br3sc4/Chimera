@@ -15,8 +15,6 @@ struct VocalMemoRow: View {
     @ObservedObject var audioPlayer = AudioPlayer()
     
     var body: some View {
-        
-        
         HStack{
             ZStack{
                 Image(systemName: "square.fill")
@@ -27,25 +25,25 @@ struct VocalMemoRow: View {
             }
             
             Text(vocalMemo.title)
-                    .foregroundColor(.primary)
-                Spacer()
-                
-                
-                if !audioPlayer.isPlaying{
-                    Button(action: {
-                        self.audioPlayer.startPlayback(audio: sampleAudioUrl!)
-                    }, label: {
-                        Image(systemName: "play.fill" )
-                            .foregroundColor(.accentColor)
-                    })
-                } else{
-                    Button(action: {
-                        self.audioPlayer.stopPlayback()
-                    }, label: {
-                        Image(systemName: "pause.fill" )
-                            .foregroundColor(.accentColor)
-                    })
-                }
+                .foregroundColor(.primary)
+            Spacer()
+            
+            
+            if !audioPlayer.isPlaying{
+                Button(action: {
+                    self.audioPlayer.startPlayback(audio: sampleAudioUrl!)
+                }, label: {
+                    Image(systemName: "play.fill" )
+                        .foregroundColor(.accentColor)
+                })
+            } else{
+                Button(action: {
+                    self.audioPlayer.stopPlayback()
+                }, label: {
+                    Image(systemName: "pause.fill" )
+                        .foregroundColor(.accentColor)
+                })
+            }
         }
     }
 }

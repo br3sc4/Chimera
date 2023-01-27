@@ -14,9 +14,10 @@ struct RecorderView: View {
     
     var body: some View {
         VStack{
-            
+            List {
                 //recorded stuff
                 VocalMemoRow(vocalMemo: VocalMemo(title: "test", urlString: sampleAudioUrl!.absoluteString))
+            }
             Spacer()
             HStack{
                 if recoderVM.isRecording {
@@ -31,6 +32,7 @@ struct RecorderView: View {
                     })
                 }
             }
+            .navigationTitle("vocal memos".capitalized)
         }
     }
 }
