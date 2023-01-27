@@ -14,11 +14,28 @@ struct EventCard: View {
     var body: some View {
         VStack(alignment: .leading) {
             if event.imageData == nil {
-                Image(event.image)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(height: 136)
-                    .cornerRadius(24)
+                // Check if its an url
+                if event.image.contains("//"){
+                    AsyncImage(
+                        url: URL(string: event.image),
+                        content: { image in
+                            image.resizable()
+                                 .scaledToFill()
+                                 .frame(height: 136)
+                                 .cornerRadius(24)
+                        },
+                        placeholder: {
+                            ProgressView()
+                        }
+                    )
+                }else {
+                    //TODO: Delete when persistency is working
+                    Image(event.image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: 136)
+                        .cornerRadius(24)
+                }
             } else {
                 if let data = event.imageData, let uiImage = UIImage(data: data){
                     Image(uiImage: uiImage)

@@ -99,7 +99,7 @@ class CreateEventApiViewModel : ObservableObject {
     private func getImageURL(for event : TMEvent) -> String {
         var imageURL = "event1"
         if event.images.count > 5 {
-            imageURL = event.images[3].url
+            imageURL = event.images[5].url
         } else if event.images.count > 0 {
             imageURL = event.images[0].url
         }
