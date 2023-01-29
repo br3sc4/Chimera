@@ -23,20 +23,27 @@ struct AddUpcomingTicketmasterView: View {
     var body: some View {
         
         VStack {
-            HStack {
-                DatePicker("Event Date", selection: $ticketMasterVm.date, displayedComponents: .date)
-                Spacer()
-                Picker("Country Event", selection: $ticketMasterVm.locale) {
-                    ForEach(NSLocale.locales()) { locale in
-                        
-                        Text("\(locale.countryName) - \(locale.countryCode)")
-                            .tag(locale.countryCode)
+            VStack {
+                Toggle("Specify Date", isOn: $ticketMasterVm.isUseDate)
+                if ticketMasterVm.isUseDate {
+                    DatePicker("Event Date", selection: $ticketMasterVm.date, displayedComponents: .date)
+                    Divider()
+                }
+                HStack {
+                    Text("Country")
+                    Spacer()
+                    Picker("Country Event", selection: $ticketMasterVm.locale) {
+                        ForEach(NSLocale.locales()) { locale in
+                            
+                            Text("\(locale.countryName) - \(locale.countryCode)")
+                                .tag(locale.countryCode)
+                        }
                     }
                 }
             }
             .alert(isPresented: $ticketMasterVm.isError){
-                Alert(title: Text("API-Error"),
-                      message: Text(ticketMasterVm.apiError ?? "Something went wrong!")
+                Alert(title: Text("Nothing found"),
+                      message: Text("Unfortunately we found nothing corresponding to your search!")
                 )
             }
             .padding()
@@ -44,12 +51,23 @@ struct AddUpcomingTicketmasterView: View {
             ScrollView{
                 ForEach(ticketMasterVm.events){ result in
                     Button(action: {
-                        
+                        if !ticketMasterVm.checkIfEventAlreadyExists(events: vm.events, searchEvent: result){
+                            Task {
+                                let eventWithPreview = await ticketMasterVm.eventWithPreview(result)
+                                vm.events.append(eventWithPreview)
+                            }
+                        }
+
                     }, label: {
                         HStack{
                             Spacer()
-                            Image(systemName: "plus")
-                                .fontWeight(.semibold)
+                            if ticketMasterVm.checkIfEventAlreadyExists(events: vm.events, searchEvent: result){
+                                Image(systemName: "checkmark")
+                                    .fontWeight(.semibold)
+                            } else {
+                                Image(systemName: "plus")
+                                    .fontWeight(.semibold)
+                            }
                             Spacer()
                             AddUpcomingEventCard(image: result.image,
                                                  performer: result.performer,

@@ -26,9 +26,9 @@ struct TicketMasterAPIEmbedded: Codable {
 
 // MARK: - Event
 struct TMEvent: Codable {
-    let name, type, id: String
-    let url: String
-    let locale: String
+    let name, type, id: String?
+    let url: String?
+    let locale: String?
     let images: [TMImage]
     let dates: Dates
     let embedded: EventEmbedded
@@ -41,60 +41,59 @@ struct TMEvent: Codable {
 
 // MARK: - Dates
 struct Dates: Codable {
-    let start: Start
-    let timezone: String
+    let start: Start?
+    let timezone: String?
 }
 
 // MARK: - Start
 struct Start: Codable {
-    let localDate, localTime: String
-    let dateTime: Date
+    let localDate, localTime: String?
+    let dateTime: Date?
 }
 
 // MARK: - EventEmbedded
 struct EventEmbedded: Codable {
-    let venues: [Venue]
+    let venues: [Venue]?
     let attractions: [Attraction]?
 }
 
 // MARK: - Venue
 struct Venue: Codable {
-    let name, type, id: String
-    let test: Bool
-    let locale, postalCode: String
-    let city: City
-    let country: Country
-    let location: Location
+    let name, type, id: String?
+    let test: Bool?
+    let locale, postalCode: String?
+    let city: City?
+    let country: Country?
+    let location: Location?
 }
 
 struct Attraction: Codable {
-    let name, type, id, locale, url : String
-    //let name : String
+    let name, type, id, locale, url : String?
 }
 
 // MARK: - City
 struct City: Codable {
-    let name: String
+    let name: String?
 }
 
 // MARK: - Country
 struct Country: Codable {
-    let name, countryCode: String
+    let name, countryCode: String?
 }
 
 // MARK: - Location
 struct Location: Codable {
-    let longitude, latitude: String
+    let longitude, latitude: String?
 }
 
 // MARK: - Image
 struct TMImage: Codable {
-    let ratio: String
+    let ratio: String?
     let url: String
-    let width, height: Int
+    let width, height: Int?
 }
 
 // MARK: - Page
 struct Page: Codable {
-    let size, totalElements, totalPages, number: Int
+    let size, totalElements, totalPages, number: Int?
 }
