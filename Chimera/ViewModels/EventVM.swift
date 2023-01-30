@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import SwiftUI
+import PhotosUI
+import CloudKit
 
 @MainActor
 class EventVM: ObservableObject{
@@ -100,13 +103,14 @@ class EventVM: ObservableObject{
 //    ]
     
     @Published var events: [Event] = []
-    
+    @Published var vocalMemos: [VocalMemo] = []
     
     private let service: CloudKitService
     
     init(service: CloudKitService) {
         self.service = service
         fetch()
+        
     }
     
     func fetch() {
@@ -116,6 +120,19 @@ class EventVM: ObservableObject{
             
             self.events = try await service.fetch(predicate: predicate, recordType: "Event")
             print("events \(events)")
+            fetchVocalMemo()
+        }
+    }
+    
+    func fetchVocalMemo() {
+        guard let event = events[0].record else { return }
+        Task {
+            let eventID = event.recordID
+            let recordToMatch = CKRecord.Reference(recordID: eventID, action: .deleteSelf)
+            let predicate = NSPredicate(format: "owningEvent == %@", recordToMatch)
+            
+            self.vocalMemos = try await service.fetch(predicate: predicate, recordType: "VocalMemo")
+            print("vocalmemo \(vocalMemos) count: \(vocalMemos.count)")
         }
     }
     
@@ -123,11 +140,21 @@ class EventVM: ObservableObject{
         guard let index = indexSet.first else { return }
         
         let event = events[index]
-        let record = event.record
+        guard let record = event.record else { return }
         
         Task {
-            try await service.delete(recordID: event.recordID!)
+            try await service.delete(recordID: record.recordID)
             fetch()
+        }
+    }
+    
+    func addRelation() {
+//        guard let event = ] else { return }
+        guard let voiceMemo = VocalMemo(title: "Vocal 3", vocalURL: nil, referenceItem: events[0]) else { return }
+        
+        
+        Task {
+            try await service.add(item: voiceMemo)
         }
     }
     

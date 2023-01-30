@@ -10,8 +10,7 @@ import CloudKit
 
 protocol CloudKitableProtocol {
     init?(record: CKRecord)
-//    init(performer: String, place: String, date: Date, image: String?, isMemory: Bool, textMemos: [String]?, vocalMemos: [VocalMemo]?, mediaMemos: [MediaType]?)
-    //var record: CKRecord { get set }
+    var record: CKRecord? { get }
 }
 
 struct Event: Identifiable, Hashable, CloudKitableProtocol {
@@ -26,9 +25,10 @@ struct Event: Identifiable, Hashable, CloudKitableProtocol {
     var textMemos: [String]?
     var vocalMemos: [VocalMemo]?
     var mediaMemos: [MediaMemo]?
-    var recordID: CKRecord.ID?
+    var record: CKRecord?
     
-    init(performer: String, place: String, date: Date, image: String? = nil, cover: URL? = nil, isMemory: Bool, textMemos: [String]? = nil, vocalMemos: [VocalMemo]? = nil, mediaMemos: [MediaType]? = nil, recordID: CKRecord.ID? = nil) {
+    init(performer: String, place: String, date: Date, image: String? = nil, cover: URL? = nil, isMemory: Bool, textMemos: [String]? = nil, vocalMemos: [VocalMemo]? = nil, mediaMemos: [MediaType]? = nil, record: CKRecord? = nil) {
+        print("standard init")
         self.performer = performer
         self.place = place
         self.date = date
@@ -38,18 +38,29 @@ struct Event: Identifiable, Hashable, CloudKitableProtocol {
         self.textMemos = textMemos
         self.vocalMemos = vocalMemos
         self.mediaMemos = mediaMemos
-        self.recordID = recordID
+        self.record = record
     }
-}
-
-struct VocalMemo: Identifiable, Hashable {
-    let id = UUID()
-    var title: String
-    var urlString: String
+    
+    init?(performer: String, place: String, date: Date, cover: URL? = nil, isMemory: Bool) {
+        print("init for create record")
+        let record = CKRecord(recordType: "Event")
+        record["performer"] = performer
+        record["place"] = place
+        record["date"] = date
+        
+        if let url = cover {
+            let assets = CKAsset(fileURL: url)
+            record["image"] = assets
+        }
+        
+        record["isMemory"] = isMemory
+        self.init(record: record)
+    }
 }
 
 extension Event {
     init?(record: CKRecord) {
+        print("Event init da record")
         guard let performer = record["performer"] as? String else { return nil }
         self.performer = performer
         guard let place = record["place"] as? String else { return nil }
@@ -62,28 +73,30 @@ extension Event {
         }
         guard let isMemory = record["isMemory"] as? Bool else { return nil }
         self.isMemory = isMemory
-        self.recordID = record.recordID
+        self.record = record
         print("record \(record)")
     }
+    
+    
 }
 
-extension Event {
-    var record: CKRecord {
-        let record = CKRecord(recordType: "Event")
-        record["performer"] = performer
-        record["place"] = place
-        record["date"] = date
-//        if let urlString = image, let url = URL(string: urlString) {
+//extension Event {
+//    var record: CKRecord {
+//        let record = CKRecord(recordType: "Event")
+//        record["performer"] = performer
+//        record["place"] = place
+//        record["date"] = date
+////        if let urlString = image, let url = URL(string: urlString) {
+////            let assets = CKAsset(fileURL: url)
+////            record["image"] = assets
+////        }
+//
+//        if let url = cover {
 //            let assets = CKAsset(fileURL: url)
 //            record["image"] = assets
 //        }
-        
-        if let url = cover {
-            let assets = CKAsset(fileURL: url)
-            record["image"] = assets
-        }
-        
-        record["isMemory"] = isMemory
-        return record
-    }
-}
+//
+//        record["isMemory"] = isMemory
+//        return record
+//    }
+//}

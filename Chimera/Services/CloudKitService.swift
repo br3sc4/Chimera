@@ -54,9 +54,9 @@ final class CloudKitService {
         return query
     }
     
-    func add/*<T: CloudKitableProtocol>*/(item: CKRecord) async throws {
+    func add<T: CloudKitableProtocol>(item: T) async throws {
         //save to iCloudKit.
-        let record = item//.record
+        guard let record = item.record else { return }
         
         do {
             try await save(record: record)
@@ -74,13 +74,6 @@ final class CloudKitService {
         print("delete \(recordID)")
         let rec = try await CKContainer.default().privateCloudDatabase.deleteRecord(withID: recordID)
         print("rec: \(rec.recordName)")
-//        CKContainer.default().publicCloudDatabase.delete(withRecordID: record.recordID) { [weak self] returnedRecordID, returnedError in
-//            //si può o rifare il fetch di tutto oppure eliminare manaualmente dall'array locale così come l'update dipende dalla quantità di dati
-//            DispatchQueue.main.async {
-//                self?.fruits.remove(at: index)
-//            }
-//
-//        }
     }
     
 }

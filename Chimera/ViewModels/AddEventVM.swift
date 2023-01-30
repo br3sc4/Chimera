@@ -36,40 +36,26 @@ class AddEventVM: ObservableObject{
     func addEvent(upcomingVM: UpcomingEventVM){
         if photoPickerItem.isEmpty {
 //            eventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending", isMemory: false))
-            let event: Event = Event(performer: performer, place: place, date: date, isMemory: false)
+            guard let event: Event = Event(performer: performer, place: place, date: date, isMemory: false) else { return }//Event = Event(performer: performer, place: place, date: date, isMemory: false)
+            
             Task {
                 
-                try await service.add(item: event.record)
+                try await service.add(item: event)
             }
             resetProperties()
             print("here")
         } else {
-//            guard
-//                let image = UIImage(named: "house"),
-//                let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent("house.jpg"),
-//                let data = image.jpegData(compressionQuality: 1.0) else { return }
-//            do {
-//                try data.write(to: url)
-//                guard let newFruit = FruitModel.init(name: name, imageURL: url) else { return }
-//                CloudKitUtility.add(item: newFruit) { result in
-//                    DispatchQueue.main.async {
-//                        self.fetchItems()
-//                    }
-//                }
-//            } catch let error {
-//                print(error)
-//            }
             
 //            eventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "", isMemory: false))
             
             guard let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent("house.jpg") else { return }
             do {
                 try imageData[0].write(to: url)
-                //let imageStringURL = try String(contentsOf: url)
-                let event: Event = Event(performer: performer, place: place, date: date, cover: url, isMemory: false)
+                guard let event: Event = Event(performer: performer, place: place, date: date, cover: url, isMemory: false) else { return }
+               
                 Task {
                     
-                    try await service.add(item: event.record)
+                    try await service.add(item: event)
                 }
             } catch {
                 print(error)
@@ -80,7 +66,7 @@ class AddEventVM: ObservableObject{
         }
     }
     
-    func resetProperties(){
+    func resetProperties() {
         performer = ""
         place = ""
         date = Date.now
