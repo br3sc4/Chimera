@@ -9,7 +9,7 @@ import SwiftUI
 import AVKit
 
 struct MediaDetailView: View {
-    let media: [MediaType]
+    let media: [MediaMemo]
     
     private enum ScrubbingState {
         case none
@@ -17,7 +17,7 @@ struct MediaDetailView: View {
         case scrubbingEnd
     }
     
-    @Binding var selectedItem: String
+    @Binding var selectedItem: UUID
     @State private var player: AVPlayer = AVPlayer()
     @State private var isPlaying: Bool = false
     @State private var offsetXThumbnail: CGSize = .zero
@@ -32,21 +32,24 @@ struct MediaDetailView: View {
             ZStack(alignment: .bottom) {
                 TabView(selection: $selectedItem) {
                     ForEach(media) { item in
-                        if case let .image(name) = item {
+                        if !item.isVideo {
                             ZStack {
                                 Color.black
-                                Image(name)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .tag(item.id)
+                                AsyncImage(url: item.url) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .tag(item.id)
+                                } placeholder: {
+                                    EmptyView()
+                                }
                             }
-                            
                         } else {
                             ZStack(alignment: .top) {
                                 VideoPlayer(player: player)
                                     .tag(item.id)
-                                    if player.currentItem != nil {
-                                        HStack {
+                                if player.currentItem != nil {
+                                    HStack {
                                         Text("\(currentTime, specifier: "%.2f")")
                                             .font(.headline)
                                         Slider(value: $currentTime, in: 0...player.currentItem!.asset.duration.seconds) { scrubStarted in
@@ -58,13 +61,13 @@ struct MediaDetailView: View {
                                             print("scrubStarted \(scrubStarted.description)")
                                             print("seek to: \(currentTime)")
                                         }
-                                        
+                                    
                                         Text(player.currentItem!.asset.duration.seconds.formatted(.number.precision(.fractionLength(2))))
                                             .font(.headline)
-                                        }
-                                        .padding()
-                                        .background(Material.ultraThin)
                                     }
+                                    .padding()
+                                    .background(Material.ultraThin)
+                                }
                             }
                         }
                     }
@@ -120,7 +123,9 @@ struct MediaDetailView: View {
                     } label: {
                         Image(systemName: "trash")
                     }
-                    .confirmationDialog("Are you sure to delete?", isPresented: $showingOptions, titleVisibility: .visible) {
+                    .confirmationDialog("Are you sure to delete?",
+                                        isPresented: $showingOptions,
+                                        titleVisibility: .visible) {
                         Button("Delete", role: .destructive) {
 
                         }
@@ -130,35 +135,35 @@ struct MediaDetailView: View {
         }
     }
     
-    private func loadVideo(withId id: String) {
+    private func loadVideo(withId id: UUID) {
         isPlaying = false
         player.pause()
         player.seek(to: CMTime(seconds: 0.0, preferredTimescale: 600))
         currentTime = 0.0
         
-        guard let foundItem = media.first(where: { $0.id == id }), case let .video(video) = foundItem else { return }
-        player = AVPlayer(url: video.url)
+        guard let foundItem = media.first(where: { $0.id == id }), foundItem.isVideo else { return }
+        player = AVPlayer(url: foundItem.url)
     }
     
-    private func checkIsVideo(selectedMedia: String?) -> Bool {
-        if let selectedMedia, let foundItem = media.first(where: { $0.id == selectedMedia }), case .video(_) = foundItem {
+    private func checkIsVideo(selectedMedia: UUID?) -> Bool {
+        if let selectedMedia, let foundItem = media.first(where: { $0.id == selectedMedia }), foundItem.isVideo {
             return true
         }
         return false
     }
 }
 
-struct MediaDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            MediaDetailView(media: [
-                .image(name: "concert1"),
-                .image(name: "concert2"),
-                .video(videoMemo: VideoMemo(name: "Tamburellare - 5026", ext: "mp4")),
-                .image(name: "concert3"),
-                .video(videoMemo: VideoMemo(name: "Violoncello - 33565", ext: "mp4"))
-            ], selectedItem: .constant(""))
-        }
-        
-    }
-}
+//struct MediaDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationStack {
+//            MediaDetailView(media: [
+//                .image(name: "concert1"),
+//                .image(name: "concert2"),
+//                .video(videoMemo: VideoMemo(name: "Tamburellare - 5026", ext: "mp4")),
+//                .image(name: "concert3"),
+//                .video(videoMemo: VideoMemo(name: "Violoncello - 33565", ext: "mp4"))
+//            ], selectedItem: .constant(""))
+//        }
+//
+//    }
+//}

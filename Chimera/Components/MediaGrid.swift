@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MediaGrid: View {
-    @State private var selectedMedia: String = ""
+    @State private var selectedMedia: UUID = UUID()
     @State private var showPreview: Bool = false
     
     private let columns: [GridItem] = [
@@ -26,14 +26,14 @@ struct MediaGrid: View {
             ForEach(media) { media in
                 MediaCard(memo: media)
                     .onTapGesture {
-                        selectedMedia = media.id.uuidString
+                        selectedMedia = media.id
                         showPreview.toggle()
                     }
             }
         }
-//        .navigationDestination(isPresented: $showPreview) {
-//            MediaDetailView(media: media, selectedItem: $selectedMedia)
-//        }
+        .navigationDestination(isPresented: $showPreview) {
+            MediaDetailView(media: media, selectedItem: $selectedMedia)
+        }
     }
 }
 

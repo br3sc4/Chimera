@@ -30,18 +30,12 @@ struct MediaCard: View {
                     }
             }
         } else {
-            AsyncImage(url: memo.url) { phase in
-                switch phase {
-                case let .success(image):
-                    image.squared()
-                case .empty:
-                    ProgressView()
-                case let .failure(error):
-                    Text(error.localizedDescription)
-                @unknown default:
-                    fatalError()
-                }
+            AsyncImage(url: memo.url) { image in
+                image.squared()
+            } placeholder: {
+                EmptyView()
             }
+
         }
     }
     

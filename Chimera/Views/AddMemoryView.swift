@@ -13,7 +13,7 @@ struct AddMemoryView: View {
     @EnvironmentObject var vm: EventVM
     @State var isFromUpcoming = true
     var body: some View {
-        NavigationStack{
+        NavigationStack {
 //            VStack(spacing: 4){
 //                if isFromUpcoming{
 //                    AddMemoryUpcomingEventsView()
@@ -26,11 +26,9 @@ struct AddMemoryView: View {
             .navigationBarTitleDisplayMode(.large)
 //            .toolbar{
 //                ToolbarItem(placement: .principal) {
-//                    Picker("", selection: $isFromUpcoming){
-//                        Text("Your Upcoming Events").tag(true)
-//                        Text("Manually").tag(false)
+//                    Button("Skip/Done") {
+//
 //                    }
-//                    .pickerStyle(.segmented)
 //                }
 //            }
         }
