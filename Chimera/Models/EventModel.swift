@@ -27,6 +27,10 @@ struct Event: Identifiable, Hashable, CloudKitableProtocol {
     var mediaMemos: [MediaMemo]?
     var record: CKRecord?
     
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 1832714 (Added iCloud relations)
     init(performer: String, place: String, date: Date, image: String? = nil, cover: URL? = nil, isMemory: Bool, textMemos: [String]? = nil, vocalMemos: [VocalMemo]? = nil, mediaMemos: [MediaType]? = nil, record: CKRecord? = nil) {
         print("standard init")
         self.performer = performer
@@ -80,7 +84,6 @@ extension Event {
     
 }
 
-<<<<<<< HEAD
 //extension Event {
 //    var record: CKRecord {
 //        let record = CKRecord(recordType: "Event")
