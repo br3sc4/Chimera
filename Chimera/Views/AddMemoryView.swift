@@ -37,6 +37,6 @@ struct AddMemoryView: View {
 
 struct AddMemoryView_Previews: PreviewProvider {
     static var previews: some View {
-        AddMemoryView().environmentObject(EventVM())
+        AddMemoryView().environmentObject(EventVM(service: CloudKitService()))
     }
 }

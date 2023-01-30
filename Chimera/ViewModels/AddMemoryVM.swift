@@ -44,17 +44,17 @@ class AddMemoryVM: ObservableObject{
     }
     
     func addEvent(eventsViewModel: EventVM) {
-        eventsViewModel.events.append(
-            Event(performer: performer,
-                  place: place,
-                  date: date,
-                  image: "",
-                  imageData: imageDataCover,
-                  isMemory: true,
-                  textMemos: textMemos,
-                  vocalMemos: vocalMemos,
-                  mediaMemos: mediaMemos)
-        )
+//        eventsViewModel.events.append(
+//            Event(performer: performer,
+//                  place: place,
+//                  date: date,
+//                  image: "",
+//                  imageData: imageDataCover,
+//                  isMemory: true,
+//                  textMemos: textMemos,
+//                  vocalMemos: vocalMemos,
+//                  mediaMemos: mediaMemos)
+//        )
         resetProperties()
     }
     

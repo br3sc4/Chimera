@@ -128,7 +128,7 @@ class CreateEventApiViewModel : ObservableObject {
     /* Downloads an image for the preview to make it available for offline usage */
     func eventWithPreview(_ event : Event) async -> Event{
         var newEvent = event
-        let imageURL = await downloadPreviewImage(from: event.image)
+        let imageURL = await downloadPreviewImage(from: event.image ?? "")
         newEvent.image = imageURL
         return newEvent
     }
