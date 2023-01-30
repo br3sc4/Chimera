@@ -11,7 +11,8 @@ struct EventView: View {
     let event: Event
     var body: some View {
         List {
-            if let textMemos = event.textMemos {
+            if let textMemos = event.textMemos,
+                !textMemos.isEmpty {
                 Section("Textual Memos") {
                     ForEach(textMemos, id: \.self){ textMemo in
                         TextMemoRow(textMemo: textMemo)
@@ -19,7 +20,8 @@ struct EventView: View {
                 }
             }
             
-            if let vocalMemos = event.vocalMemos {
+            if let vocalMemos = event.vocalMemos,
+                !vocalMemos.isEmpty {
                 Section("Vocal Memos") {
                     ForEach(vocalMemos){ vocalMemo in
                         VocalMemoRow(vocalMemo: vocalMemo)
@@ -27,7 +29,8 @@ struct EventView: View {
                 }
             }
             
-            if let mediaMemos = event.mediaMemos {
+            if let mediaMemos = event.mediaMemos,
+                !mediaMemos.isEmpty {
                 Section("Media Memos") {
                     MediaGrid(media: mediaMemos)
                         .listRowInsets(EdgeInsets())

@@ -55,12 +55,6 @@ class EventVM: ObservableObject{
                           urlString: "data for audio 2 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"),
                 VocalMemo(title: "Audio 3",
                           urlString: "data for audio 3 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"),
-            ],
-            mediaMemos: [
-                .image(name: "concert1"),
-                .video(videoMemo: VideoMemo(name: "IMG_0684", ext: "mov")),
-                .image(name: "concert2"),
-                .image(name: "concert3")
             ]
         ),
         Event(

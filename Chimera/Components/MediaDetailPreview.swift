@@ -8,31 +8,15 @@
 import SwiftUI
 
 struct MediaDetailPreview: View {
-    @Binding var selectedItem: String
-    let media: [MediaType]
+    @Binding var selectedItem: UUID
+    let media: [MediaMemo]
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(media) { item in
-                    switch item {
-                    case let .image(name):
-                        Image(name)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: selectedItem == item.id ? 100 : 50, height: 50)
-                            .clipped()
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .animation(.easeInOut, value: selectedItem)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(selectedItem == item.id ? .white : .clear, lineWidth: 4)
-                            }
-                            .onTapGesture {
-                                selectedItem = item.id
-                            }
-                    case let .video(video):
-                        Image(uiImage: video.thumbnail!)
+                    if item.isVideo {
+                        Image(uiImage: UIImage(cgImage: item.thumbnail!))
                             .resizable()
                             .scaledToFill()
                             .frame(width: selectedItem == item.id ? 100 : 50, height: 50)
@@ -45,6 +29,25 @@ struct MediaDetailPreview: View {
                             .onTapGesture {
                                 selectedItem = item.id
                             }
+                    } else {
+                        AsyncImage(url: item.url) { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: selectedItem == item.id ? 100 : 50, height: 50)
+                                .clipped()
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .animation(.easeInOut, value: selectedItem)
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(selectedItem == item.id ? .white : .clear, lineWidth: 4)
+                                }
+                                .onTapGesture {
+                                    selectedItem = item.id
+                                }
+                        } placeholder: {
+                            EmptyView()
+                        }
                     }
                 }
             }
@@ -55,6 +58,6 @@ struct MediaDetailPreview: View {
 
 struct MediaDetailPreview_Previews: PreviewProvider {
     static var previews: some View {
-        MediaDetailPreview(selectedItem: .constant(""), media: [])
+        MediaDetailPreview(selectedItem: .constant(UUID()), media: [])
     }
 }
