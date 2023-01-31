@@ -7,7 +7,7 @@
 
 import Foundation
 import AVFoundation
-import SwiftUI
+import CoreTransferable
 
 struct MediaMemo: Identifiable, Hashable {
     let url: URL
@@ -50,11 +50,24 @@ extension MediaMemo {
 extension MediaMemo: Transferable {
     static var transferRepresentation: some TransferRepresentation {
         FileRepresentation(importedContentType: .data) { received in
+            let fileURL: URL = received.file
             let id = UUID()
-            let fileName = "\(id.uuidString).png"
-            let filePath = URL.cachesDirectory.appendingPathComponent(fileName, conformingTo: .data)
-            try FileManager.default.copyItem(at: received.file, to: filePath)
+            guard let ext = fileURL.absoluteString.split(separator: "/").last?.split(separator: ".").last else {
+                throw FileError.extensionNotFound
+            }
+            let fileName = "\(id.uuidString).\(ext)"
+            let filePath = URL.cachesDirectory.appendingPathComponent(fileName)
+            do {
+                try FileManager.default.copyItem(at: received.file, to: filePath)
+            } catch {
+                debugPrint(error)
+                throw error
+            }
             return Self.init(url: filePath, isVideo: false, id: id)
         }
+    }
+    
+    enum FileError: Error {
+        case extensionNotFound
     }
 }
