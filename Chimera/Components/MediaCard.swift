@@ -33,7 +33,7 @@ struct MediaCard: View {
             AsyncImage(url: memo.url) { image in
                 image.squared()
             } placeholder: {
-                EmptyView()
+                ProgressView()
             }
 
         }
