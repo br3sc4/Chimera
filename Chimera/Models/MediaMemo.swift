@@ -50,9 +50,12 @@ extension MediaMemo {
 extension MediaMemo: Transferable {
     static var transferRepresentation: some TransferRepresentation {
         FileRepresentation(importedContentType: .data) { received in
+            let fileURL: URL = received.file
             let id = UUID()
-            let ext = received.file.absoluteString.split(separator: "/").last?.split(separator: ".").last
-            let fileName = "\(id.uuidString).\(ext ?? "png")"
+            guard let ext = fileURL.absoluteString.split(separator: "/").last?.split(separator: ".").last else {
+                throw FileError.extensionNotFound
+            }
+            let fileName = "\(id.uuidString).\(ext)"
             let filePath = URL.cachesDirectory.appendingPathComponent(fileName)
             do {
                 try FileManager.default.copyItem(at: received.file, to: filePath)
@@ -62,5 +65,9 @@ extension MediaMemo: Transferable {
             }
             return Self.init(url: filePath, isVideo: false, id: id)
         }
+    }
+    
+    enum FileError: Error {
+        case extensionNotFound
     }
 }

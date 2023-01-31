@@ -35,7 +35,6 @@ struct MediaCard: View {
             } placeholder: {
                 ProgressView()
             }
-
         }
     }
     
