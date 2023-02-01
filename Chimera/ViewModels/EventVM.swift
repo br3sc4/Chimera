@@ -6,10 +6,8 @@
 //
 
 import Foundation
-import SwiftUI
-import PhotosUI
 
-class EventVM: ObservableObject{
+class EventVM: ObservableObject {
     
     @Published var events = [
         Event(

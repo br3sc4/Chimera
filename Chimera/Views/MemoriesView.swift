@@ -11,9 +11,8 @@ struct MemoriesView: View {
     @EnvironmentObject private var vm: EventVM
     @State var isShowingAddMemory = false
     var body: some View {
-        NavigationStack
-        {
-            EventList(eventType: .memory)
+        NavigationStack {
+            EventList(eventType: .memory, events: vm.events)
                 .navigationTitle("Memories")
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {

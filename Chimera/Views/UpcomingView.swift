@@ -9,10 +9,11 @@ import SwiftUI
 
 struct UpcomingView: View {
     @State var isShowingAddUpcoming = false
+    @EnvironmentObject private var vm: UpcomingEventVM
 
     var body: some View {
         NavigationStack {
-            EventList(eventType: .upcoming)
+            EventList(eventType: .upcoming, events: vm.events)
                 .navigationTitle("Upcoming Events")
                 .navigationBarTitleDisplayMode(.large)
                 .toolbar {

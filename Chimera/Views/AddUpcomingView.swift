@@ -10,7 +10,7 @@ import PhotosUI
 
 struct AddUpcomingView: View {
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var vm: EventVM
+    @EnvironmentObject private var vm: UpcomingEventVM
     @State private var isViaTicketmaster = true
     @State private var performer = ""
     @State private var date = ""

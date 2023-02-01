@@ -28,13 +28,13 @@ class AddEventVM: ObservableObject{
         }
     }
     
-    func addEvent(eventsViewModel: EventVM){
+    func addEvent(upcomingVM: UpcomingEventVM){
         if photoPickerItem.isEmpty {
-            eventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending", isMemory: false))
+            upcomingVM.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending", isMemory: false))
             resetProperties()
             print("here")
         } else {
-            eventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "", imageData: imageData[0], isMemory: false))
+            upcomingVM.events.append(Event(performer: performer, place: place, date: date, image: "", imageData: imageData[0], isMemory: false))
             resetProperties()
             print("or here")
         }
