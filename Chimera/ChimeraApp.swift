@@ -11,7 +11,6 @@ import SwiftUI
 struct ChimeraApp: App {
     @StateObject private var eventVM: EventVM = EventVM()
     @StateObject private var addEventVM: AddEventVM = AddEventVM()
-    @StateObject private var addMemoryVM: AddMemoryVM = AddMemoryVM()
     @StateObject private var upcomingVM: UpcomingEventVM = UpcomingEventVM()
     
     var body: some Scene {
@@ -19,7 +18,6 @@ struct ChimeraApp: App {
             ContentView()
                 .environmentObject(eventVM)
                 .environmentObject(addEventVM)
-                .environmentObject(addMemoryVM)
                 .environmentObject(upcomingVM)
         }
     }

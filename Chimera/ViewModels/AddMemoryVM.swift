@@ -10,15 +10,45 @@ import SwiftUI
 import PhotosUI
 
 class AddMemoryVM: ObservableObject{
-    @Published var performer = ""
-    @Published var place = ""
-    @Published var date = Date.now
+    @Published var performer : String
+    @Published var place : String
+    @Published var date : Date
     @Published var imageDataCover: Data?
-    @Published var mediaMemos: [MediaMemo] = []
-    @Published var photoPickerItem: [PhotosPickerItem] = []
-    @Published var photoPickerItemCover: [PhotosPickerItem] = []
-    @Published var vocalMemos: [VocalMemo] = []
-    @Published var textMemos: [String] = []
+    @Published var mediaMemos: [MediaMemo]
+    @Published var photoPickerItem: [PhotosPickerItem]
+    @Published var photoPickerItemCover: [PhotosPickerItem]
+    @Published var vocalMemos: [VocalMemo]
+    @Published var textMemos: [String]
+    
+    init(event: Event?) {
+        
+        self.mediaMemos = []
+        self.photoPickerItem = []
+        self.photoPickerItemCover = []
+        self.vocalMemos = []
+        self.textMemos = []
+        
+        if let event {
+            self.performer = event.performer
+            self.place = event.place
+            self.date = event.date
+
+            self.imageDataCover = loadImageFromURL(url: event.image)
+        } else {
+            self.performer = ""
+            self.place = ""
+            self.date = Date()
+        }
+    }
+    
+    private func loadImageFromURL(url: String) -> Data? {
+        let url = URL(string: url)
+        if let url {
+            let coverData  = try? Data(contentsOf: url)
+            return coverData
+        }
+        return nil
+    }
     
     func loadCover(_ photos: [PhotosPickerItem]) {
         imageDataCover = nil

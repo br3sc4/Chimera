@@ -10,33 +10,52 @@ import PhotosUI
 
 struct AddMemoryView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var vm: EventVM
-    @State var isFromUpcoming = true
+    @EnvironmentObject var upcomingVM : UpcomingEventVM
     var body: some View {
         NavigationStack {
-//            VStack(spacing: 4){
-//                if isFromUpcoming{
-//                    AddMemoryUpcomingEventsView()
-//                }else{
-                    
-                    AddMemoryManuallyView()
-//                }
-//            }
-            .navigationTitle("Add a new Memory")
-            .navigationBarTitleDisplayMode(.large)
-//            .toolbar{
-//                ToolbarItem(placement: .principal) {
-//                    Button("Skip/Done") {
-//
-//                    }
-//                }
-//            }
+            NavigationLink{
+                AddMemoryManuallyView(event: nil)
+            }label: {
+                HStack {
+                    Image(systemName: "plus.circle")
+                        .font(.largeTitle)
+                    Text("Create new Memory")
+                }
+            }
+            List{
+                Text("Choose from your Upcoming")
+                    .fontWeight(.bold)
+                ForEach(upcomingVM.events) { event in
+                    NavigationLink{
+                        AddMemoryManuallyView(event: event)
+
+                    }label: {
+                        EventCard(type: .upcoming, event: event)
+                    }
+                }
+                .listRowSeparator(.hidden)
+
+
+            }
+            .listStyle(.plain)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text("Cancel")
+                    }
+                }
+            }
         }
+
     }
 }
 
 struct AddMemoryView_Previews: PreviewProvider {
     static var previews: some View {
-        AddMemoryView().environmentObject(EventVM())
+        AddMemoryView()
+            .environmentObject(EventVM())
+            .environmentObject(UpcomingEventVM())
     }
 }

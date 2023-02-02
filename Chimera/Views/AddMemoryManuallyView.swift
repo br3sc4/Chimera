@@ -12,7 +12,12 @@ struct AddMemoryManuallyView: View {
     @FocusState private var focusedField: FocusedFields?
     @Environment(\.dismiss) private var dismiss: DismissAction
     @EnvironmentObject private var eventVM: EventVM
-    @EnvironmentObject private var vm: AddMemoryVM
+    private var event : Event?
+    @ObservedObject private var vm : AddMemoryVM
+    
+    init(event:Event?) {
+        self.vm = AddMemoryVM(event: event)
+    }
     
     var body: some View {
         Form {
@@ -72,23 +77,25 @@ struct AddMemoryManuallyView: View {
                     }
                     
                     NavigationLink {
-                        TextualMemosView()
+                        TextualMemosView(addMemoryVM: vm)
                     } label: {
                         AddMemorySectionRow(imageIcon: "note.text", memoName: "Textual Memos")
                     }
                     
                     NavigationLink {
-                        MediaMemosView()
+                        MediaMemosView(addMemoryVM: vm)
                     } label: {
                         AddMemorySectionRow(imageIcon: "photo.fill", memoName: "Media Memos")
                     }
                 }
             }
         }
+        .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button {
                     vm.deleteMediaFiles()
+                    dismiss()
                     dismiss()
                 } label: {
                     Text("Cancel")
@@ -98,6 +105,7 @@ struct AddMemoryManuallyView: View {
             ToolbarItem(placement: .confirmationAction) {
                 Button {
                     vm.addEvent(eventsViewModel: eventVM)
+                    dismiss()
                     dismiss()
                 } label: {
                     Text("Done")
@@ -117,6 +125,29 @@ extension AddMemoryManuallyView {
 
 struct AddMemoryManuallyView_Previews: PreviewProvider {
     static var previews: some View {
-        AddMemoryManuallyView().environmentObject(AddMemoryVM())
+        AddMemoryManuallyView(event:
+                                Event(
+                                    performer: "Imagine Dragons",
+                                    place: "Munich",
+                                    date: {
+                                        var components = DateComponents()
+                                        components.year = 2022
+                                        components.month = 11
+                                        components.day = 25
+                                        return components.date ?? Date.now
+                                    }(),
+                                    image: "event1",
+                                    isMemory: true, textMemos: [
+                                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+                                        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur",
+                                        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo"],
+                                    vocalMemos: [
+                                        VocalMemo(title: "Audio 1",
+                                                  urlString: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"),
+                                        VocalMemo(title: "Audio 2",
+                                                  urlString: "data for audio 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"),
+                                        VocalMemo(title: "Audio 3",
+                                                  urlString: "data for audio 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"),
+                                    ]))
     }
 }

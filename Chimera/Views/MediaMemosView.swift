@@ -9,7 +9,11 @@ import SwiftUI
 import PhotosUI
 
 struct MediaMemosView: View {
-    @EnvironmentObject var vm: AddMemoryVM
+    @ObservedObject var vm: AddMemoryVM
+    
+    init(addMemoryVM : AddMemoryVM) {
+        self.vm = addMemoryVM
+    }
     
     private let columns: [GridItem] = [
         GridItem(.adaptive(minimum: 100), spacing: 2)
@@ -39,6 +43,6 @@ struct MediaMemosView: View {
 
 struct MediaMemosView_Previews: PreviewProvider {
     static var previews: some View {
-        MediaMemosView().environmentObject(AddMemoryVM())
+        MediaMemosView(addMemoryVM: AddMemoryVM(event: nil))
     }
 }

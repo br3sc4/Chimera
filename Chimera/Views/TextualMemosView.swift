@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct TextualMemosView: View {
-    @EnvironmentObject var vm: AddMemoryVM
+    @ObservedObject private var vm: AddMemoryVM
     @State var isShowingAddTextMemo = false
+    
+    init(addMemoryVM : AddMemoryVM) {
+        self.vm = addMemoryVM
+    }
+    
     var body: some View {
         List {
             ForEach(vm.textMemos, id:\.self){ memo in
@@ -27,13 +32,13 @@ struct TextualMemosView: View {
             }
         }
         .sheet(isPresented: $isShowingAddTextMemo) {
-            AddTextMemoView()
+            AddTextMemoView(addMemoryVM: vm)
         }
     }
 }
 
 struct TextualMemosView_Previews: PreviewProvider {
     static var previews: some View {
-        TextualMemosView().environmentObject(AddMemoryVM())
+        TextualMemosView(addMemoryVM: AddMemoryVM(event: nil))
     }
 }

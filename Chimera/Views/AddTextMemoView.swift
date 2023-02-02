@@ -9,8 +9,13 @@ import SwiftUI
 
 struct AddTextMemoView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var vm: AddMemoryVM
+    @ObservedObject private var vm: AddMemoryVM
     @State var text = ""
+    
+    init(addMemoryVM : AddMemoryVM) {
+        self.vm = addMemoryVM
+    }
+    
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading) {
@@ -49,6 +54,6 @@ struct AddTextMemoView: View {
 
 struct AddTextMemoView_Previews: PreviewProvider {
     static var previews: some View {
-        AddTextMemoView().environmentObject(AddMemoryVM())
+        AddTextMemoView(addMemoryVM: AddMemoryVM(event: nil))
     }
 }
