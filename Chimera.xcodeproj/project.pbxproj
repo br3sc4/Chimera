@@ -37,9 +37,8 @@
 		A91FB01429798D3B0083DCAE /* AddUpcomingTicketmasterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB01329798D3B0083DCAE /* AddUpcomingTicketmasterView.swift */; };
 		A91FB01629798EB00083DCAE /* AddUpcomingManuallyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB01529798EB00083DCAE /* AddUpcomingManuallyView.swift */; };
 		A97D3D2C2980132A0071B5E9 /* AddMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97D3D2B2980132A0071B5E9 /* AddMemoryView.swift */; };
-		A97D3D2E298016020071B5E9 /* AddMemoryManuallyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97D3D2D298016020071B5E9 /* AddMemoryManuallyView.swift */; };
+		A97D3D2E298016020071B5E9 /* EditMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97D3D2D298016020071B5E9 /* EditMemoryView.swift */; };
 		A97D3D3029801DD70071B5E9 /* AddMemorySectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97D3D2F29801DD70071B5E9 /* AddMemorySectionRow.swift */; };
-		A97D3D32298021C30071B5E9 /* AddMemoryUpcomingEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97D3D31298021C30071B5E9 /* AddMemoryUpcomingEventsView.swift */; };
 		A97D3D3429802BA00071B5E9 /* TextualMemosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97D3D3329802BA00071B5E9 /* TextualMemosView.swift */; };
 		A97D3D38298035120071B5E9 /* AddTextMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97D3D37298035120071B5E9 /* AddTextMemoView.swift */; };
 		A97D3D3A2981629D0071B5E9 /* MediaMemosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97D3D392981629D0071B5E9 /* MediaMemosView.swift */; };
@@ -89,9 +88,8 @@
 		A91FB01329798D3B0083DCAE /* AddUpcomingTicketmasterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpcomingTicketmasterView.swift; sourceTree = "<group>"; };
 		A91FB01529798EB00083DCAE /* AddUpcomingManuallyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUpcomingManuallyView.swift; sourceTree = "<group>"; };
 		A97D3D2B2980132A0071B5E9 /* AddMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoryView.swift; sourceTree = "<group>"; };
-		A97D3D2D298016020071B5E9 /* AddMemoryManuallyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoryManuallyView.swift; sourceTree = "<group>"; };
+		A97D3D2D298016020071B5E9 /* EditMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoryView.swift; sourceTree = "<group>"; };
 		A97D3D2F29801DD70071B5E9 /* AddMemorySectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemorySectionRow.swift; sourceTree = "<group>"; };
-		A97D3D31298021C30071B5E9 /* AddMemoryUpcomingEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoryUpcomingEventsView.swift; sourceTree = "<group>"; };
 		A97D3D3329802BA00071B5E9 /* TextualMemosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextualMemosView.swift; sourceTree = "<group>"; };
 		A97D3D3529802BE70071B5E9 /* AddMemoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoryVM.swift; sourceTree = "<group>"; };
 		A97D3D37298035120071B5E9 /* AddTextMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTextMemoView.swift; sourceTree = "<group>"; };
@@ -177,8 +175,7 @@
 				A97D3D3329802BA00071B5E9 /* TextualMemosView.swift */,
 				A97D3D37298035120071B5E9 /* AddTextMemoView.swift */,
 				A97D3D2B2980132A0071B5E9 /* AddMemoryView.swift */,
-				A97D3D2D298016020071B5E9 /* AddMemoryManuallyView.swift */,
-				A97D3D31298021C30071B5E9 /* AddMemoryUpcomingEventsView.swift */,
+				A97D3D2D298016020071B5E9 /* EditMemoryView.swift */,
 				A91FB01329798D3B0083DCAE /* AddUpcomingTicketmasterView.swift */,
 				A91FB01529798EB00083DCAE /* AddUpcomingManuallyView.swift */,
 				A91FB0062975B4D40083DCAE /* MemoriesView.swift */,
@@ -332,7 +329,7 @@
 				2DC5130729707ECD004958C0 /* MediaGrid.swift in Sources */,
 				2D1257F02981217800880459 /* EventTypes.swift in Sources */,
 				A97D3D38298035120071B5E9 /* AddTextMemoView.swift in Sources */,
-				A97D3D2E298016020071B5E9 /* AddMemoryManuallyView.swift in Sources */,
+				A97D3D2E298016020071B5E9 /* EditMemoryView.swift in Sources */,
 				A97D3D3429802BA00071B5E9 /* TextualMemosView.swift in Sources */,
 				2D0E78F3296F01050020CDCF /* (null) in Sources */,
 				A9D5412A2970687C00C76CAF /* EventCard.swift in Sources */,
@@ -340,7 +337,6 @@
 				A9D5413229706A6F00C76CAF /* VocalMemoRow.swift in Sources */,
 				A97D3D2C2980132A0071B5E9 /* AddMemoryView.swift in Sources */,
 				2D5CAA1A298AA4B700A83922 /* UpcomingEventVM.swift in Sources */,
-				A97D3D32298021C30071B5E9 /* AddMemoryUpcomingEventsView.swift in Sources */,
 				A9D5412C2970691200C76CAF /* EventModel.swift in Sources */,
 				2DDD9E652982CE1B00D34342 /* AddMemoryVM.swift in Sources */,
 				A97D3D3029801DD70071B5E9 /* AddMemorySectionRow.swift in Sources */,

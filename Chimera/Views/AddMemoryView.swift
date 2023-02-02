@@ -14,7 +14,7 @@ struct AddMemoryView: View {
     var body: some View {
         NavigationStack {
             NavigationLink{
-                AddMemoryManuallyView(event: nil)
+                EditMemoryView(event: nil)
             }label: {
                 HStack {
                     Image(systemName: "plus.circle")
@@ -27,7 +27,7 @@ struct AddMemoryView: View {
                     .fontWeight(.bold)
                 ForEach(upcomingVM.events) { event in
                     NavigationLink{
-                        AddMemoryManuallyView(event: event)
+                        EditMemoryView(event: event)
 
                     }label: {
                         EventCard(type: .upcoming, event: event)

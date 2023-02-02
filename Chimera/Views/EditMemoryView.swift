@@ -1,5 +1,5 @@
 //
-//  AddMemoryManuallyView.swift
+//  EditMemoryView.swift
 //  Chimera
 //
 //  Created by Antonella Giugliano on 24/01/23.
@@ -8,7 +8,7 @@
 import SwiftUI
 import PhotosUI
 
-struct AddMemoryManuallyView: View {
+struct EditMemoryView: View {
     @FocusState private var focusedField: FocusedFields?
     @Environment(\.dismiss) private var dismiss: DismissAction
     @EnvironmentObject private var eventVM: EventVM
@@ -117,7 +117,7 @@ struct AddMemoryManuallyView: View {
     
 }
 
-extension AddMemoryManuallyView {
+extension EditMemoryView {
     private enum FocusedFields: Hashable {
         case performer, place
     }
@@ -125,7 +125,7 @@ extension AddMemoryManuallyView {
 
 struct AddMemoryManuallyView_Previews: PreviewProvider {
     static var previews: some View {
-        AddMemoryManuallyView(event:
+        EditMemoryView(event:
                                 Event(
                                     performer: "Imagine Dragons",
                                     place: "Munich",
