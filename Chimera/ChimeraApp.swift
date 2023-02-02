@@ -9,12 +9,18 @@ import SwiftUI
 
 @main
 struct ChimeraApp: App {
-    @StateObject var vm = EventVM()
-    @StateObject var addVM = AddEventVM()
-    @StateObject var addMemoryVM = AddMemoryVM()
+    @StateObject private var eventVM: EventVM = EventVM()
+    @StateObject private var addEventVM: AddEventVM = AddEventVM()
+    @StateObject private var addMemoryVM: AddMemoryVM = AddMemoryVM()
+    @StateObject private var upcomingVM: UpcomingEventVM = UpcomingEventVM()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(vm).environmentObject(addVM).environmentObject(addMemoryVM)
+            ContentView()
+                .environmentObject(eventVM)
+                .environmentObject(addEventVM)
+                .environmentObject(addMemoryVM)
+                .environmentObject(upcomingVM)
         }
     }
 }

@@ -10,7 +10,7 @@ import PhotosUI
 
 struct AddUpcomingManuallyView: View {
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var eventsVM: EventVM
+    @EnvironmentObject private var eventsVM: UpcomingEventVM
     @EnvironmentObject private var vm: AddEventVM
   
     var body: some View {
@@ -62,7 +62,7 @@ struct AddUpcomingManuallyView: View {
         }.toolbar{
             ToolbarItem(placement: .confirmationAction) {
                 Button(action: {
-                    vm.addEvent(eventsViewModel: eventsVM)
+                    vm.addEvent(upcomingVM: eventsVM)
                     dismiss()
                 }, label: {
                     Text("Done")

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddUpcomingTicketmasterView: View {
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var vm: EventVM
+    @EnvironmentObject private var vm: UpcomingEventVM
     @StateObject private var ticketMasterVm = CreateEventApiViewModel()
     
     var searchResults: [Event] {
@@ -90,19 +90,26 @@ struct AddUpcomingTicketmasterView: View {
             })
         }.toolbar{
             ToolbarItem(placement: .confirmationAction) {
-                Button(action: {
+                Button {
                     dismiss()
-                }, label: {
+                } label: {
                     Text("Done")
-                })
+                }
             }
         }
-
+        .alert(isPresented: $ticketMasterVm.isError) {
+            Alert(title: Text("Nothing found"),
+                  message: Text("Unfortunately we found nothing corresponding to your search!")
+            )
+        }
     }
 }
 
 struct AddUpcomingTicketmasterView_Previews: PreviewProvider {
     static var previews: some View {
-        AddUpcomingTicketmasterView().environmentObject(EventVM())
+        NavigationStack {
+            AddUpcomingTicketmasterView()
+                .environmentObject(UpcomingEventVM())
+        }
     }
 }
