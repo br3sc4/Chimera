@@ -11,7 +11,7 @@ import PhotosUI
 import CloudKit
 
 @MainActor
-class EventVM: ObservableObject{
+class EventVM: ObservableObject {
     @Published var events: [Event] = []
     @Published var vocalMemos: [VocalMemo] = []
     
