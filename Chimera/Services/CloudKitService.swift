@@ -43,7 +43,6 @@ final class CloudKitService {
         
         let result = try await CKContainer.default().privateCloudDatabase.records(matching: query)
         let records = result.matchResults.compactMap { try? $0.1.get() }
-        print("records: \(records)")
         return records.compactMap(T.init)
     }
     
@@ -63,7 +62,7 @@ final class CloudKitService {
         do {
             return try await save(record: record)
         } catch {
-            print("error add \(error.localizedDescription)")
+            debugPrint("error add \(error.localizedDescription)")
             throw error
         }
     }
@@ -74,9 +73,7 @@ final class CloudKitService {
     }
     
     func delete(recordID: CKRecord.ID) async throws {
-        print("delete \(recordID)")
         let rec = try await CKContainer.default().privateCloudDatabase.deleteRecord(withID: recordID)
-        print("rec: \(rec.recordName)")
     }
     
 }

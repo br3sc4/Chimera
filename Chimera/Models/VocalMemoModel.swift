@@ -24,7 +24,7 @@ struct VocalMemo: Identifiable, Hashable, CloudKitableProtocol {
     }
     
     init?(record: CKRecord) {
-        print("Vocal memo init da record")
+//        print("Vocal memo init da record")
         guard let title = record["title"] as? String else { return nil }
         self.title = title
         let vocalAssets = record["vocal"] as? CKAsset
@@ -32,7 +32,7 @@ struct VocalMemo: Identifiable, Hashable, CloudKitableProtocol {
             self.vocalURL = url
         }
         self.record = record
-        print("record \(record)")
+//        print("record \(record)")
     }
     
     init?<T: CloudKitableProtocol>(title: String, vocalURL: URL?, referenceItem: T) {

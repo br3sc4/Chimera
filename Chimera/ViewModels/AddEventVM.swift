@@ -43,7 +43,6 @@ class AddEventVM: ObservableObject{
                 try await service.add(item: event)
             }
             resetProperties()
-            print("here")
         } else {
             guard let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent("house.jpg") else { return }
             do {
@@ -59,7 +58,6 @@ class AddEventVM: ObservableObject{
             }
             
             resetProperties()
-            print("or here")
         }
     }
     

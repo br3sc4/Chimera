@@ -36,7 +36,6 @@ class SingleEventVM: ObservableObject {
             event.textMemos = try await textMemo
             event.mediaMemos = try await mediaMemo
 //            let textMemo: [TextMemoModel] = try await service.fetch(predicate: predicate, recordType: "TextMemo")
-            print("textmemo \(try await textMemo) count: \(try await textMemo.count)")
         } catch {
             print(error)
         }

@@ -20,16 +20,16 @@ struct TextMemoModel: Identifiable, Hashable, CloudKitableProtocol {
     }
     
     init?(record: CKRecord) {
-        print("text memo init da record")
+//        print("text memo init da record")
         guard let text = record["text"] as? String else { return nil }
         self.text = text
         self.id = UUID()
         self.record = record
-        print("record \(record)")
+//        print("record \(record)")
     }
     
     init?<T: CloudKitableProtocol>(text: String, referenceItem: T) {
-        print("text memo init da parameters")
+//        print("text memo init da parameters")
         let record = CKRecord(recordType: "TextMemo")
         record["text"] = text
         self.init(record: record)

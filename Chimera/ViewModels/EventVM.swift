@@ -29,22 +29,9 @@ class EventVM: ObservableObject {
             let predicate = NSPredicate(value: true)
             
             self.events = try await service.fetch(predicate: predicate, recordType: "Event")
-            print("events \(events)")
 //            fetchVocalMemo()
         }
     }
-    
-//    func fetchVocalMemo() {
-//        guard let event = events[0].record else { return }
-//        Task {
-//            let eventID = event.recordID
-//            let recordToMatch = CKRecord.Reference(recordID: eventID, action: .deleteSelf)
-//            let predicate = NSPredicate(format: "owningEvent == %@", recordToMatch)
-//
-//            self.vocalMemos = try await service.fetch(predicate: predicate, recordType: "VocalMemo")
-//            print("vocalmemo \(vocalMemos) count: \(vocalMemos.count)")
-//        }
-//    }
     
     func fetchMemo(event: inout Event) async { //Binding<Event>
         guard let record = event.record else { return } //wrappedValue
@@ -55,16 +42,13 @@ class EventVM: ObservableObject {
             async let vocalMemo: [VocalMemo] = try service.fetch(predicate: predicate, recordType: "VocalMemo")
             async let textMemo: [TextMemoModel] = try service.fetch(predicate: predicate, recordType: "TextMemo")
             async let mediaMemo: [MediaMemo] = try service.fetch(predicate: predicate, recordType: "MediaMemo")
-//            event.wrappedValue.vocalMemos = try await vocalMemo
+            event.vocalMemos = try await vocalMemo
             event.textMemos = try await textMemo
-//            event.wrappedValue.mediaMemos = try await mediaMemo
-//            let textMemo: [TextMemoModel] = try await service.fetch(predicate: predicate, recordType: "TextMemo")
-            print("textmemo \(try await textMemo) count: \(try await textMemo.count)")
+            event.mediaMemos = try await mediaMemo
+            //            let textMemo: [TextMemoModel] = try await service.fetch(predicate: predicate, recordType: "TextMemo")
         } catch {
             print(error)
         }
-        
-
     }
     
     func deleteItem(at indexSet: IndexSet) {

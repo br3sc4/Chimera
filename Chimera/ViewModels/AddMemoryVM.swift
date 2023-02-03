@@ -52,9 +52,7 @@ class AddMemoryVM: ObservableObject{
     }
     
     func addEvent() async -> Event? {
-//        Task {
         guard let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent("house.jpg") else { return nil }
-        print("media memos \(mediaMemos)")
         do {
             guard let imageDataCover else { return nil }
             try imageDataCover.write(to: url)
@@ -62,26 +60,16 @@ class AddMemoryVM: ObservableObject{
             
                 
                 let record = try await service.add(item: event)
-            print("record: \(record)")
                 guard let event = Event(record: record) else { return nil }
-                print("event memori id: \(event.id)")
-                print("event record: \(record)")
-                print("media memos \(mediaMemos)")
             
                 for memo in mediaMemos {
-                    print("memo prima \(memo)")
                     guard let memo = MediaMemo(isVideo: memo.isVideo, url: memo.url, referenceItem: event) else { return nil }
-//                    memo.createRecord(memo: memo, referenceItem: event)
-                    print("memo dopo \(memo)")
                     try await addRelationMedia(memo)
                     
                 }
             
             for memo in textMemos {
-                print("text prima \(memo)")
                 guard let memo = TextMemoModel(text: memo.text, referenceItem: event) else { return nil }
-//                    memo.createRecord(memo: memo, referenceItem: event)
-                print("text dopo \(memo)")
                 try await addRelationMedia(memo)
             }
             
@@ -91,8 +79,6 @@ class AddMemoryVM: ObservableObject{
         }
         
         resetProperties()
-        print("or here")
-//        }
         return nil
     }
     

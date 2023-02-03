@@ -28,7 +28,7 @@ struct Event: Identifiable, Hashable, CloudKitableProtocol {
     var record: CKRecord?
     
     init(performer: String, place: String, date: Date, image: String? = nil, cover: URL? = nil, isMemory: Bool, textMemos: [TextMemoModel]? = nil, vocalMemos: [VocalMemo]? = nil, mediaMemos: [MediaMemo]? = nil, record: CKRecord? = nil) {
-        print("standard init")
+//        print("standard init")
         self.performer = performer
         self.place = place
         self.date = date
@@ -43,7 +43,7 @@ struct Event: Identifiable, Hashable, CloudKitableProtocol {
     }
     
     init?(performer: String, place: String, date: Date, cover: URL? = nil, isMemory: Bool) {
-        print("init for create record")
+//        print("init for create record")
         let record = CKRecord(recordType: "Event")
         record["performer"] = performer
         record["place"] = place
@@ -56,15 +56,13 @@ struct Event: Identifiable, Hashable, CloudKitableProtocol {
         
         record["isMemory"] = isMemory
         self.init(record: record)
-//        record["internalID"] = self.id
-//        print("event id: \(self.id)")
     }
 }
 
 extension Event {
     init?(record: CKRecord) {
 //        self.id = UUID().uuidString
-        print("Event init da record")
+//        print("Event init da record")
         guard let performer = record["performer"] as? String else { return nil }
         self.performer = performer
         guard let place = record["place"] as? String else { return nil }
@@ -78,6 +76,6 @@ extension Event {
         guard let isMemory = record["isMemory"] as? Bool else { return nil }
         self.isMemory = isMemory
         self.record = record
-        print("record \(record)")
+//        print("record \(record)")
     } 
 }
