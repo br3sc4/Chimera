@@ -34,7 +34,7 @@ struct AddTextMemoView: View {
                     }
                     ToolbarItem(placement: .primaryAction) {
                         Button(action: {
-                            vm.textMemos.append(text)
+                            vm.textMemos.append(TextMemoModel(text: text))
                             dismiss()
                         }, label: {
                             Text("Done")
@@ -49,6 +49,7 @@ struct AddTextMemoView: View {
 
 struct AddTextMemoView_Previews: PreviewProvider {
     static var previews: some View {
-        AddTextMemoView().environmentObject(AddMemoryVM())
+        AddTextMemoView()
+            .environmentObject(AddMemoryVM(service: CloudKitService()))
     }
 }

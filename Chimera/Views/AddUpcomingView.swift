@@ -62,6 +62,6 @@ struct AddUpcomingView: View {
 
 struct AddUpcomingView_Previews: PreviewProvider {
     static var previews: some View {
-        AddUpcomingView(performer: "Name of Performer", date: "Date", place: "Place").environmentObject(EventVM())
+        AddUpcomingView(performer: "Name of Performer", date: "Date", place: "Place").environmentObject(EventVM(service: CloudKitService()))
     }
 }

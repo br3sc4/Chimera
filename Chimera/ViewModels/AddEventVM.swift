@@ -17,6 +17,11 @@ class AddEventVM: ObservableObject{
     @Published var imageData: [Data] = []
     @Published var photoPickerItem: [PhotosPickerItem] = []
     
+    private let service: CloudKitService
+    
+    init(service: CloudKitService) {
+        self.service = service
+    }
     
     func loadImage(_ photos: [PhotosPickerItem]) {
         imageData = []
@@ -30,21 +35,39 @@ class AddEventVM: ObservableObject{
     
     func addEvent(upcomingVM: UpcomingEventVM){
         if photoPickerItem.isEmpty {
-            upcomingVM.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending", isMemory: false))
+            
+            guard let event: Event = Event(performer: performer, place: place, date: date, isMemory: false) else { return }
+            
+            Task {
+                
+                try await service.add(item: event)
+            }
             resetProperties()
-            print("here")
         } else {
-            upcomingVM.events.append(Event(performer: performer, place: place, date: date, image: "", imageData: imageData[0], isMemory: false))
+            guard let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent("house.jpg") else { return }
+            do {
+                try imageData[0].write(to: url)
+                guard let event: Event = Event(performer: performer, place: place, date: date, cover: url, isMemory: false) else { return }
+               
+                Task {
+                    
+                    try await service.add(item: event)
+                }
+            } catch {
+                print(error)
+            }
+            
             resetProperties()
-            print("or here")
         }
     }
     
-    func resetProperties(){
+    func resetProperties() {
         performer = ""
         place = ""
         date = Date.now
         imageData = []
         photoPickerItem = []
     }
+    
+    
 }

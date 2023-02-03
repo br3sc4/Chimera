@@ -39,6 +39,7 @@ struct MediaMemosView: View {
 
 struct MediaMemosView_Previews: PreviewProvider {
     static var previews: some View {
-        MediaMemosView().environmentObject(AddMemoryVM())
+        MediaMemosView()
+            .environmentObject(AddMemoryVM(service: CloudKitService()))
     }
 }

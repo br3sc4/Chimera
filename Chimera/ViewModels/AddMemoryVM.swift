@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import PhotosUI
+import CloudKit
 
 class AddMemoryVM: ObservableObject{
     @Published var performer = ""
@@ -18,7 +19,14 @@ class AddMemoryVM: ObservableObject{
     @Published var photoPickerItem: [PhotosPickerItem] = []
     @Published var photoPickerItemCover: [PhotosPickerItem] = []
     @Published var vocalMemos: [VocalMemo] = []
-    @Published var textMemos: [String] = []
+    @Published var textMemos: [TextMemoModel] = []
+    
+    
+    private let service: CloudKitService
+    
+    init(service: CloudKitService) {
+        self.service = service
+    }
     
     func loadCover(_ photos: [PhotosPickerItem]) {
         imageDataCover = nil
@@ -43,19 +51,35 @@ class AddMemoryVM: ObservableObject{
         }
     }
     
-    func addEvent(eventsViewModel: EventVM) {
-        eventsViewModel.events.append(
-            Event(performer: performer,
-                  place: place,
-                  date: date,
-                  image: "",
-                  imageData: imageDataCover,
-                  isMemory: true,
-                  textMemos: textMemos,
-                  vocalMemos: vocalMemos,
-                  mediaMemos: mediaMemos)
-        )
+    func addEvent() async -> Event? {
+        guard let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent("house.jpg") else { return nil }
+        do {
+            guard let imageDataCover else { return nil }
+            try imageDataCover.write(to: url)
+            guard let event: Event = Event(performer: performer, place: place, date: date, cover: url, isMemory: true) else { return nil }
+            
+                
+                let record = try await service.add(item: event)
+                guard let event = Event(record: record) else { return nil }
+            
+                for memo in mediaMemos {
+                    guard let memo = MediaMemo(isVideo: memo.isVideo, url: memo.url, referenceItem: event) else { return nil }
+                    try await addRelationMedia(memo)
+                    
+                }
+            
+            for memo in textMemos {
+                guard let memo = TextMemoModel(text: memo.text, referenceItem: event) else { return nil }
+                try await addRelationMedia(memo)
+            }
+            
+            return event
+        } catch {
+            print(error)
+        }
+        
         resetProperties()
+        return nil
     }
     
     var isFormValid: Bool {
@@ -63,12 +87,15 @@ class AddMemoryVM: ObservableObject{
     }
     
     private func resetProperties() {
-        performer = ""
-        place = ""
-        date = Date.now
-        mediaMemos = []
-        photoPickerItem = []
-        imageDataCover = nil
+        DispatchQueue.main.async {
+            self.performer = ""
+            self.place = ""
+            self.date = Date.now
+            self.mediaMemos = []
+            self.photoPickerItem = []
+            self.imageDataCover = nil
+        }
+       
     }
     
     func deleteMediaFiles() {
@@ -80,5 +107,13 @@ class AddMemoryVM: ObservableObject{
             }
         }
         resetProperties()
+    }
+    
+    func addRelationMedia<T: CloudKitableProtocol>(_ media: T) async throws {
+//        guard let event = ] else { return }
+//        guard let voiceMemo = VocalMemo(title: "Vocal 3", vocalURL: nil, referenceItem: events[0]) else { return }
+        
+        
+            try await service.add(item: media)
     }
 }

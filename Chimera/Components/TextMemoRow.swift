@@ -9,19 +9,19 @@ import SwiftUI
 
 struct TextMemoRow: View {
     
-    let textMemo: String
+    let textMemo: TextMemoModel
     @State var showTextMemo = false
     var body: some View {
         Button(action: {showTextMemo.toggle()}, label: {
             HStack{
                 Image(systemName: "note.text")
                     .foregroundColor(.accentColor)
-                Text(textMemo)
+                Text(textMemo.text)
                     .foregroundColor(.primary)
                     .lineLimit(1)
             }
         }).sheet(isPresented: $showTextMemo) {
-            TextMemo(textMemo: textMemo)
+            TextMemo(textMemo: textMemo.text)
                 .presentationDetents([.medium])
         }
     }
@@ -30,6 +30,6 @@ struct TextMemoRow: View {
 
 struct TextMemoRow_Previews: PreviewProvider {
     static var previews: some View {
-        TextMemoRow(textMemo: "events[0].textMemos![0]")
+        TextMemoRow(textMemo: TextMemoModel(text: "events[0].textMemos![0]"))
     }
 }

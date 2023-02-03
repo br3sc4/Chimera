@@ -69,7 +69,7 @@ struct AddUpcomingTicketmasterView: View {
                                     .fontWeight(.semibold)
                             }
                             Spacer()
-                            AddUpcomingEventCard(image: result.image,
+                            AddUpcomingEventCard(image: result.image!,
                                                  performer: result.performer,
                                                  date: result.date,
                                                  place: result.place)

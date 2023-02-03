@@ -13,37 +13,12 @@ struct EventCard: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            if event.imageData == nil {
-                // Check if its an url
-                if event.image.contains("//"){
-                    AsyncImage(
-                        url: URL(string: event.image),
-                        content: { image in
-                            image.resizable()
-                                 .scaledToFill()
-                                 .frame(height: 136)
-                                 .cornerRadius(24)
-                        },
-                        placeholder: {
-                            ProgressView()
-                        }
-                    )
-                }else {
-                    //TODO: Delete when persistency is working
-                    Image(event.image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(height: 136)
-                        .cornerRadius(24)
-                }
-            } else {
-                if let data = event.imageData, let uiImage = UIImage(data: data){
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(height: 136)
-                        .cornerRadius(24)
-                }
+            if let url = event.cover, let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 136)
+                    .cornerRadius(24)
             }
             
             switch type {
@@ -70,9 +45,9 @@ struct EventCard: View {
 struct EventCard_Previews: PreviewProvider {
     static var previews: some View {
         EventCard(type: .memory,
-                  event: EventVM().events[0])
+                  event: EventVM(service: CloudKitService()).events[0])
         
         EventCard(type: .upcoming,
-                  event: EventVM().events[0])
+                  event: EventVM(service: CloudKitService()).events[0])
     }
 }

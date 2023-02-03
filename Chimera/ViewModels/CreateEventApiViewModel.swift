@@ -68,10 +68,8 @@ class CreateEventApiViewModel : ObservableObject {
                                         keyWordQuery]
         }
         let url = urlComponents.url!
-        print(url)
                 do {
                     let (data, _) = try await URLSession.shared.data(from: url)
-                    print(String(data: data, encoding: .utf8)!)
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
                     let decoder = JSONDecoder()
@@ -90,7 +88,6 @@ class CreateEventApiViewModel : ObservableObject {
                         events.append(event)
                     }
                 } catch {
-                    print("Error!!")
                     print(error)
                     isError = true
                 }
@@ -128,7 +125,7 @@ class CreateEventApiViewModel : ObservableObject {
     /* Downloads an image for the preview to make it available for offline usage */
     func eventWithPreview(_ event : Event) async -> Event{
         var newEvent = event
-        let imageURL = await downloadPreviewImage(from: event.image)
+        let imageURL = await downloadPreviewImage(from: event.image ?? "")
         newEvent.image = imageURL
         return newEvent
     }
