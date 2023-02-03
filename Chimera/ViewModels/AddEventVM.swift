@@ -35,8 +35,8 @@ class AddEventVM: ObservableObject{
     
     func addEvent(upcomingVM: UpcomingEventVM){
         if photoPickerItem.isEmpty {
-//            eventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "imgforappending", isMemory: false))
-            guard let event: Event = Event(performer: performer, place: place, date: date, isMemory: false) else { return }//Event = Event(performer: performer, place: place, date: date, isMemory: false)
+            
+            guard let event: Event = Event(performer: performer, place: place, date: date, isMemory: false) else { return }
             
             Task {
                 
@@ -45,9 +45,6 @@ class AddEventVM: ObservableObject{
             resetProperties()
             print("here")
         } else {
-            
-//            eventsViewModel.events.append(Event(performer: performer, place: place, date: date, image: "", isMemory: false))
-            
             guard let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent("house.jpg") else { return }
             do {
                 try imageData[0].write(to: url)

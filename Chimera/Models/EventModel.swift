@@ -14,7 +14,7 @@ protocol CloudKitableProtocol {
 }
 
 struct Event: Identifiable, Hashable, CloudKitableProtocol {
-    let id = UUID()
+    let id: String = UUID().uuidString
     let performer: String
     var place: String
     var date: Date
@@ -22,12 +22,12 @@ struct Event: Identifiable, Hashable, CloudKitableProtocol {
     var cover: URL?
     //var imageData: Data?
     var isMemory: Bool
-    var textMemos: [String]?
+    var textMemos: [TextMemoModel]?
     var vocalMemos: [VocalMemo]?
     var mediaMemos: [MediaMemo]?
     var record: CKRecord?
     
-    init(performer: String, place: String, date: Date, image: String? = nil, cover: URL? = nil, isMemory: Bool, textMemos: [String]? = nil, vocalMemos: [VocalMemo]? = nil, mediaMemos: [MediaMemo]? = nil, record: CKRecord? = nil) {
+    init(performer: String, place: String, date: Date, image: String? = nil, cover: URL? = nil, isMemory: Bool, textMemos: [TextMemoModel]? = nil, vocalMemos: [VocalMemo]? = nil, mediaMemos: [MediaMemo]? = nil, record: CKRecord? = nil) {
         print("standard init")
         self.performer = performer
         self.place = place
@@ -39,6 +39,7 @@ struct Event: Identifiable, Hashable, CloudKitableProtocol {
         self.vocalMemos = vocalMemos
         self.mediaMemos = mediaMemos
         self.record = record
+        //self.id = UUID().uuidString
     }
     
     init?(performer: String, place: String, date: Date, cover: URL? = nil, isMemory: Bool) {
@@ -55,11 +56,14 @@ struct Event: Identifiable, Hashable, CloudKitableProtocol {
         
         record["isMemory"] = isMemory
         self.init(record: record)
+//        record["internalID"] = self.id
+//        print("event id: \(self.id)")
     }
 }
 
 extension Event {
     init?(record: CKRecord) {
+//        self.id = UUID().uuidString
         print("Event init da record")
         guard let performer = record["performer"] as? String else { return nil }
         self.performer = performer
@@ -75,28 +79,5 @@ extension Event {
         self.isMemory = isMemory
         self.record = record
         print("record \(record)")
-    }
-    
-    
+    } 
 }
-
-//extension Event {
-//    var record: CKRecord {
-//        let record = CKRecord(recordType: "Event")
-//        record["performer"] = performer
-//        record["place"] = place
-//        record["date"] = date
-////        if let urlString = image, let url = URL(string: urlString) {
-////            let assets = CKAsset(fileURL: url)
-////            record["image"] = assets
-////        }
-//
-//        if let url = cover {
-//            let assets = CKAsset(fileURL: url)
-//            record["image"] = assets
-//        }
-//
-//        record["isMemory"] = isMemory
-//        return record
-//    }
-//}

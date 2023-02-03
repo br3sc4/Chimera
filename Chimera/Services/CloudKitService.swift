@@ -34,6 +34,7 @@ final class CloudKitService {
         case iCloudApplicationPermissionNotGranted
         case iCloudCouldNotFetchUserID
         case iCloudCouldNotDiscoverUser
+        case iCloudRecordNotFound
     }
     
     func fetch<T: CloudKitableProtocol>(predicate: NSPredicate, recordType: CKRecord.RecordType, sortDescriptor: [NSSortDescriptor]? = nil, resultLimits: Int? = nil) async throws -> [T] {
@@ -54,19 +55,21 @@ final class CloudKitService {
         return query
     }
     
-    func add<T: CloudKitableProtocol>(item: T) async throws {
+    @discardableResult
+    func add<T: CloudKitableProtocol>(item: T) async throws -> CKRecord {
         //save to iCloudKit.
-        guard let record = item.record else { return }
+        guard let record = item.record else { throw CloudKitError.iCloudRecordNotFound }
         
         do {
-            try await save(record: record)
+            return try await save(record: record)
         } catch {
             print("error add \(error.localizedDescription)")
+            throw error
         }
-        
     }
     
-    func save(record: CKRecord) async throws {
+    
+    private func save(record: CKRecord) async throws -> CKRecord {
         try await CKContainer.default().privateCloudDatabase.save(record)
     }
     

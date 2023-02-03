@@ -15,8 +15,9 @@ struct ChimeraApp: App {
     @StateObject private var upcomingVM: UpcomingEventVM = UpcomingEventVM()
     
     init() {
-        _eventVM = StateObject(wrappedValue: EventVM(service: CloudKitService()))
-        _addEventVM = StateObject(wrappedValue: AddEventVM(service: CloudKitService()))
+        _vm = StateObject(wrappedValue: EventVM(service: CloudKitService()))
+        _addVM = StateObject(wrappedValue: AddEventVM(service: CloudKitService()))
+        _addMemoryVM = StateObject(wrappedValue: AddMemoryVM(service: CloudKitService()))
     }
     
     var body: some Scene {

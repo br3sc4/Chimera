@@ -12,95 +12,6 @@ import CloudKit
 
 @MainActor
 class EventVM: ObservableObject{
-//    @Published var events = [
-//        Event(
-//            performer: "Imagine Dragons",
-//            place: "Munich",
-//            date: {
-//                var components = DateComponents()
-//                components.year = 2022
-//                components.month = 11
-//                components.day = 25
-//                return components.date ?? Date.now
-//            }(),
-//            image: "event1",
-//            isMemory: true, textMemos: [
-//                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
-//                "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur",
-//                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo"],
-//            vocalMemos: [
-//                VocalMemo(title: "Audio 1",
-//                          urlString: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"),
-//                VocalMemo(title: "Audio 2",
-//                          urlString: "data for audio 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"),
-//                VocalMemo(title: "Audio 3",
-//                          urlString: "data for audio 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"),
-//            ]),
-//        Event(
-//            performer: "Foo Fighters",
-//            place: "London",
-//            date: {
-//                var components = DateComponents()
-//                components.year = 2019
-//                components.month = 7
-//                components.day = 30
-//                return components.date ?? Date.now
-//            }(),
-//            image: "event2",
-//            isMemory: true, textMemos: [
-//                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo"],
-//            vocalMemos: [
-//                VocalMemo(title: "Audio 1",
-//                          urlString: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"),
-//                VocalMemo(title: "Audio 2",
-//                          urlString: "data for audio 2 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"),
-//                VocalMemo(title: "Audio 3",
-//                          urlString: "data for audio 3 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"),
-//            ],
-//            mediaMemos: [
-//                .image(name: "concert1"),
-//                .video(videoMemo: VideoMemo(name: "IMG_0684", ext: "mov")),
-//                .image(name: "concert2"),
-//                .image(name: "concert3")
-//            ]
-//        ),
-//        Event(
-//            performer: "Bon Iver",
-//            place: "Milan",
-//            date: {
-//                var components = DateComponents()
-//                components.year = 2022
-//                components.month = 11
-//                components.day = 8
-//                return components.date ?? Date.now
-//            }(),
-//            image: "event3", isMemory: true
-//        ),
-//        Event(
-//            performer: "Imagine Dragons",
-//            place: "Munich",
-//            date: {
-//                var components = DateComponents()
-//                components.year = 2022
-//                components.month = 11
-//                components.day = 25
-//                return components.date ?? Date.now
-//            }(),
-//            image: "event1",
-//            isMemory: false, textMemos: [
-//                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
-//                "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur",
-//                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo"],
-//            vocalMemos: [
-//                VocalMemo(title: "Audio 1",
-//                          urlString: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"),
-//                VocalMemo(title: "Audio 2",
-//                          urlString: "data for audio 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"),
-//                VocalMemo(title: "Audio 3",
-//                          urlString: "data for audio 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"),
-//            ])
-//    ]
-    
     @Published var events: [Event] = []
     @Published var vocalMemos: [VocalMemo] = []
     
@@ -119,21 +30,40 @@ class EventVM: ObservableObject{
             
             self.events = try await service.fetch(predicate: predicate, recordType: "Event")
             print("events \(events)")
-            fetchVocalMemo()
+//            fetchVocalMemo()
         }
     }
     
-    func fetchVocalMemo() {
-        guard let event = events[0].record else { return }
-        Task {
-            let eventID = event.recordID
-            let recordToMatch = CKRecord.Reference(recordID: eventID, action: .deleteSelf)
-            let predicate = NSPredicate(format: "owningEvent == %@", recordToMatch)
-            
-            self.vocalMemos = try await service.fetch(predicate: predicate, recordType: "VocalMemo")
-            print("vocalmemo \(vocalMemos) count: \(vocalMemos.count)")
-        }
-    }
+//    func fetchVocalMemo() {
+//        guard let event = events[0].record else { return }
+//        Task {
+//            let eventID = event.recordID
+//            let recordToMatch = CKRecord.Reference(recordID: eventID, action: .deleteSelf)
+//            let predicate = NSPredicate(format: "owningEvent == %@", recordToMatch)
+//
+//            self.vocalMemos = try await service.fetch(predicate: predicate, recordType: "VocalMemo")
+//            print("vocalmemo \(vocalMemos) count: \(vocalMemos.count)")
+//        }
+//    }
+    
+//    func fetchMemo(event: Binding<Event>) async {
+//        guard let record = event.wrappedValue.record else { return }
+//        let eventID = record.recordID
+//        let recordToMatch = CKRecord.Reference(recordID: eventID, action: .deleteSelf)
+//        let predicate = NSPredicate(format: "owningEvent == %@", recordToMatch)
+//        do {
+//            async let vocalMemo: [VocalMemo] = try service.fetch(predicate: predicate, recordType: "VocalMemo")
+//            async let textMemo: [TextMemoModel] = try service.fetch(predicate: predicate, recordType: "TextMemo")
+//            async let mediaMemo: [MediaMemo] = try service.fetch(predicate: predicate, recordType: "MediaMemo")
+//            event.wrappedValue.vocalMemos = try await vocalMemo
+//            event.wrappedValue.textMemos = try await textMemo
+//            event.wrappedValue.mediaMemos = try await mediaMemo
+//        } catch {
+//            print(error)
+//        }
+//        
+//
+//    }
     
     func deleteItem(at indexSet: IndexSet) {
         guard let index = indexSet.first else { return }
@@ -143,17 +73,9 @@ class EventVM: ObservableObject{
         
         Task {
             try await service.delete(recordID: record.recordID)
-            fetch()
+            events.remove(at: index)
         }
     }
     
-    func addRelation() {
-//        guard let event = ] else { return }
-        guard let voiceMemo = VocalMemo(title: "Vocal 3", vocalURL: nil, referenceItem: events[0]) else { return }
-        
-        
-        Task {
-            try await service.add(item: voiceMemo)
-        }
-    }
+   
 }

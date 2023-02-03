@@ -97,8 +97,11 @@ struct AddMemoryManuallyView: View {
             
             ToolbarItem(placement: .confirmationAction) {
                 Button {
-                    vm.addEvent(eventsViewModel: eventVM)
-                    dismiss()
+                    Task {
+                        guard let event = await vm.addEvent() else { return }
+                        eventVM.events.append(event)
+                        dismiss()
+                    }
                 } label: {
                     Text("Done")
                 }
@@ -117,6 +120,7 @@ extension AddMemoryManuallyView {
 
 struct AddMemoryManuallyView_Previews: PreviewProvider {
     static var previews: some View {
-        AddMemoryManuallyView().environmentObject(AddMemoryVM())
+        AddMemoryManuallyView()
+            .environmentObject(AddMemoryVM(service: CloudKitService()))
     }
 }

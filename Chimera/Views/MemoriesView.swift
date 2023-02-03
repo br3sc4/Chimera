@@ -18,7 +18,7 @@ struct MemoriesView: View {
                     ToolbarItem(placement: .primaryAction) {
                         Button {
                             isShowingAddMemory.toggle()
-                            vm.addRelation()
+//                            vm.addRelation()
                         } label: {
                             Image(systemName: "plus")
                         }

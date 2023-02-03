@@ -62,7 +62,7 @@ struct AddUpcomingManuallyView: View {
         }.toolbar{
             ToolbarItem(placement: .confirmationAction) {
                 Button(action: {
-                    vm.addEvent(upcomingVM: eventsVM)
+                    vm.addEvent()
                     dismiss()
                 }, label: {
                     Text("Done")

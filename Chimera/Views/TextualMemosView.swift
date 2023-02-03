@@ -12,7 +12,7 @@ struct TextualMemosView: View {
     @State var isShowingAddTextMemo = false
     var body: some View {
         List {
-            ForEach(vm.textMemos, id:\.self){ memo in
+            ForEach(vm.textMemos){ memo in
                 TextMemoRow(textMemo: memo)
             }
         }
@@ -34,6 +34,7 @@ struct TextualMemosView: View {
 
 struct TextualMemosView_Previews: PreviewProvider {
     static var previews: some View {
-        TextualMemosView().environmentObject(AddMemoryVM())
+        TextualMemosView()
+            .environmentObject(AddMemoryVM(service: CloudKitService()))
     }
 }

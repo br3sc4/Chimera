@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct EventView: View {
-    let event: Event
+    @EnvironmentObject private var eventVM: EventVM
+    var event: Event
     var body: some View {
         List {
             if let textMemos = event.textMemos,
@@ -37,6 +38,9 @@ struct EventView: View {
                 }
             }
         }
+//        .task {
+//            await eventVM.fetchMemo(event: event)
+//        }
         .navigationTitle(event.performer)
     }
 }
@@ -44,5 +48,6 @@ struct EventView: View {
 struct EventView_Previews: PreviewProvider {
     static var previews: some View {
         EventView(event: Event(performer: "event1", place: "Name of Performer", date: Date.now, image: "Place", isMemory: true))
+            .environmentObject(AddMemoryVM(service: CloudKitService()))
     }
 }
