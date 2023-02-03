@@ -9,10 +9,16 @@ import SwiftUI
 
 struct EventView: View {
     @EnvironmentObject private var eventVM: EventVM
-    var event: Event
+    //var event: Event
+    @StateObject private var vm: SingleEventVM
+    
+    init(event: Event) {
+        self._vm = StateObject(wrappedValue: SingleEventVM(event: event, service: CloudKitService()))
+    }
+    
     var body: some View {
         List {
-            if let textMemos = event.textMemos,
+            if let textMemos = vm.event.textMemos,
                 !textMemos.isEmpty {
                 Section("Textual Memos") {
                     ForEach(textMemos, id: \.self){ textMemo in
@@ -21,7 +27,7 @@ struct EventView: View {
                 }
             }
             
-            if let vocalMemos = event.vocalMemos,
+            if let vocalMemos = vm.event.vocalMemos,
                 !vocalMemos.isEmpty {
                 Section("Vocal Memos") {
                     ForEach(vocalMemos){ vocalMemo in
@@ -30,7 +36,7 @@ struct EventView: View {
                 }
             }
             
-            if let mediaMemos = event.mediaMemos,
+            if let mediaMemos = vm.event.mediaMemos,
                 !mediaMemos.isEmpty {
                 Section("Media Memos") {
                     MediaGrid(media: mediaMemos)
@@ -41,7 +47,7 @@ struct EventView: View {
 //        .task {
 //            await eventVM.fetchMemo(event: event)
 //        }
-        .navigationTitle(event.performer)
+        .navigationTitle(vm.event.performer)
     }
 }
 

@@ -46,24 +46,26 @@ class EventVM: ObservableObject{
 //        }
 //    }
     
-//    func fetchMemo(event: Binding<Event>) async {
-//        guard let record = event.wrappedValue.record else { return }
-//        let eventID = record.recordID
-//        let recordToMatch = CKRecord.Reference(recordID: eventID, action: .deleteSelf)
-//        let predicate = NSPredicate(format: "owningEvent == %@", recordToMatch)
-//        do {
-//            async let vocalMemo: [VocalMemo] = try service.fetch(predicate: predicate, recordType: "VocalMemo")
-//            async let textMemo: [TextMemoModel] = try service.fetch(predicate: predicate, recordType: "TextMemo")
-//            async let mediaMemo: [MediaMemo] = try service.fetch(predicate: predicate, recordType: "MediaMemo")
+    func fetchMemo(event: inout Event) async { //Binding<Event>
+        guard let record = event.record else { return } //wrappedValue
+        let eventID = record.recordID
+        let recordToMatch = CKRecord.Reference(recordID: eventID, action: .deleteSelf)
+        let predicate = NSPredicate(format: "owningEvent == %@", recordToMatch)
+        do {
+            async let vocalMemo: [VocalMemo] = try service.fetch(predicate: predicate, recordType: "VocalMemo")
+            async let textMemo: [TextMemoModel] = try service.fetch(predicate: predicate, recordType: "TextMemo")
+            async let mediaMemo: [MediaMemo] = try service.fetch(predicate: predicate, recordType: "MediaMemo")
 //            event.wrappedValue.vocalMemos = try await vocalMemo
-//            event.wrappedValue.textMemos = try await textMemo
+            event.textMemos = try await textMemo
 //            event.wrappedValue.mediaMemos = try await mediaMemo
-//        } catch {
-//            print(error)
-//        }
-//        
-//
-//    }
+//            let textMemo: [TextMemoModel] = try await service.fetch(predicate: predicate, recordType: "TextMemo")
+            print("textmemo \(try await textMemo) count: \(try await textMemo.count)")
+        } catch {
+            print(error)
+        }
+        
+
+    }
     
     func deleteItem(at indexSet: IndexSet) {
         guard let index = indexSet.first else { return }

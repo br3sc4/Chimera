@@ -32,6 +32,7 @@
 		40330BD12981AE9100FBD715 /* CloudKitUserVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40330BD02981AE9100FBD715 /* CloudKitUserVM.swift */; };
 		40330BD329865F2A00FBD715 /* VocalMemoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40330BD229865F2A00FBD715 /* VocalMemoModel.swift */; };
 		40330BD5298CFACC00FBD715 /* TextMemoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40330BD4298CFACC00FBD715 /* TextMemoModel.swift */; };
+		40330BD7298D163800FBD715 /* SingleEventVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40330BD6298D163800FBD715 /* SingleEventVM.swift */; };
 		40F8129329816490007A175D /* CloudKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F8129229816490007A175D /* CloudKitService.swift */; };
 		A91FB0032971921E0083DCAE /* AudioPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91FB0022971921E0083DCAE /* AudioPlayerModel.swift */; };
 		A91FB0052971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */; };
@@ -87,6 +88,7 @@
 		40330BD02981AE9100FBD715 /* CloudKitUserVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitUserVM.swift; sourceTree = "<group>"; };
 		40330BD229865F2A00FBD715 /* VocalMemoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocalMemoModel.swift; sourceTree = "<group>"; };
 		40330BD4298CFACC00FBD715 /* TextMemoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMemoModel.swift; sourceTree = "<group>"; };
+		40330BD6298D163800FBD715 /* SingleEventVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEventVM.swift; sourceTree = "<group>"; };
 		40F8129229816490007A175D /* CloudKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitService.swift; sourceTree = "<group>"; };
 		A91FB0022971921E0083DCAE /* AudioPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerModel.swift; sourceTree = "<group>"; };
 		A91FB0042971AA6F0083DCAE /* 01-11-22_at_18_30_44.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "01-11-22_at_18_30_44.m4a"; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				BCD6E29B296F11BA000B9B9B /* RecorderViewModel.swift */,
 				2D5CAA19298AA4B700A83922 /* UpcomingEventVM.swift */,
 				40330BD02981AE9100FBD715 /* CloudKitUserVM.swift */,
+				40330BD6298D163800FBD715 /* SingleEventVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				2DC5131C2971A84D004958C0 /* Image.swift in Sources */,
 				2D0E78F1296F01050020CDCF /* ChimeraApp.swift in Sources */,
 				2DF6BD862980190900B8D5B8 /* LocaleModel.swift in Sources */,
+				40330BD7298D163800FBD715 /* SingleEventVM.swift in Sources */,
 				2DF6BD8A2980192000B8D5B8 /* NSLocale.swift in Sources */,
 				2DF6BD872980190900B8D5B8 /* MemorySearchToken.swift in Sources */,
 				A97D3D402981912D0071B5E9 /* MediaCard.swift in Sources */,
