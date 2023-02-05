@@ -13,7 +13,14 @@ import CloudKit
 @MainActor
 class EventVM: ObservableObject {
     @Published var events: [Event] = []
-    @Published var vocalMemos: [VocalMemo] = []
+    
+    
+    var currentDate: Date {
+        let calendar = Calendar.current
+        let startTime = calendar.startOfDay(for: Date())
+        return startTime
+    }
+    
     
     private let service: CloudKitService
     
@@ -26,28 +33,10 @@ class EventVM: ObservableObject {
     func fetch() {
         
         Task {
-            let predicate = NSPredicate(value: true)
+//            let predicate = NSPredicate(value: true)
+            let predicate =  NSPredicate(format: "date < %@", currentDate as NSDate)
             
             self.events = try await service.fetch(predicate: predicate, recordType: "Event")
-//            fetchVocalMemo()
-        }
-    }
-    
-    func fetchMemo(event: inout Event) async { //Binding<Event>
-        guard let record = event.record else { return } //wrappedValue
-        let eventID = record.recordID
-        let recordToMatch = CKRecord.Reference(recordID: eventID, action: .deleteSelf)
-        let predicate = NSPredicate(format: "owningEvent == %@", recordToMatch)
-        do {
-            async let vocalMemo: [VocalMemo] = try service.fetch(predicate: predicate, recordType: "VocalMemo")
-            async let textMemo: [TextMemoModel] = try service.fetch(predicate: predicate, recordType: "TextMemo")
-            async let mediaMemo: [MediaMemo] = try service.fetch(predicate: predicate, recordType: "MediaMemo")
-            event.vocalMemos = try await vocalMemo
-            event.textMemos = try await textMemo
-            event.mediaMemos = try await mediaMemo
-            //            let textMemo: [TextMemoModel] = try await service.fetch(predicate: predicate, recordType: "TextMemo")
-        } catch {
-            print(error)
         }
     }
     

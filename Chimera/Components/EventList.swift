@@ -123,6 +123,6 @@ struct EventList: View {
 
 struct EventList_Previews: PreviewProvider {
     static var previews: some View {
-        EventList(eventType: .memory, events: UpcomingEventVM().events)
+        EventList(eventType: .memory, events: UpcomingEventVM(service: CloudKitService()).events)
     }
 }

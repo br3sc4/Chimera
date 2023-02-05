@@ -28,11 +28,16 @@ struct MediaGrid: View {
                     .onTapGesture {
                         selectedMedia = media.id
                         showPreview.toggle()
+                        print("selectedMedia \(selectedMedia)")
                     }
             }
         }
         .navigationDestination(isPresented: $showPreview) {
-            MediaDetailView(media: media, selectedItem: $selectedMedia)
+            //MediaDetailView() //media: media, selectedItem: $selectedMedia
+//            VStack {
+//                Text("media detail")
+//            }
+            TestView(selectedItem: $selectedMedia, memo: media)
         }
     }
 }

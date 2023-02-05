@@ -12,12 +12,13 @@ struct ChimeraApp: App {
     @StateObject private var eventVM: EventVM
     @StateObject private var addEventVM: AddEventVM
     @StateObject private var addMemoryVM: AddMemoryVM
-    @StateObject private var upcomingVM: UpcomingEventVM = UpcomingEventVM()
+    @StateObject private var upcomingVM: UpcomingEventVM
     
     init() {
         _eventVM = StateObject(wrappedValue: EventVM(service: CloudKitService()))
         _addEventVM = StateObject(wrappedValue: AddEventVM(service: CloudKitService()))
         _addMemoryVM = StateObject(wrappedValue: AddMemoryVM(service: CloudKitService()))
+        _upcomingVM = StateObject(wrappedValue: UpcomingEventVM(service: CloudKitService()))
     }
     
     var body: some Scene {

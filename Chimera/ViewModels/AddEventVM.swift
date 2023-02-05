@@ -41,6 +41,7 @@ class AddEventVM: ObservableObject{
             Task {
                 
                 try await service.add(item: event)
+                await upcomingVM.appendEvent(event)
             }
             resetProperties()
         } else {
@@ -52,6 +53,7 @@ class AddEventVM: ObservableObject{
                 Task {
                     
                     try await service.add(item: event)
+                    await upcomingVM.appendEvent(event)
                 }
             } catch {
                 print(error)
