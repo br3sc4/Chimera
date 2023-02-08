@@ -74,7 +74,6 @@ extension MediaMemo {
         do {
             try image?.write(to: filePath)
             url = filePath
-            try FileManager.default.copyItem(at: videoUrl!, to: URL.cachesDirectory.appendingPathComponent("video_\(id).\(videoExt!)"))
         } catch {
             debugPrint(error)
         }

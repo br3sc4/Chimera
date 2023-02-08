@@ -33,8 +33,10 @@ class MediaDetailVM: ObservableObject {
         currentTime = 0.0
         
         guard let foundItem = media.first(where: { $0.id == id }), foundItem.isVideo else { return }
-        debugPrint(foundItem.url.appendingPathExtension("mov"))
-        player = AVPlayer(url: foundItem.url.appendingPathExtension("mov"))
+    
+        if let videoUrl = foundItem.videoUrl, let videoExt = foundItem.videoExt {
+            player = AVPlayer(url: videoUrl.appendingPathExtension(videoExt))
+        }
     }
     
     func checkIsVideo(selectedMedia: UUID?) -> Bool {

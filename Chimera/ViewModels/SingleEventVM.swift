@@ -32,11 +32,17 @@ class SingleEventVM: ObservableObject {
             async let vocalMemo: [VocalMemo] = try service.fetch(predicate: predicate, recordType: "VocalMemo")
             async let textMemo: [TextMemoModel] = try service.fetch(predicate: predicate, recordType: "TextMemo")
             async let mediaMemo: [MediaMemo] = try service.fetch(predicate: predicate,
-                                                                 recordType: "MediaMemo",
-                                                                 fields: MediaMemo.FieldKeys.exludeVideoAsset)
+                                                                 recordType: "MediaMemo")
             event.vocalMemos = try await vocalMemo
             event.textMemos = try await textMemo
             event.mediaMemos = try await mediaMemo
+            if let mediaMemos = event.mediaMemos {
+                for media in mediaMemos {
+                    if let videoUrl = media.videoUrl, let videoExt = media.videoExt {
+                        try FileManager.default.copyItem(at: videoUrl, to: videoUrl.appendingPathExtension(videoExt))
+                    }
+                }
+            }
             print(event, try await mediaMemo)
 //            let textMemo: [TextMemoModel] = try await service.fetch(predicate: predicate, recordType: "TextMemo")
         } catch {

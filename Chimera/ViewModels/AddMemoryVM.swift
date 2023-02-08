@@ -71,6 +71,7 @@ class AddMemoryVM: ObservableObject{
                 print("2")
                 guard let memo = MediaMemo(from: memo, referenceItem: event) else { return nil }
                 print("3")
+                debugPrint(memo)
                 try await addRelationMedia(memo)
                 
             }
