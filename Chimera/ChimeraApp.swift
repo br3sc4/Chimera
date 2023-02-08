@@ -19,6 +19,11 @@ struct ChimeraApp: App {
         _addEventVM = StateObject(wrappedValue: AddEventVM(service: CloudKitService()))
         _addMemoryVM = StateObject(wrappedValue: AddMemoryVM(service: CloudKitService()))
         _upcomingVM = StateObject(wrappedValue: UpcomingEventVM(service: CloudKitService()))
+        
+        NotificationCenter.default.addObserver(forName: .CKAccountChanged, object: self, queue: nil) { notification in
+             //
+            print("notification \(notification)")
+        }
     }
     
     var body: some Scene {

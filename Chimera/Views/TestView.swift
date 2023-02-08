@@ -22,6 +22,7 @@ class MediaDetailVM: ObservableObject {
     @Published var currentTime: Double = 0.0
     
     init(mediaMemo: [MediaMemo]) {
+        print("media: \(mediaMemo)")
         media = mediaMemo
     }
     
@@ -32,7 +33,8 @@ class MediaDetailVM: ObservableObject {
         currentTime = 0.0
         
         guard let foundItem = media.first(where: { $0.id == id }), foundItem.isVideo else { return }
-        player = AVPlayer(url: foundItem.url)
+        debugPrint(foundItem.url.appendingPathExtension("mov"))
+        player = AVPlayer(url: foundItem.url.appendingPathExtension("mov"))
     }
     
     func checkIsVideo(selectedMedia: UUID?) -> Bool {
@@ -118,6 +120,7 @@ struct TestView: View {
                 vm.loadVideo(withId: newId)
             }
             .onAppear {
+                debugPrint("OnAppear \(selectedItem)")
                 vm.loadVideo(withId: selectedItem)
             }
             .toolbar {

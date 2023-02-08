@@ -37,11 +37,11 @@ final class CloudKitService {
         case iCloudRecordNotFound
     }
     
-    func fetch<T: CloudKitableProtocol>(predicate: NSPredicate, recordType: CKRecord.RecordType, sortDescriptor: [NSSortDescriptor]? = nil, resultLimits: Int? = nil) async throws -> [T] {
+    func fetch<T: CloudKitableProtocol>(predicate: NSPredicate, recordType: CKRecord.RecordType, fields: [CKRecord.FieldKey]? = nil, sortDescriptor: [NSSortDescriptor]? = nil, resultLimits: Int? = nil) async throws -> [T] {
         
         let query = createOperation(predicate: predicate, recordType: recordType, sortDescriptor: sortDescriptor)
         
-        let result = try await CKContainer.default().privateCloudDatabase.records(matching: query)
+        let result = try await CKContainer.default().privateCloudDatabase.records(matching: query, desiredKeys: fields)
         let records = result.matchResults.compactMap { try? $0.1.get() }
         return records.compactMap(T.init)
     }
@@ -73,7 +73,7 @@ final class CloudKitService {
     }
     
     func delete(recordID: CKRecord.ID) async throws {
-        let rec = try await CKContainer.default().privateCloudDatabase.deleteRecord(withID: recordID)
+        let _ = try await CKContainer.default().privateCloudDatabase.deleteRecord(withID: recordID)
     }
     
 }

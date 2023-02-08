@@ -45,7 +45,10 @@ class AddMemoryVM: ObservableObject{
                 guard let mediaTypes = photo.supportedContentTypes.first,
                         var media = try? await photo.loadTransferable(type: MediaMemo.self) else { return }
                 let isVideo = mediaTypes.preferredMIMEType?.split(separator: "/")[0] == "video"
-                media.isVideo = isVideo
+                if isVideo {
+                    media.isVideo = isVideo
+                    media.configureVideo()
+                }
                 mediaMemos.append(media)
             }
         }
@@ -61,9 +64,15 @@ class AddMemoryVM: ObservableObject{
                 
                 let record = try await service.add(item: event)
                 guard let event = Event(record: record) else { return nil }
-            
+            print("1")
+            print(mediaMemos)
                 for memo in mediaMemos {
-                    guard let memo = MediaMemo(isVideo: memo.isVideo, url: memo.url, referenceItem: event) else { return nil }
+                    print("2")
+                    guard let memo = MediaMemo(isVideo: memo.isVideo,
+                                               url: memo.url,
+                                               duration: memo.duration,
+                                               referenceItem: event) else { return nil }
+                    print("3")
                     try await addRelationMedia(memo)
                     
                 }
@@ -73,6 +82,7 @@ class AddMemoryVM: ObservableObject{
                 try await addRelationMedia(memo)
             }
             
+            resetProperties()
             return event
         } catch {
             print(error)
@@ -110,6 +120,7 @@ class AddMemoryVM: ObservableObject{
     }
     
     func addRelationMedia<T: CloudKitableProtocol>(_ media: T) async throws {
+        print("addrelation \(media)")
 //        guard let event = ] else { return }
 //        guard let voiceMemo = VocalMemo(title: "Vocal 3", vocalURL: nil, referenceItem: events[0]) else { return }
         

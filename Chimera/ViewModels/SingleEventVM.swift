@@ -31,10 +31,13 @@ class SingleEventVM: ObservableObject {
         do {
             async let vocalMemo: [VocalMemo] = try service.fetch(predicate: predicate, recordType: "VocalMemo")
             async let textMemo: [TextMemoModel] = try service.fetch(predicate: predicate, recordType: "TextMemo")
-            async let mediaMemo: [MediaMemo] = try service.fetch(predicate: predicate, recordType: "MediaMemo")
+            async let mediaMemo: [MediaMemo] = try service.fetch(predicate: predicate,
+                                                                 recordType: "MediaMemo",
+                                                                 fields: MediaMemo.FieldKeys.exludeVideoAsset)
             event.vocalMemos = try await vocalMemo
             event.textMemos = try await textMemo
             event.mediaMemos = try await mediaMemo
+            print(event, try await mediaMemo)
 //            let textMemo: [TextMemoModel] = try await service.fetch(predicate: predicate, recordType: "TextMemo")
         } catch {
             print(error)

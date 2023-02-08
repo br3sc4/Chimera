@@ -33,8 +33,8 @@ class EventVM: ObservableObject {
     func fetch() {
         
         Task {
-//            let predicate = NSPredicate(value: true)
-            let predicate =  NSPredicate(format: "date < %@", currentDate as NSDate)
+            let predicate = NSPredicate(value: true)
+//            let predicate =  NSPredicate(format: "date < %@", currentDate as NSDate)
             
             self.events = try await service.fetch(predicate: predicate, recordType: "Event")
         }

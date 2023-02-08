@@ -9,12 +9,15 @@ import Foundation
 import AVFoundation
 import CoreTransferable
 import CloudKit
+import UIKit
 
 struct MediaMemo: Identifiable, Hashable, CloudKitableProtocol {
-    let url: URL
+    private(set) var url: URL
     var isVideo: Bool
     let id: UUID
     var record: CKRecord?
+    private(set) var duration: Double? = nil
+    private(set) var videoUrl: URL? = nil
     
     
     init(url: URL, isVideo: Bool, id: UUID = UUID(), record: CKRecord? = nil) {
@@ -26,22 +29,33 @@ struct MediaMemo: Identifiable, Hashable, CloudKitableProtocol {
     }
     
     init?(record: CKRecord) {
-//        print("media memo init da record")
+        print("media memo init da record")
+        print("record \(record)")
         guard let isVideo = record["isVideo"] as? Bool else { return nil }
         self.isVideo = isVideo
         guard let mediaAssets = record["mediaURL"] as? CKAsset, let url = mediaAssets.fileURL else { return nil }
         self.url = url
+        self.duration = record["duration"] as? Double
         self.id = UUID()
         self.record = record
-//        print("record \(record)")
     }
     
-    init?<T: CloudKitableProtocol>(isVideo: Bool, url: URL, referenceItem: T) {
-//        print("media memo init da parameters")
+    init?<T: CloudKitableProtocol>(isVideo: Bool, url: URL, duration: Double? = nil, referenceItem: T) {
+        print("media memo init da parameters")
         let record = CKRecord(recordType: "MediaMemo")
         record["isVideo"] = isVideo
-        let assets = CKAsset(fileURL: url)
-        record["mediaURL"] = assets
+        let mediaAsset = CKAsset(fileURL: url)
+        record["mediaURL"] = mediaAsset
+//        if let duration {
+//            record["duration"] = duration
+//        } else {
+//            record["duration"] = 0.0
+//        }
+         record["duration"] = duration
+        
+//        if let videoUrl {
+//            record["videoURL"] = CKAsset(fileURL: videoUrl)
+//        }
         self.init(record: record)
         guard let referenceRecord = referenceItem.record else { return }
         record["owningEvent"] = CKRecord.Reference(record: referenceRecord, action: .deleteSelf)
@@ -51,8 +65,12 @@ struct MediaMemo: Identifiable, Hashable, CloudKitableProtocol {
 //        print("media memo createRecord")
         self.record = CKRecord(recordType: "MediaMemo")
         record?["isVideo"] = memo.isVideo
-        let assets = CKAsset(fileURL: url)
-        record?["mediaURL"] = assets
+        let mediaAsset = CKAsset(fileURL: url)
+        record?["mediaURL"] = mediaAsset
+        record?["duration"] = duration
+        if let videoUrl {
+            record?["videoURL"] = CKAsset(fileURL: videoUrl)
+        }
 //        self.init(record: record)
         guard let referenceRecord = referenceItem.record else { return }
         record?["owningEvent"] = CKRecord.Reference(record: referenceRecord, action: .deleteSelf)
@@ -60,29 +78,50 @@ struct MediaMemo: Identifiable, Hashable, CloudKitableProtocol {
    
 }
 
-extension MediaMemo: Codable {
-    private enum CodingKeys: String, CodingKey {
-        case url
-        case isVideo
-        case id
+extension MediaMemo {
+    mutating func configureVideo() {
+        videoUrl = url
+        duration = videoAsset.duration.seconds
+        
+        guard let thumbnail = generateThumbnail() else { return }
+        let image = UIImage(cgImage: thumbnail).pngData()
+        let filePath = URL.cachesDirectory.appendingPathComponent("thumbanil_\(id)", conformingTo: .image)
+        do {
+            try image?.write(to: filePath)
+            url = filePath
+        } catch {
+            debugPrint(error)
+        }
+        
+    }
+    
+    enum FieldKeys {
+        static let all: [String]? = nil
+        static let exludeVideoAsset: [String] = ["mediaURL", "isVideo", "duration"]
     }
 }
 
 extension MediaMemo {
-    var mediaDuration: Double {
-        let time = videoAsset.duration
-        return time.seconds
-    }
-    
-    var thumbnail: CGImage? {
-        return try? AVAssetImageGenerator(asset: videoAsset)
-            .copyCGImage(at: .init(seconds: 0,
-                                   preferredTimescale: 1),
-                         actualTime: nil)
+    func generateThumbnail() -> CGImage? {
+        let generator = AVAssetImageGenerator(asset: videoAsset)
+        debugPrint(generator)
+        do {
+            let image = try generator.copyCGImage(at: .init(seconds: 0,
+                                                                preferredTimescale: 1),
+                                                      actualTime: nil)
+            debugPrint(image)
+            return image
+        } catch {
+            debugPrint(error)
+        }
+        return nil
     }
     
     private var videoAsset: AVAsset {
-        return AVAsset(url: url)
+        debugPrint(url, url.pathExtension)
+        let asset = AVAsset(url: url)
+        debugPrint(asset)
+        return asset
     }
 }
 
