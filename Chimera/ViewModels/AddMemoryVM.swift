@@ -44,10 +44,11 @@ class AddMemoryVM: ObservableObject{
             for photo in photos {
                 guard let mediaTypes = photo.supportedContentTypes.first,
                         var media = try? await photo.loadTransferable(type: MediaMemo.self) else { return }
-                let isVideo = mediaTypes.preferredMIMEType?.split(separator: "/")[0] == "video"
-                if isVideo {
-                    media.isVideo = isVideo
-                    media.configureVideo()
+                
+                media.isVideo = mediaTypes.preferredMIMEType?.split(separator: "/")[0] == "video"
+                if media.isVideo {
+                    let ext = media.url.pathExtension
+                    media.configureVideo(of: ext)
                 }
                 mediaMemos.append(media)
             }
@@ -62,20 +63,17 @@ class AddMemoryVM: ObservableObject{
             guard let event: Event = Event(performer: performer, place: place, date: date, cover: url, isMemory: true) else { return nil }
             
                 
-                let record = try await service.add(item: event)
-                guard let event = Event(record: record) else { return nil }
+            let record = try await service.add(item: event)
+            guard let event = Event(record: record) else { return nil }
             print("1")
             print(mediaMemos)
-                for memo in mediaMemos {
-                    print("2")
-                    guard let memo = MediaMemo(isVideo: memo.isVideo,
-                                               url: memo.url,
-                                               duration: memo.duration,
-                                               referenceItem: event) else { return nil }
-                    print("3")
-                    try await addRelationMedia(memo)
-                    
-                }
+            for memo in mediaMemos {
+                print("2")
+                guard let memo = MediaMemo(from: memo, referenceItem: event) else { return nil }
+                print("3")
+                try await addRelationMedia(memo)
+                
+            }
             
             for memo in textMemos {
                 guard let memo = TextMemoModel(text: memo.text, referenceItem: event) else { return nil }

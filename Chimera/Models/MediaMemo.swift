@@ -18,6 +18,7 @@ struct MediaMemo: Identifiable, Hashable, CloudKitableProtocol {
     var record: CKRecord?
     private(set) var duration: Double? = nil
     private(set) var videoUrl: URL? = nil
+    private(set) var videoExt: String? = nil
     
     
     init(url: URL, isVideo: Bool, id: UUID = UUID(), record: CKRecord? = nil) {
@@ -33,54 +34,38 @@ struct MediaMemo: Identifiable, Hashable, CloudKitableProtocol {
         print("record \(record)")
         guard let isVideo = record["isVideo"] as? Bool else { return nil }
         self.isVideo = isVideo
-        guard let mediaAssets = record["mediaURL"] as? CKAsset, let url = mediaAssets.fileURL else { return nil }
+        guard let mediaAsset = record["mediaURL"] as? CKAsset, let url = mediaAsset.fileURL else { return nil }
         self.url = url
+        let videoAsset = record["videoURL"] as? CKAsset
+        self.videoUrl = videoAsset?.fileURL
+        self.videoExt = record["videoExt"] as? String
         self.duration = record["duration"] as? Double
         self.id = UUID()
         self.record = record
     }
     
-    init?<T: CloudKitableProtocol>(isVideo: Bool, url: URL, duration: Double? = nil, referenceItem: T) {
+    init?<T: CloudKitableProtocol>(from memo: MediaMemo, referenceItem: T) {
         print("media memo init da parameters")
         let record = CKRecord(recordType: "MediaMemo")
-        record["isVideo"] = isVideo
-        let mediaAsset = CKAsset(fileURL: url)
-        record["mediaURL"] = mediaAsset
-//        if let duration {
-//            record["duration"] = duration
-//        } else {
-//            record["duration"] = 0.0
-//        }
-         record["duration"] = duration
+        record["isVideo"] = memo.isVideo
+        record["mediaURL"] = CKAsset(fileURL: memo.url)
         
-//        if let videoUrl {
-//            record["videoURL"] = CKAsset(fileURL: videoUrl)
-//        }
+        if let videoUrl = memo.videoUrl, let videoExt = memo.videoExt, let duration = memo.duration {
+            record["videoURL"] = CKAsset(fileURL: videoUrl)
+            record["videoExt"] = videoExt
+            record["duration"] = duration
+        }
+        
         self.init(record: record)
         guard let referenceRecord = referenceItem.record else { return }
         record["owningEvent"] = CKRecord.Reference(record: referenceRecord, action: .deleteSelf)
     }
-    
-    mutating func createRecord<T: CloudKitableProtocol>(memo: MediaMemo, referenceItem: T) {
-//        print("media memo createRecord")
-        self.record = CKRecord(recordType: "MediaMemo")
-        record?["isVideo"] = memo.isVideo
-        let mediaAsset = CKAsset(fileURL: url)
-        record?["mediaURL"] = mediaAsset
-        record?["duration"] = duration
-        if let videoUrl {
-            record?["videoURL"] = CKAsset(fileURL: videoUrl)
-        }
-//        self.init(record: record)
-        guard let referenceRecord = referenceItem.record else { return }
-        record?["owningEvent"] = CKRecord.Reference(record: referenceRecord, action: .deleteSelf)
-    }
-   
 }
 
 extension MediaMemo {
-    mutating func configureVideo() {
+    mutating func configureVideo(of ext: String) {
         videoUrl = url
+        videoExt = ext
         duration = videoAsset.duration.seconds
         
         guard let thumbnail = generateThumbnail() else { return }
@@ -89,10 +74,10 @@ extension MediaMemo {
         do {
             try image?.write(to: filePath)
             url = filePath
+            try FileManager.default.copyItem(at: videoUrl!, to: URL.cachesDirectory.appendingPathComponent("video_\(id).\(videoExt!)"))
         } catch {
             debugPrint(error)
         }
-        
     }
     
     enum FieldKeys {
