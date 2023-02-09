@@ -54,7 +54,9 @@ struct AddUpcomingTicketmasterView: View {
                         if !ticketMasterVm.checkIfEventAlreadyExists(events: vm.events, searchEvent: result){
                             Task {
                                 let eventWithPreview = await ticketMasterVm.eventWithPreview(result)
-                                vm.events.append(eventWithPreview)
+                                print("eventWithPreview \(eventWithPreview)")
+                                //                                vm.events.append(eventWithPreview)
+                                await vm.addEvent(eventWithPreview)
                             }
                         }
 
@@ -109,7 +111,7 @@ struct AddUpcomingTicketmasterView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             AddUpcomingTicketmasterView()
-                .environmentObject(UpcomingEventVM())
+                .environmentObject(UpcomingEventVM(service: CloudKitService()))
         }
     }
 }

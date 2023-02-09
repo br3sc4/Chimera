@@ -44,8 +44,12 @@ class AddMemoryVM: ObservableObject{
             for photo in photos {
                 guard let mediaTypes = photo.supportedContentTypes.first,
                         var media = try? await photo.loadTransferable(type: MediaMemo.self) else { return }
-                let isVideo = mediaTypes.preferredMIMEType?.split(separator: "/")[0] == "video"
-                media.isVideo = isVideo
+                
+                media.isVideo = mediaTypes.preferredMIMEType?.split(separator: "/")[0] == "video"
+                if media.isVideo {
+                    let ext = media.url.pathExtension
+                    media.configureVideo(of: ext)
+                }
                 mediaMemos.append(media)
             }
         }
@@ -59,20 +63,25 @@ class AddMemoryVM: ObservableObject{
             guard let event: Event = Event(performer: performer, place: place, date: date, cover: url, isMemory: true) else { return nil }
             
                 
-                let record = try await service.add(item: event)
-                guard let event = Event(record: record) else { return nil }
-            
-                for memo in mediaMemos {
-                    guard let memo = MediaMemo(isVideo: memo.isVideo, url: memo.url, referenceItem: event) else { return nil }
-                    try await addRelationMedia(memo)
-                    
-                }
+            let record = try await service.add(item: event)
+            guard let event = Event(record: record) else { return nil }
+            print("1")
+            print(mediaMemos)
+            for memo in mediaMemos {
+                print("2")
+                guard let memo = MediaMemo(from: memo, referenceItem: event) else { return nil }
+                print("3")
+                debugPrint(memo)
+                try await addRelationMedia(memo)
+                
+            }
             
             for memo in textMemos {
                 guard let memo = TextMemoModel(text: memo.text, referenceItem: event) else { return nil }
                 try await addRelationMedia(memo)
             }
             
+            resetProperties()
             return event
         } catch {
             print(error)
@@ -110,6 +119,7 @@ class AddMemoryVM: ObservableObject{
     }
     
     func addRelationMedia<T: CloudKitableProtocol>(_ media: T) async throws {
+        print("addrelation \(media)")
 //        guard let event = ] else { return }
 //        guard let voiceMemo = VocalMemo(title: "Vocal 3", vocalURL: nil, referenceItem: events[0]) else { return }
         

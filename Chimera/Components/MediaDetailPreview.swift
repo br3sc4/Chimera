@@ -15,13 +15,14 @@ struct MediaDetailPreview: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(media) { item in
-                    if item.isVideo {
-                        Image(uiImage: UIImage(cgImage: item.thumbnail!))
+                    AsyncImage(url: item.url) { image in
+                        image
                             .resizable()
                             .scaledToFill()
                             .frame(width: selectedItem == item.id ? 100 : 50, height: 50)
                             .clipped()
                             .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .animation(.easeInOut, value: selectedItem)
                             .overlay {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(selectedItem == item.id ? .white : .clear, lineWidth: 4)
@@ -29,25 +30,8 @@ struct MediaDetailPreview: View {
                             .onTapGesture {
                                 selectedItem = item.id
                             }
-                    } else {
-                        AsyncImage(url: item.url) { image in
-                            image
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: selectedItem == item.id ? 100 : 50, height: 50)
-                                .clipped()
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                                .animation(.easeInOut, value: selectedItem)
-                                .overlay {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(selectedItem == item.id ? .white : .clear, lineWidth: 4)
-                                }
-                                .onTapGesture {
-                                    selectedItem = item.id
-                                }
-                        } placeholder: {
-                            EmptyView()
-                        }
+                    } placeholder: {
+                        EmptyView()
                     }
                 }
             }

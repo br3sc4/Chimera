@@ -103,7 +103,7 @@ class CreateEventApiViewModel : ObservableObject {
         return imageURL
     }
     
-    private func downloadPreviewImage(from stringUrl : String) async -> String{
+    private func downloadPreviewImage(from stringUrl : String) async -> URL{
         let url = URL(string: stringUrl)
         let documentDirectoryPath = URL.documentsDirectory
         let filePath = documentDirectoryPath.appendingPathComponent("\(UUID()).jpg")
@@ -118,7 +118,7 @@ class CreateEventApiViewModel : ObservableObject {
             print(error)
         }
         print(filePath)
-        return filePath.absoluteString
+        return filePath//.absoluteString
         
     }
     
@@ -126,7 +126,7 @@ class CreateEventApiViewModel : ObservableObject {
     func eventWithPreview(_ event : Event) async -> Event{
         var newEvent = event
         let imageURL = await downloadPreviewImage(from: event.image ?? "")
-        newEvent.image = imageURL
+        newEvent.cover = imageURL
         return newEvent
     }
     

@@ -59,7 +59,7 @@ struct AddMemoryManuallyView: View {
                     .focused($focusedField, equals: .performer)
                 TextField("Place of the Event", text: $vm.place)
                     .focused($focusedField, equals: .place)
-                DatePicker(selection: $vm.date, in: Date.now..., displayedComponents: .date) {
+                DatePicker(selection: $vm.date, in: ...Date.now, displayedComponents: .date) {
                     Text("Date of the Event")
                 }
             }

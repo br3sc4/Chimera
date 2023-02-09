@@ -15,12 +15,12 @@ struct MediaCard: View {
     }
     
     var body: some View {
-        if memo.isVideo {
-            if let thumbnail = memo.thumbnail {
-                Image(uiImage: UIImage(cgImage: thumbnail))
-                    .squared()
-                    .overlay(alignment: .bottomTrailing) {
-                        let convertedDuration = secondsToMinutesSeconds(ceil(memo.mediaDuration))
+        AsyncImage(url: memo.url) { image in
+            image
+                .squared()
+                .overlay(alignment: .bottomTrailing) {
+                    if memo.isVideo, let duration = memo.duration {
+                        let convertedDuration = secondsToMinutesSeconds(ceil(duration))
 
                         Text("\(convertedDuration.minutes):\(convertedDuration.seconds.formatted(.number.precision(.integerLength(2))))")
                             .font(.footnote)
@@ -28,13 +28,9 @@ struct MediaCard: View {
                             .padding(.trailing, 8)
                             .padding(.bottom, 4)
                     }
-            }
-        } else {
-            AsyncImage(url: memo.url) { image in
-                image.squared()
-            } placeholder: {
-                ProgressView()
-            }
+                }
+        } placeholder: {
+            ProgressView()
         }
     }
     
